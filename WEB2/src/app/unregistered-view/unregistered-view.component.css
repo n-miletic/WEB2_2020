@@ -1,0 +1,41 @@
+.wrapper{
+   
+    position: fixed;
+    top:0;
+}
+.wrapper img{
+  
+    width: 100vw;
+    height:90vh;
+  
+}
+.fieldcontainer{
+    display:flex;
+    box-sizing: border-box;
+    position:relative;
+    top:-4em;
+    height:7em;
+    box-sizing: border-box;
+    background-color:white;
+    margin-left: 12vw;
+    margin-right:12vw;
+    padding:20px;
+}
+.fieldcontainer img{
+    height: 100%;
+    width: 60px;
+}
+.fieldcontainer div{
+    display:inline-flex;
+    height: 100%;
+    width: 100%;
+}
+.fieldcontainer input{
+    height: 100%;
+    width: 100%;
+}
+.btn{
+    width:700px;
+    background-color: #E54B4B;
+    border-radius: 0;
+}
