@@ -1,1 +1,27 @@
-<p>search-result-view works!</p>
+<div class="wrapper">
+    <img class ="img" src = "assets/tempbg2.jpg"/>
+    <div class="search-options">
+        <button class="btn">
+            PRICE: LOW TO HIGH
+        </button>
+        <button class="btn">
+            PRICE: HIGH TO LOW
+        </button>
+        <button class="btn">
+            AVG. CUSTOMER REVIEW
+        </button>
+        <button class="btn">
+            NEWEST
+        </button>
+    </div>
+    <div class="search-list">
+        <a routerLink="/company:id" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Ime kompanije</h5>
+            <small>kad je postavljeno</small>
+          </div>
+          <p class="mb-1">Kratak opis kompanije</p>
+          <small>Ocena</small>
+        </a>
+      </div>
+</div>

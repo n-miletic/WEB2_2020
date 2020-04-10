@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UnregisteredViewComponent } from './unregistered-view/unregistered-view.component';
 import { SearchResultViewComponent } from './search-result-view/search-result-view.component';
+import { CompanyViewComponent } from './company-view/company-view.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path:"rentacar",
     component: SearchResultViewComponent
+  },
+  {
+    path:"company:id",
+    component: CompanyViewComponent
   }
 ];
 
@@ -24,4 +29,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [SearchResultViewComponent, UnregisteredViewComponent]
+export const routingComponents = [SearchResultViewComponent, UnregisteredViewComponent, CompanyViewComponent]

@@ -4,13 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
-import { CompanyViewComponent } from './company-view/company-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationBarComponent,
-    CompanyViewComponent,
     routingComponents
   ],
   imports: [
