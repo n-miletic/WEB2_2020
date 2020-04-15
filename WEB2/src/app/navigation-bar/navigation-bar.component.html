@@ -1,10 +1,31 @@
+<div *ngIf = "Dialog" (click) = "hideDialog()" class = "greyout">
+   
+</div>
+<div *ngIf = "Dialog" [ngClass] = "(logInActive) ? 'DialogContainerLog' : 'DialogContainerLog' ">
+    <div (click) = "signInActivate()" class="DialogNavBar">
+      <div class = "LogInSignUp">
+        <label [ngClass] = "(logInActive) ? 'Picked' : 'null' ">Log In</label>
+        <label [ngClass] = "(logInActive) ? 'null' : 'Picked' ">Sign Up</label>
+      </div>
+      <img class = "exitimg" (click) = "hideDialog()" src="assets/exit.svg"/>
+    </div>
+    <app-log-in *ngIf = "logInActive; else signDiv" class="LogInDialog">
+       
+    </app-log-in>
+    <ng-template #signDiv>
+        <app-sign-in>
+           
+        </app-sign-in>
+    </ng-template>
+</div>
 <div class="navbar">
     <img src = "assets/logo.png"/>
     <div>
         <li><a routerLink="" routerLinkActive="active">HOME</a></li>
         <li><a routerLink="/flight" routerLinkActive="active">FLIGHTS</a></li>
         <li><a routerLink="/rentacar" routerLinkActive="active">RENT A CAR</a></li>
-        <img src = "assets/user.png" />
+        <img (click) = "showDialog()" src = "assets/user.png" />
     
     </div>
 </div>
+
