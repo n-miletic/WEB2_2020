@@ -8,11 +8,6 @@ import { Flight } from 'src/app/entities/flight/flight'
 })
 export class FlightComponent implements OnInit {
 
-  allFlights: Array<Flight>;
-
-  // constructor(private hotelService: HotelService) {
-  //   this.allHotels = this.hotelService.loadHotels();
-  // }
   tripType = ['Return', 'One Way'];
   cabinClass = ['Economy', 'Premium Economy', 'Business Class', 'First Class'];
   travellers = ['1 adult', '2 adults', '1 adult and 1 child', '1 adult and 2 children', 

@@ -36,6 +36,7 @@
    height:10vh;
    padding-left: 15vw;
    padding-right:15vw;
+   list-style-type: none;
 }
 .DialogContainerLog{
     z-index: 4;
@@ -43,7 +44,7 @@
     background-color: transparent;
     width:20vw;
     
-    top: 22%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, 0);
 }
