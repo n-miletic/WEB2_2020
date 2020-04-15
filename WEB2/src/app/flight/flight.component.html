@@ -5,26 +5,21 @@
         
     <div class="container">
         <h1>Where to next?</h1>
-        <div class="form-group">
-            <label for="fromDestination">From</label>
-            <input type="text" class="form-control" id="fromDestination" required>
+        <div class="destination-group">
+            <input type="text" placeholder= "From:" class="form-control" id="fromDestination" required>
+            <input type="text" placeholder= "To:" class="form-control" id="toDestination" required>
         </div>
 
-        <div class="form-group">
-            <label for="toDestination">To</label>
-            <input type="text" class="form-control" id="toDestination" required>
-        </div>
-
-        <div class="form-group">
-            <label for="tripType">Trip Type</label>
+        <div class="select-group">
+            <label for="tripType"></label>
             <select class="form-control" id="tripType" required>
               <option *ngFor="let trip of tripType" [value]="trip">{{trip}}</option>
             </select>
-            <label for="cabinClass">Cabin Class</label>
+            <label for="cabinClass"></label>
             <select class="form-control" id="cabinClass" required>
               <option *ngFor="let cabin of cabinClass" [value]="cabin">{{cabin}}</option>
             </select>
-            <label for="travellers">Travellers</label>
+            <label for="travellers"></label>
             <select class="form-control" id="travellers" required>
               <option *ngFor="let traveller of travellers" [value]="traveller">{{traveller}}</option>
             </select>

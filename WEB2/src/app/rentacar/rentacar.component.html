@@ -5,19 +5,14 @@
         
     <div class="container">
         <h1>Where to next?</h1>
-        <div class="form-group">
-            <label for="pickUpLocation">Pick Up Location</label>
-            <input type="text" class="form-control" id="pickUpLocation" required>
-        </div>
-
-        <div class="form-group">
+        <div class="rentacar-group">
+            <input type="text" placeholder= "Pick Up Location"class="form-control" id="pickUpLocation" required>
             <label for="pickUpTime">Pick Up Time</label>
             <select class="form-control" id="pickUpTime" required>
               <option *ngFor="let pickUp of pickUpTime" [value]="pickUp">{{pickUp}}</option>
             </select>
         </div>
           
-
         <button type="submit" class="btn btn-success" >Submit</button>
     </div>
     </form>

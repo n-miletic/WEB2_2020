@@ -8,3 +8,8 @@
     width: 100vw;
     height:30vh;
 }
+.btn{
+    width:10vh;
+    background-color: #E54B4B;
+    border-radius: 0;
+}
