@@ -7,6 +7,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LogInComponent } from './log-in/log-in.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { FlightsViewComponent } from './flights-view/flights-view.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SignInComponent } from './sign-in/sign-in.component';
     NavigationBarComponent,
     routingComponents,
     LogInComponent,
-    SignInComponent
+    SignInComponent,
+    FlightsViewComponent
   ],
   imports: [
     BrowserModule,

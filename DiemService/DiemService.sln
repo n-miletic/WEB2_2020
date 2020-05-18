@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiemService", "DiemService.csproj", "{CA7717D2-1633-4389-9D6C-665D1D0A960C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA7717D2-1633-4389-9D6C-665D1D0A960C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA7717D2-1633-4389-9D6C-665D1D0A960C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA7717D2-1633-4389-9D6C-665D1D0A960C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA7717D2-1633-4389-9D6C-665D1D0A960C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {30E758AC-EA8E-45EF-B49A-D1EF47BF69BC}
+	EndGlobalSection
+EndGlobal
