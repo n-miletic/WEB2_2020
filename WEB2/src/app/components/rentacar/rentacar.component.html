@@ -7,6 +7,7 @@
         <h1>Where to next?</h1>
         <div class="rentacar-group">
             <input type="text" placeholder= "Pick Up Location"class="form-control" id="pickUpLocation" required>
+            <br>
             <label for="pickUpTime">Pick Up Time</label>
             <select class="form-control" id="pickUpTime" required>
               <option *ngFor="let pickUp of pickUpTime" [value]="pickUp">{{pickUp}}</option>
