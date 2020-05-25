@@ -5,20 +5,26 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LogInComponent } from './log-in/log-in.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { FlightsViewComponent } from './flights-view/flights-view.component';
-
+import { LogInComponent } from './components/log-in/log-in.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { FlightsViewComponent } from './components/flights-view/flights-view.component';
+import { GoogleAutocompletePlacesComponent } from './components/google-autocomplete-places/google-autocomplete-places.component';
+import { GoogleMapsModule } from '@angular/google-maps'
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     NavigationBarComponent,
-    routingComponents
+    routingComponents,
+    GoogleAutocompletePlacesComponent,
+    FlightsViewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule, 
+    GoogleMapsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,33 @@
+<div class = "main-div">
+    <form (ngSubmit)="onSubmit($event)" (change) = "onChange($event)">
+        <div class = "flex-space-between">
+            <label>From:</label>
+            <AutocompleteComponent inputName = "from" (setAddress)="getAddress($event)" addressType = "(cities)">
+            </AutocompleteComponent>
+        </div>
+        <div class = "flex-space-between">
+            <label>To:</label>
+            <AutocompleteComponent inputName ="to"  (setAddress)="getAddress($event)" addressType = "(cities)">
+
+            </AutocompleteComponent>
+           
+        </div>
+        <div class = "flex-space-between">
+            <label>Datum poletanja:</label>
+            <input name = "datum_poletanja" type="date" required/>
+        </div>
+        <div class = "flex-space-between">
+            <label>Datum sletanja:</label>
+            <input name ="datum_sletanja" type="date" required/>
+        </div>
+        <div class = "flex-space-between">
+            <label>Vreme:</label>
+            <input name = "vreme" type="time" required/>
+        </div>
+        <div  class = "flex-space-between">
+            <label>CENA:</label>
+            <input name = "cena" type="number" required/>
+        </div>
+        <input type="submit" value="Add flight"/>
+    </form>
+</div>

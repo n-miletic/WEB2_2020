@@ -37,5 +37,5 @@ const routes: Routes = [
 export class AppRoutingModule { }
 export const routingComponents = [SearchResultViewComponent, FlightComponent, 
                                   RentacarComponent, UnregisteredViewComponent, 
-                                  LogInComponent, SignInComponent, 
+                                   LogInComponent, SignInComponent, 
                                   CompanyViewComponent]
