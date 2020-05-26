@@ -13,6 +13,7 @@ namespace DiemService.Database
         public virtual DbSet<Admin> AdminDbSet { get; set; }
         public virtual DbSet<AdminAvio> AdminAvioDbSet { get; set; }
         public virtual DbSet<AdminRent> AdminRentDbSet { get; set; }
+        public virtual DbSet<RegisteredUser> RegisteredUserDbSet { get; set; }
         public virtual DbSet<AvioCompany> AvioCompanyDbSet { get; set; }
         public virtual DbSet<RentACar> RentACarDbSet { get; set; }
         public virtual DbSet<Vehicle> VehicleDbSet { get; set; }

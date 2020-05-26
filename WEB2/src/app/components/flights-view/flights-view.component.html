@@ -1,5 +1,5 @@
 <div class = "main-div">
-    <form (ngSubmit)="onSubmit($event)" (change) = "onChange($event)">
+    <form ngNativeValidate (ngSubmit)="onSubmit($event)" (change) = "onChange($event)">
         <div class = "flex-space-between">
             <label>From:</label>
             <AutocompleteComponent inputName = "from" (setAddress)="getAddress($event)" addressType = "(cities)">

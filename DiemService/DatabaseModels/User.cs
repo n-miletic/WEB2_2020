@@ -48,7 +48,7 @@ namespace DiemService.Database
     public class AdminAvio
     {
         public int Id { get; set; }
-        public ICollection<Flight> Flights { get; set; }
+        public ICollection<AvioCompany> OwnedAvioCompanies { get; set; }
         public AdminAvio()
         {
         }
@@ -59,6 +59,18 @@ namespace DiemService.Database
         public ICollection<RentACar> OwnedRentServices { get; set; }
         public AdminRent()
         {
+        }
+    }
+
+    public class RegisteredUser
+    {
+        public int Id { get; set; }
+        public ICollection<Flight> FlightReservations { get; set; }//FlightReservation class
+        public ICollection<Vehicle> VehicleReservations { get; set; }//VehicleReservation class
+        //invite trip collection
+        public RegisteredUser()
+        {
+
         }
     }
 

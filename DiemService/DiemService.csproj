@@ -92,6 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AvioCompanyController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Forms\FlightFormUpdate.cs" />
     <Compile Include="ManageMeLikeOneOfYourDbSets\FlightDbManager.cs" />
     <Compile Include="Controllers\FlightsController.cs" />
     <Compile Include="DatabaseModels\AvioCompany.cs" />
@@ -101,8 +104,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ManageMeLikeOneOfYourDbSets\UserDbManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\FlightForm.cs" />
+    <Compile Include="Forms\FlightForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

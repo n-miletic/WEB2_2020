@@ -100,7 +100,11 @@ namespace DiemService.Database
             State = state;
             City = city;
         }
-
+        public Location(string form)
+        {
+            State = form.Split(',')[1];
+            City = form.Split(',')[2];
+        }
         public Location()
         {
         }

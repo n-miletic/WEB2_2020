@@ -31,7 +31,7 @@ export class FlightsViewComponent implements OnInit {
       fromLocation: this['from'].formatted_address,
       Flight_Departure_Time: this['datum_poletanja'],
       Flight_Arrival_Time :this['datum_sletanja'],
-      cena:this['cena']
+      price:this['cena']
     }
 
     fetch('/DiemApi/Flights/Add', {
@@ -42,7 +42,7 @@ export class FlightsViewComponent implements OnInit {
       }
   })
     console.log(flightForm)
-    event.preventDefault()
+   
    
   }
 

@@ -1,5 +1,6 @@
 ﻿using DiemService.Database;
-using DiemService.Models;
+using DiemService.Forms;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +29,22 @@ namespace DiemService.Controllers
             FlightDbManager.AddFlight(form);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+
+        [HttpPut]
+        [Route("Flights/Update")]
+        public HttpResponseMessage UpdateFlight([FromBody] FlightFormUpdate form)
+        {
+            FlightDbManager.ModifyFlight(form);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpDelete]
+        [Route("Flights/Delete")]
+        public HttpResponseMessage DeleteFlight([FromBody] int Id)
+        {
+            FlightDbManager.DeleteFlight(Id);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
     }
 }
