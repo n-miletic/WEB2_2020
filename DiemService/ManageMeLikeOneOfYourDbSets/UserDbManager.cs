@@ -1,13 +1,20 @@
-﻿using DiemService.Database;
+﻿using DiemService.Authorization;
+using DiemService.Database;
+using DiemService.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.Mail;
 using System.Web;
 
 namespace DiemService.ManageMeLikeOneOfYourDbSets
 {
     public static class UserDbManager
     {
+
+       
+
         public static User GetUser(int userid)
         {
             using (var _context = new DiemServiceDB())
@@ -16,11 +23,29 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
             }
         }
 
+        public static User GetLoggedUser(string username)
+        {
+            using (var _context = new DiemServiceDB())
+            {
+                return _context.UserDbSet.Where(user => user.Username == username).FirstOrDefault();
+            }
+        }
+
+
+
         public static List<User> GetUsers()
         {
             using (var _context = new DiemServiceDB())
             {
-                return _context.UserDbSet.ToList(); //exclude yourself in front end
+                return _context.UserDbSet.ToList(); 
+            }
+        }
+
+        public static List<User> GetUsers(string loggedUsername)
+        {
+            using (var _context = new DiemServiceDB())
+            {
+                return _context.UserDbSet.Where(u => u.Username != loggedUsername).ToList();
             }
         }
 
@@ -79,6 +104,33 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
                 _context.SaveChanges();
             }
         }
+
+        public static UserGift LogIn(string username,string password)
+        {
+            using(var _context = new DiemServiceDB())
+            {
+                User logIn = _context.UserDbSet.Where(s => s.Username == username).FirstOrDefault();
+                if ( logIn != null)
+                {
+                    if(logIn.Hash == password)
+                    {
+                        return new UserGift(TokenManager.GetToken(logIn),logIn);
+                    }
+                }
+                throw new Exception("wrong password or user doenst exist");
+            }
+        }
+
+        public static void SendRequest(string from, string to)
+        {
+            using(var _context = new DiemServiceDB())
+            {
+                User fromUser = _context.UserDbSet.Where(s => s.Username == from).FirstOrDefault();
+                User toUser = _context.UserDbSet.Where(s => s.Username == to).FirstOrDefault();
+                toUser.FriendRequests.Add(fromUser);
+            }
+        }
+
 
     }
 }

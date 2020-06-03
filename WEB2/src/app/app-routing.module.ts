@@ -7,7 +7,7 @@ import { FlightComponent } from './components/flight/flight.component';
 import { RentacarComponent } from './components/rentacar/rentacar.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
-
+import {ActivatedAccountComponent} from './components/activated-account/activated-account.component';
 
 
 
@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path:"company/:id",
     component: CompanyViewComponent
+  },
+  {
+    path:"ActivateUser/:link",
+    component: ActivatedAccountComponent
   }
 ];
 
@@ -38,4 +42,4 @@ export class AppRoutingModule { }
 export const routingComponents = [SearchResultViewComponent, FlightComponent, 
                                   RentacarComponent, UnregisteredViewComponent, 
                                    LogInComponent, SignInComponent, 
-                                  CompanyViewComponent]
+                                  CompanyViewComponent,ActivatedAccountComponent]

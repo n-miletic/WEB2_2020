@@ -7,9 +7,8 @@ describe('NavigationBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavigationBarComponent ]
-    })
-    .compileComponents();
+      declarations: [NavigationBarComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

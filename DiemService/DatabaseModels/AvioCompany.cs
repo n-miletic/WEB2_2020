@@ -39,6 +39,8 @@ namespace DiemService.Database
         public string Flight_Duration { get; set; }
         public string Flight_Distance { get; set; }
 
+        public AvioCompany Provider { get; set; }
+
         public Flight(Location from_Location, Location to_Location, Price price, DateTime flight_Departure_Time, DateTime flight_Arrival_Time, string flight_Duration, string flight_Distance)
         {
             From_Location = from_Location;

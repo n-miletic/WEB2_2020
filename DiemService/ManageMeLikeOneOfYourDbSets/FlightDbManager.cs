@@ -34,6 +34,19 @@ namespace DiemService.Controllers
             }
         }
 
+        public static void AvioAddFlight(FlightForm flight)
+        {
+            using (var _context = new DiemServiceDB())
+            {
+                Flight toAdd = flight.toFlight();
+                toAdd.To_Location = _context.LocationDbSet.Add(toAdd.To_Location);
+                toAdd.From_Location = _context.LocationDbSet.Add(toAdd.From_Location);
+                _context.FlightDbSet.Add(toAdd);
+                _context.SaveChanges();
+
+            }
+        }
+
         public static void ModifyFlight(FlightFormUpdate modifyValues)
         {
         

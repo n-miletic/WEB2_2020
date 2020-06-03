@@ -1,0 +1,65 @@
+<div class = "main-wrap">
+    <table class="user-div" >
+       <thead>
+           <tr>
+               <th colspan="1">
+                   &nbsp;
+               </th>
+               <th>
+                   Username
+               </th>
+               <th>
+                   Name
+               </th>
+               <th>
+                   Last Name
+               </th>
+               <th>
+                   &nbsp;
+               </th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr *ngFor="let user of Users">
+                <td>
+                    <img class= "account-img" src="assets/account_stock.png"/>
+                </td>
+                <td>
+                    {{user.Username}}
+                </td>
+                <td>
+                    {{user.Name}}
+                </td>
+                <td>
+                    {{user.LastName}}
+                </td>
+                <td>
+                    <div *ngIf="CurrentUser != null">
+                        <div *ngIf= "DetermineRelationship(user.Name,'friends');else notfriendsBlock">
+                            <button (click) = "HandleRequests(user.Name, 'Unfriend')">
+                                FRIENDS
+                            </button>
+                        </div>
+                        <ng-template #notfriendsBlock>
+                            <div *ngIf = "DetermineRelationship(user.Name,'hasTheirRequest'); else doesntHaveIt">
+                                <button (click) = "HandleRequests(user.Name,'Accept')">
+                                    ACCEPT/DENY REQUEST
+                                </button>
+                            </div>
+                            <ng-template #doesntHaveIt>
+                                <button (click) = "HandleRequests(user.Name,'Send')">
+                                    SEND REQUEST
+                                </button>
+                            </ng-template>
+                        </ng-template>
+                        
+                    </div>
+                </td>
+           </tr>
+           
+           
+           
+           
+       </tbody>
+    </table>
+</div>

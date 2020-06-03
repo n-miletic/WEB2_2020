@@ -11,13 +11,17 @@ import { FlightsViewComponent } from './components/flights-view/flights-view.com
 import { GoogleAutocompletePlacesComponent } from './components/google-autocomplete-places/google-autocomplete-places.component';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { FormsModule } from '@angular/forms';
+import { ActivatedAccountComponent } from './components/activated-account/activated-account.component';
+import { UsersViewComponent } from './components/users-view/users-view.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavigationBarComponent,
     routingComponents,
     GoogleAutocompletePlacesComponent,
-    FlightsViewComponent
+    FlightsViewComponent,
+    ActivatedAccountComponent,
+    UsersViewComponent
   ],
   imports: [
     BrowserModule,

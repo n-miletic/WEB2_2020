@@ -20,6 +20,7 @@ namespace DiemService.Database
         public virtual DbSet<Location> LocationDbSet { get; set; }
         public virtual DbSet<Address> AddressDbSet { get; set; }
 
+        public virtual DbSet<TempUser> TempUserDbSet { get; set; }
 
         public void ThePurge()
         {
@@ -33,6 +34,7 @@ namespace DiemService.Database
             VehicleDbSet.RemoveRange(VehicleDbSet);
             LocationDbSet.RemoveRange(LocationDbSet);
             AddressDbSet.RemoveRange(AddressDbSet);
+            TempUserDbSet.RemoveRange(TempUserDbSet);
             this.SaveChanges();
         }
     }
