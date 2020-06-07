@@ -20,7 +20,7 @@
            </tr>
        </thead>
        <tbody>
-           <tr *ngFor="let user of Users">
+           <tr  *ngFor="let user of Users">
                 <td>
                     <img class= "account-img" src="assets/account_stock.png"/>
                 </td>
@@ -35,21 +35,31 @@
                 </td>
                 <td>
                     <div *ngIf="CurrentUser != null">
-                        <div *ngIf= "DetermineRelationship(user.Name,'friends');else notfriendsBlock">
-                            <button (click) = "HandleRequests(user.Name, 'Unfriend')">
-                                FRIENDS
+                        <div *ngIf= "DetermineRelationship(user.Username,'friends');else notfriendsBlock">
+                            <button (click) = "HandleRequests(user.Username, 'Unfriend')">
+                                Unfriend
                             </button>
                         </div>
                         <ng-template #notfriendsBlock>
-                            <div *ngIf = "DetermineRelationship(user.Name,'hasTheirRequest'); else doesntHaveIt">
-                                <button (click) = "HandleRequests(user.Name,'Accept')">
-                                    ACCEPT/DENY REQUEST
+                            <div *ngIf = "DetermineRelationship(user.Username,'hasTheirRequest'); else doesntHaveIt">
+                                <button (click) = "HandleRequests(user.Username,'Accept')">
+                                    ACCEPT REQUEST
+                                </button>
+                                <button (click) = "HandleRequests(user.Username,'Decline')">
+                                    DENY REQUEST
                                 </button>
                             </div>
                             <ng-template #doesntHaveIt>
-                                <button (click) = "HandleRequests(user.Name,'Send')">
+                                <div *ngIf = "DetermineRelationship(user.Username,'didTheySend'); else didntsend">
+                                    <button>
+                                        FRIEND REQUEST SENT
+                                    </button>
+                                </div>
+                            <ng-template #didntsend>
+                                <button (click) = "HandleRequests(user.Username,'Send')">
                                     SEND REQUEST
                                 </button>
+                            </ng-template>
                             </ng-template>
                         </ng-template>
                         

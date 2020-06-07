@@ -15,8 +15,7 @@ import {
   styleUrls: ['./log-in.component.css'],
 })
 export class LogInComponent implements OnInit {
-  @Output() setCookie: EventEmitter<any> = new EventEmitter();
-  cookie: JSON;
+  @Output() imDone: EventEmitter<any> = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
@@ -24,7 +23,6 @@ export class LogInComponent implements OnInit {
     this[event.srcElement.name] = event.srcElement.value;
   }
   onSubmit(event: any) {
-    console.log(this);
     let credentials = {
       Username: this['Username'],
       Password: this['Password'],
@@ -39,12 +37,9 @@ export class LogInComponent implements OnInit {
     })
       .then((res) => res.json())
       .then((UserGift) => {
-        console.log(UserGift)
         sessionStorage.setItem("tokenKey",UserGift.Token)
         sessionStorage.setItem("LoggedUser",JSON.stringify(UserGift.User))
-        console.log(sessionStorage)
-      }).then(
-
-      );
+        this.imDone.emit("BYE")
+      })
   }
 }

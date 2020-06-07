@@ -1,0 +1,22 @@
+<div class = "main-div">
+    <form ngNativeValidate (ngSubmit)="onSubmit($event)" (change) = "onChange($event)">
+        <div class = "flex-space-between">
+            <label>Name:</label>
+            <input name ="Name" type="text" required/>
+        </div>
+        <div class = "flex-space-between">
+            <label>Address:</label>
+            <AutocompleteComponent inputName ="Address"  (setAddress)="getAddress($event)" addressType = "(cities)">
+            </AutocompleteComponent>
+        </div>
+        <div class = "flex-space-between">
+            <label>Description:</label>
+            <input name = "Promo_description" type="text" required/>
+        </div>
+        <div class = "flex-space-between">
+            <label>Select logo:</label>
+            <input name ="Logo" type="file" required/>
+        </div>
+        <input type="submit" value="Add company"/>
+    </form>
+</div>

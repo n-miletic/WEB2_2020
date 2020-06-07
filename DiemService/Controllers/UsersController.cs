@@ -48,9 +48,10 @@ namespace DiemService.Controllers
 
         [HttpPost]
         [Route("User/AcceptRequest")]
-        public HttpResponseMessage AcceptRequest([FromBody]string myid, string personid )
+        public HttpResponseMessage AcceptRequest(SignForm toUsername)
         {
-            UserDbManager.AcceptRequest(Int32.Parse(myid), Int32.Parse(personid));
+            ClaimsPrincipal loggedUser = (ClaimsPrincipal)HttpContext.Current.User;
+            UserDbManager.AcceptRequest(loggedUser.FindFirst("username").Value, toUsername.Username);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
@@ -89,42 +90,28 @@ namespace DiemService.Controllers
 
         [HttpPost]
         [Route("User/DeclineRequest")]
-        public HttpResponseMessage DeclineRequest([FromBody]string myid, string personid)
+        public HttpResponseMessage DeclineRequest(SignForm toUsername)
         {
-            UserDbManager.DeclineRequest(Int32.Parse(myid), Int32.Parse(personid));
+            ClaimsPrincipal loggedUser = (ClaimsPrincipal)HttpContext.Current.User;
+            UserDbManager.DeclineRequest(loggedUser.FindFirst("username").Value, toUsername.Username);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         [HttpPost]
-        [Route("User/AddFlightReservation")]
-        public HttpResponseMessage AddFlightReservation([FromBody]string myid, string flightid)
+        [Route("User/UnfriendRequest")]
+        public HttpResponseMessage UnfriendRequest(SignForm toUsername)
         {
-            UserDbManager.AddFlightReservation(Int32.Parse(myid), Int32.Parse(flightid));
+            ClaimsPrincipal loggedUser = (ClaimsPrincipal)HttpContext.Current.User;
+            UserDbManager.UnfriendRequest(loggedUser.FindFirst("username").Value, toUsername.Username);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        [HttpPost]
-        [Route("User/CancelFlightReservation")] // moras i za vehicle add/cancel 
-        public HttpResponseMessage CancelFlightReservation([FromBody]string myid, string flightid)
+        [HttpGet]
+        [Authorize]
+        [Route("User/GetHardcoreUsers")]
+        public HttpResponseMessage GetHardcoreUsers()
         {
-            UserDbManager.CancelFlightReservation(Int32.Parse(myid), Int32.Parse(flightid));
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
-
-        [HttpPost]
-        [Route("User/AddVehicleReservation")]
-        public HttpResponseMessage AddVehicleReservation([FromBody]string myid, string vehicleid)
-        {
-            UserDbManager.AddVehicleReservation(Int32.Parse(myid), Int32.Parse(vehicleid));
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
-
-        [HttpPost]
-        [Route("User/CancelVehicleReservation")]
-        public HttpResponseMessage CancelVehicleReservation([FromBody]string myid, string vehicleid)
-        {
-            UserDbManager.CancelVehicleReservation(Int32.Parse(myid), Int32.Parse(vehicleid));
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, UserDbManager.GetHardcoreUsers());
         }
 
 

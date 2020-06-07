@@ -1,0 +1,82 @@
+<div class = "main-wrap">
+    <table class="user-div" >
+       <thead>
+           <tr>
+               <th colspan="1">
+                   &nbsp;
+               </th>
+               <th>
+                   Username
+               </th>
+               <th>
+                   Name
+               </th>
+               <th>
+                   Last Name
+               </th>
+               <th>
+                   &nbsp;
+               </th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr  *ngFor="let user of Users">
+                <td>
+                    <img class= "account-img" src="assets/account_stock.png"/>
+                </td>
+                <td>
+                    {{user.Username}}
+                </td>
+                <td>
+                    {{user.Name}}
+                </td>
+                <td>
+                    {{user.LastName}}
+                </td>
+                <td>
+                    <div *ngIf="CurrentUser != null">
+                        <div *ngIf= "user.Role === 0;else other">
+                            <button (click) = "Promote(user.Username, 'AdminAvio')">
+                                Promote to Aviocompany Admin
+                            </button>
+                            <button (click) = "Promote(user.Username, 'AdminRentACar')">
+                                Promote to Rent a Car Admin
+                            </button>
+                        </div>
+                        <ng-template #other>
+                            <div *ngIf = "user.Role === 1 ;else rentadmin">
+                                <div [hidden] = "user.OwnedAvioCompanies.length == 0" >
+                                    <button (click) = "ViewCompany(user.Username)">
+                                        HAS COMPANY
+                                    </button>
+                                </div>
+                                <div [hidden] = "user.OwnedAvioCompanies.length > 0">
+                                    <button (click) = "AddCompany(user.Username)">
+                                        ADD AVIO COMPANY
+                                    </button>
+                                </div>
+                            </div>
+                            <ng-template #rentadmin>
+                                <div  [hidden] = "user.OwnedRentServices.length == 0"  >
+                                    <button (click) = "ViewCompany(user.Username)">
+                                        HAS COMPANY
+                                    </button>
+                                </div>
+                                <div [hidden] = "user.OwnedRentServices.length > 0">
+                                    <button (click) = "AddCompany(user.Username)">
+                                        ADD RENT COMPANY
+                                    </button>
+                                </div>
+                            </ng-template>
+                        </ng-template>
+                        
+                    </div>
+                </td>
+           </tr>
+           
+           
+           
+           
+       </tbody>
+    </table>
+</div>

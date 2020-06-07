@@ -11,6 +11,7 @@
     <img class="exitimg" (click)="hideDialog()" src="assets/exit.svg" />
   </div>
   <app-log-in
+    (imDone) = "close($event)"
     *ngIf="logInActive; else signDiv"
     class="LogInDialog"
   >

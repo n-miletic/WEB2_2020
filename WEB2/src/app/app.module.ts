@@ -13,6 +13,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
 import { FormsModule } from '@angular/forms';
 import { ActivatedAccountComponent } from './components/activated-account/activated-account.component';
 import { UsersViewComponent } from './components/users-view/users-view.component';
+import { AdminUsersViewComponent } from './components/admin-users-view/admin-users-view.component';
+import { AddAvioCompanyComponent } from './components/add-avio-company/add-avio-company.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,9 @@ import { UsersViewComponent } from './components/users-view/users-view.component
     GoogleAutocompletePlacesComponent,
     FlightsViewComponent,
     ActivatedAccountComponent,
-    UsersViewComponent
+    UsersViewComponent,
+    AdminUsersViewComponent,
+    AddAvioCompanyComponent
   ],
   imports: [
     BrowserModule,

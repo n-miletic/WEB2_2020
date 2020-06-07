@@ -7,7 +7,7 @@ import { Flight } from 'src/app/entities/flight/flight'
   styleUrls: ['./flight.component.css']
 })
 export class FlightComponent implements OnInit {
-
+  CurrentUser ;
   tripType = ['Return', 'One Way'];
   cabinClass = ['Economy', 'Premium Economy', 'Business Class', 'First Class'];
   travellers = ['1 adult', '2 adults', '1 adult and 1 child', '1 adult and 2 children', 
@@ -20,6 +20,7 @@ export class FlightComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
   }
 
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,12 +10,13 @@ namespace DiemService.Database
     public class AvioCompany
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public Address Address { get; set; }
         public string Promo_description { get; set; }
         public int Average_Rating { get; set; }
         public virtual ICollection<Location> Destinations { get; set; }
         public virtual ICollection<Flight> Flights { get; set; }
-
+        public User Owner { get; set; }
         public AvioCompany()
         {
         }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-users-view',
+  selector: 'users-view',
   templateUrl: './users-view.component.html',
   styleUrls: ['./users-view.component.css']
 })
@@ -12,16 +12,35 @@ export class UsersViewComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.getUsers();
+
     this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
+    this.getUsers();
   }
 
   getUsers(){
+    if (this.CurrentUser == null)
     fetch('/DiemApi/User/GetAll').then(
-      data =>{
-        this.Users = data;
+      data => data.json()
+    ).then(
+      users => {
+        this.Users = users
+        console.log(users)
       }
-    )
+      )
+      else
+      fetch('/DiemApi/User/GetAll/Logged',{
+        headers:{
+          'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey")
+        }
+      }).then(
+        data => data.json()
+      ).then(
+        users => {
+          this.Users = users
+          console.log(users)
+        }
+        )
+
   }
 
   updateLoggedUser(){
@@ -32,20 +51,23 @@ export class UsersViewComponent implements OnInit {
       }
     }
     ).then(res=> res.json()).then(
-      user => sessionStorage.setItem("LoggedUser",JSON.stringify(user))
+      user => {sessionStorage.setItem("LoggedUser",JSON.stringify(user)); this.CurrentUser = user}
     )
   }
 
   DetermineRelationship(userName:string,relationship:string):boolean{
     if(relationship == "friends")
     {
-      if(this.CurrentUser.Friends == null)
-        return false;
-      else return this.CurrentUser.Friends.some(friend => friend.Username == userName);
+      console.log(this.CurrentUser)
+      return this.CurrentUser.Friends.map(user => user.Username).includes(userName);
     }
     else if(relationship == "hasTheirRequest")
     {
-      return this.Users.find(user => user.Username == userName).Friends.some(friend => friend.Username == this.CurrentUser.Username)
+      return   this.CurrentUser.PendingFriends.map(user => user.Username).includes(userName);
+    }
+    else if(relationship == "didTheySend")
+    {
+      return  this.CurrentUser.FriendRequestsSent.map(user => user.Username).includes(userName);
     }
   }
 
@@ -61,7 +83,7 @@ export class UsersViewComponent implements OnInit {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey"),
       },
-    }).then(()=>{this.getUsers()});
+    }).then(()=>{this.getUsers(); this.updateLoggedUser()});
   }
 
 }

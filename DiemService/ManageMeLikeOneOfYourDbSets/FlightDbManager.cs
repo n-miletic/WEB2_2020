@@ -1,6 +1,7 @@
 ﻿using DiemService.Database;
 using DiemService.Forms;
 using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -15,7 +16,11 @@ namespace DiemService.Controllers
             using (var _context = new DiemServiceDB())
             {
                 //_context.ThePurge();
-                List<Flight> retVal = _context.FlightDbSet.ToList();
+                List<Flight> retVal = _context.FlightDbSet.Include(x => x.From_Location)
+                                                           .Include(x => x.To_Location)
+                                                           .Include(x => x.Transits)
+                                                           .ToList();
+                    
                 return retVal;
 
             }

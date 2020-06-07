@@ -18,7 +18,8 @@ namespace DiemService.Controllers
         [HttpGet]
         [Route("Flights")]
         public HttpResponseMessage GetFlights()
-        {   
+        {
+            List<Flight> s = FlightDbManager.GetAllFlights();
             return Request.CreateResponse(HttpStatusCode.OK, FlightDbManager.GetAllFlights());
         }
 

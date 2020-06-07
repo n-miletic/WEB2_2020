@@ -1,0 +1,20 @@
+.main-div{
+    width : 400px;
+    border:2px  #E54B4B;
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+.flex-space-between{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+div > label + *{
+    width:150px;
+}
+
+AutocompleteComponent input{
+    width: 150px;
+}

@@ -58,7 +58,8 @@ namespace DiemService.Database
         public Role Role { get; set; }
         public int UlogaID { get; set; }
         public string Email { get; set; }
-        public ICollection<User> FriendRequests { get; set; }
+        public ICollection<User> PendingFriends { get; set; }
+        public ICollection<User> FriendRequestsSent { get; set; }
         public ICollection<User> Friends { get; set; }
 
         public User(string name, string lastName, Role role, int ulogaID,string hash,string email)
@@ -84,7 +85,9 @@ namespace DiemService.Database
 
         public User()
         {
-
+            Friends = new List<User>();
+            PendingFriends = new List<User>();
+            FriendRequestsSent = new List<User>();
         }
     }
 
@@ -110,6 +113,7 @@ namespace DiemService.Database
         public ICollection<AvioCompany> OwnedAvioCompanies { get; set; }
         public AdminAvio()
         {
+            OwnedAvioCompanies = new List<AvioCompany>();
         }
     }
     public class AdminRent
@@ -118,6 +122,7 @@ namespace DiemService.Database
         public ICollection<RentACar> OwnedRentServices { get; set; }
         public AdminRent()
         {
+            OwnedRentServices = new List<RentACar>();
         }
     }
 

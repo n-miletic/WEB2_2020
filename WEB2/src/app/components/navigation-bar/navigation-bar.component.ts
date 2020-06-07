@@ -28,4 +28,8 @@ export class NavigationBarComponent implements OnInit {
     this.logInActive = !this.logInActive;
   }
 
+  close(event:any):void {
+    this.Dialog = false;
+  }
+
 }

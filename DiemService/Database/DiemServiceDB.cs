@@ -24,8 +24,8 @@ namespace DiemService.Database
 
         public void ThePurge()
         {
+            UserDbSet.RemoveRange(UserDbSet.Include(x=>x.PendingFriends).Include(x=>x.Friends).Include(x=>x.FriendRequestsSent));
             FlightDbSet.RemoveRange(FlightDbSet);
-            UserDbSet.RemoveRange(UserDbSet);
             AdminDbSet.RemoveRange(AdminDbSet);
             AdminAvioDbSet.RemoveRange(AdminAvioDbSet);
             AdminRentDbSet.RemoveRange(AdminRentDbSet);

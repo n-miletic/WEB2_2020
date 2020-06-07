@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -127,12 +130,19 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Authorization\OwinProvider.cs" />
     <Compile Include="Authorization\TokenManager.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AvioCompanyController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="DTO\AdminAvioDTO.cs" />
+    <Compile Include="DTO\AdminRentDTO.cs" />
+    <Compile Include="DTO\RegisteredUserDTO.cs" />
     <Compile Include="Forms\FlightFormUpdate.cs" />
+    <Compile Include="Forms\PromoteForm.cs" />
     <Compile Include="Forms\SendReqForm.cs" />
     <Compile Include="Forms\SignForm.cs" />
     <Compile Include="Forms\UserGift.cs" />
+    <Compile Include="ManageMeLikeOneOfYourDbSets\AdminDbManager.cs" />
     <Compile Include="ManageMeLikeOneOfYourDbSets\FlightDbManager.cs" />
     <Compile Include="Controllers\FlightsController.cs" />
     <Compile Include="DatabaseModels\AvioCompany.cs" />
@@ -143,6 +153,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ManageMeLikeOneOfYourDbSets\MailServiceManager.cs" />
+    <Compile Include="ManageMeLikeOneOfYourDbSets\ReservationDbManager.cs" />
     <Compile Include="ManageMeLikeOneOfYourDbSets\UserDbManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Forms\FlightForm.cs" />

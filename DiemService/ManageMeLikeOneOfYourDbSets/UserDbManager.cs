@@ -7,18 +7,46 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Mail;
 using System.Web;
+using System.Data.Entity;
+using DiemService.DTO;
 
 namespace DiemService.ManageMeLikeOneOfYourDbSets
 {
     public static class UserDbManager
     {
-
+        public static List<object> GetHardcoreUsers()
+        {
+            List<object> retVal = new List<object>();
+            using(var _context = new DiemServiceDB())
+            {
+                List<User> s = _context.UserDbSet.Where(u => u.Role != Role.Admin).ToList();
+                foreach (User basic in s)
+                {
+                    switch (basic.Role)
+                    {
+                        case Role.RegisteredUser:
+                            retVal.Add(basic);
+                            break;
+                        case Role.AdminAvio:
+                            retVal.Add(new AdminAvioDTO(basic, _context));
+                            break;
+                        case Role.AdminRentACar:
+                            retVal.Add(new AdminRentDTO(basic, _context));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                return retVal;
+            }
+        }
        
 
         public static User GetUser(int userid)
         {
             using (var _context = new DiemServiceDB())
             {
+                
                 return _context.UserDbSet.Find(userid);
             }
         }
@@ -27,7 +55,8 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
         {
             using (var _context = new DiemServiceDB())
             {
-                return _context.UserDbSet.Where(user => user.Username == username).FirstOrDefault();
+                User retVal = _context.UserDbSet.Where(user => user.Username == username).Include(x => x.FriendRequestsSent).Include(x => x.Friends).Include(x => x.PendingFriends).FirstOrDefault();
+                return retVal;
             }
         }
 
@@ -37,7 +66,7 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
         {
             using (var _context = new DiemServiceDB())
             {
-                return _context.UserDbSet.ToList(); 
+                return _context.UserDbSet.Where(u=> u.Role != Role.Admin).ToList();
             }
         }
 
@@ -45,71 +74,55 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
         {
             using (var _context = new DiemServiceDB())
             {
-                return _context.UserDbSet.Where(u => u.Username != loggedUsername).ToList();
+                return _context.UserDbSet.Where(u => u.Role != Role.Admin).Where(u => u.Username != loggedUsername).ToList();
             }
         }
 
-        public static void AcceptRequest(int myid, int personid)
+        public static void AcceptRequest(string from, string to)
         {
             using (var _context = new DiemServiceDB())
             {
-                User toAdd = _context.UserDbSet.Find(personid);
-                _context.UserDbSet.Find(myid).FriendRequests.Remove(toAdd);
-                _context.UserDbSet.Find(myid).Friends.Add(toAdd);
+                User fromUser = _context.UserDbSet.Where(s => s.Username == from).Include(x => x.PendingFriends).Include(x=>x.Friends).FirstOrDefault();
+                User toUser = _context.UserDbSet.Where(s => s.Username == to).Include(x => x.FriendRequestsSent).Include(x => x.Friends).FirstOrDefault();
+
+                fromUser.PendingFriends.Remove(toUser);
+                toUser.FriendRequestsSent.Remove(fromUser);
+                fromUser.Friends.Add(toUser);
+                toUser.Friends.Add(fromUser);
                 _context.SaveChanges();
             }
         }
 
-        public static void DeclineRequest(int myid, int personid)
+        public static void DeclineRequest(string from, string to)
         {
             using (var _context = new DiemServiceDB())
             {
-                _context.UserDbSet.Find(myid).FriendRequests.Remove(_context.UserDbSet.Find(personid));
+                User fromUser = _context.UserDbSet.Where(s => s.Username == from).Include(x => x.PendingFriends).FirstOrDefault();
+                User toUser = _context.UserDbSet.Where(s => s.Username == to).Include(x => x.FriendRequestsSent).FirstOrDefault();
+
+                fromUser.PendingFriends.Remove(toUser);
+                toUser.FriendRequestsSent.Remove(fromUser);
                 _context.SaveChanges();
             }
         }
 
-        public static void AddFlightReservation(int myid,int flightid)
+        public static void UnfriendRequest(string from, string to)
         {
             using (var _context = new DiemServiceDB())
             {
-                _context.RegisteredUserDbSet.Find(_context.UserDbSet.Find(myid).UlogaID).FlightReservations.Add(_context.FlightDbSet.Find(flightid));
+                User fromUser = _context.UserDbSet.Where(s => s.Username == from).Include(x => x.Friends).FirstOrDefault();
+                User toUser = _context.UserDbSet.Where(s => s.Username == to).Include(x => x.Friends).FirstOrDefault();
+
+                fromUser.Friends.Remove(toUser);
+                toUser.Friends.Remove(fromUser);
                 _context.SaveChanges();
             }
         }
-
-        public static void CancelFlightReservation(int myid, int flightid)
-        {
-            using (var _context = new DiemServiceDB())
-            {
-                _context.RegisteredUserDbSet.Find(_context.UserDbSet.Find(myid).UlogaID).FlightReservations.Remove(_context.FlightDbSet.Find(flightid));
-                _context.SaveChanges();
-            }
-        }
-
-        public static void AddVehicleReservation(int myid, int vehicleid)
-        {
-            using (var _context = new DiemServiceDB())
-            {
-                _context.RegisteredUserDbSet.Find(_context.UserDbSet.Find(myid).UlogaID).VehicleReservations.Add(_context.VehicleDbSet.Find(vehicleid));
-                _context.SaveChanges();
-            }
-        }
-
-        public static void CancelVehicleReservation(int myid,int vehicleid)
-        {
-            using (var _context = new DiemServiceDB())
-            {
-                _context.RegisteredUserDbSet.Find(_context.UserDbSet.Find(myid).UlogaID).VehicleReservations.Remove(_context.VehicleDbSet.Find(vehicleid));
-                _context.SaveChanges();
-            }
-        }
-
         public static UserGift LogIn(string username,string password)
         {
             using(var _context = new DiemServiceDB())
             {
-                User logIn = _context.UserDbSet.Where(s => s.Username == username).FirstOrDefault();
+                User logIn = _context.UserDbSet.Where(s => s.Username == username).Include(x => x.FriendRequestsSent).Include(x => x.Friends).Include(x => x.PendingFriends).FirstOrDefault();
                 if ( logIn != null)
                 {
                     if(logIn.Hash == password)
@@ -117,7 +130,7 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
                         return new UserGift(TokenManager.GetToken(logIn),logIn);
                     }
                 }
-                throw new Exception("wrong password or user doenst exist");
+                throw new Exception("Pogresna loyinka, ili je juzer nepostojeci");
             }
         }
 
@@ -125,9 +138,14 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
         {
             using(var _context = new DiemServiceDB())
             {
-                User fromUser = _context.UserDbSet.Where(s => s.Username == from).FirstOrDefault();
-                User toUser = _context.UserDbSet.Where(s => s.Username == to).FirstOrDefault();
-                toUser.FriendRequests.Add(fromUser);
+                User fromUser = _context.UserDbSet.Where(s => s.Username == from).Include(x=> x.FriendRequestsSent).FirstOrDefault();
+                User toUser = _context.UserDbSet.Where(s => s.Username == to).Include(x=> x.PendingFriends).FirstOrDefault();
+
+                toUser.PendingFriends.Add(fromUser);
+
+                fromUser.FriendRequestsSent.Add(toUser);
+                _context.SaveChanges();
+
             }
         }
 
