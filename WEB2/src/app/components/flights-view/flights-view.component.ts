@@ -27,7 +27,6 @@ export class FlightsViewComponent implements OnInit {
     
   }
   onSubmit(event:any){
-    console.log(this)
     let flightForm = {
       toLocation : this['to'].formatted_address ,
       fromLocation: this['from'].formatted_address,
@@ -44,7 +43,6 @@ export class FlightsViewComponent implements OnInit {
           'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey"),
       }
   }).then(()=> this.reload.emit("reload"))
-    console.log(flightForm)
    
    
   }

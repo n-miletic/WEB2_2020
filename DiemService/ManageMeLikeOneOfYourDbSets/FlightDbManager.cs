@@ -40,6 +40,12 @@ namespace DiemService.Controllers
                 toAdd.To_Location = _context.LocationDbSet.Add(toAdd.To_Location);
                 toAdd.From_Location = _context.LocationDbSet.Add(toAdd.From_Location);
                 toAdd.Provider = found;
+                int[] Seats = new int[100];
+                for (int i = 0; i < 50; i++)
+                {
+                    Seats[i] = 0;
+                }
+                toAdd.Seats = Seats.ToString();
                 found.Flights.Add(_context.FlightDbSet.Add(toAdd));
                 _context.SaveChanges();
 

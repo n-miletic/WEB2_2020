@@ -1,9 +1,12 @@
 <div class="wrapper">
     <img class ="img" src = "assets/tempbg2.jpg"/>
+    <admin-users-view 
+    [hidden] = "MyUser?.Role !== 3">
+    </admin-users-view>
+    <userlist [hidden] = "MyUser?.Role !== 1" TableName = "Friends" [CurrentUser] = "MyUser" [Users] = "MyUser?.Friends">
+    </userlist>
+    <userlist [hidden] = "MyUser?.Role !== 1" TableName = "Requests" [CurrentUser] = "MyUser" [Users] = "MyUser?.PendingFriends">
+    </userlist>
 </div>
-<userlist [CurrentUser] = MyUser [Users] = MyUser?.Friends>
-    Friendslist
-</userlist>
-<userlist [CurrentUser] = MyUser [Users] = MyUser?.PendingFriends>
-    Requests
-</userlist>
+
+

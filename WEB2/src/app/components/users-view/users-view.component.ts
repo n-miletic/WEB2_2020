@@ -8,16 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 export class UsersViewComponent implements OnInit {
  @Input() Users:any;
  @Input() CurrentUser:any;
+ @Input() TableName:string;
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.Users)
   }
 
   DetermineRelationship(userName:string,relationship:string):boolean{
     if(relationship == "friends")
     {
-      console.log(this.CurrentUser)
       return this.CurrentUser.Friends.map(user => user.Username).includes(userName);
     }
     else if(relationship == "hasTheirRequest")

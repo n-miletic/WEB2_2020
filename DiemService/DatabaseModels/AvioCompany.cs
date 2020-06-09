@@ -43,6 +43,7 @@ namespace DiemService.Database
         public DateTime Flight_Departure_Time { get; set; }
         public DateTime Flight_Arrival_Time { get; set; }
         public string Flight_Duration { get; set; }
+        public string Seats { get; set; }
         public string Flight_Distance { get; set; }
 
         public AvioCompany Provider { get; set; }

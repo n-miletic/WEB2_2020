@@ -7,17 +7,24 @@ import { Component, OnInit } from '@angular/core';
 export class NavigationBarComponent implements OnInit {
   CurrentUser:any;
   Dialog: boolean;
+  link:string;
+  AviocompanyName:string;
   logInActive: boolean;
   constructor() {}
 
   ngOnInit(): void {
     this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
+    console.log(this.CurrentUser)
     this.Dialog = false;
+    this.link = '/:ViewAvioCompany/'
+    if(this.CurrentUser?.hasOwnProperty("OwnedAvioCompanies")){
+      this.link += this.CurrentUser.OwnedAvioCompanies[0].Id
+      this.AviocompanyName = this.CurrentUser.OwnedAvioCompanies[0].Name
+    }
     this.logInActive = true;
   }
   showDialog(): void {
     this.Dialog = true;
-    console.log('super');
   }
   hideDialog(): void {
     this.Dialog = false;

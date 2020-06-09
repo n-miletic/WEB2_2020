@@ -29,7 +29,6 @@ export class AdminUsersViewComponent implements OnInit {
       ).then(
         users => {
           this.Users = users
-          console.log(users)
         }
         )
 

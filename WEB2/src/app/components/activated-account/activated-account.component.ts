@@ -18,7 +18,6 @@ export class ActivatedAccountComponent implements OnInit {
           'Content-Type': 'application/json'
       }
   })
-  console.log(this.link)
   }
 
 }

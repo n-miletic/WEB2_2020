@@ -10,9 +10,9 @@
     width: 30%;
     align-items: center;
 }
-div > label + *{
+div .flex-space-between > label + *{
     width:150px;
-}
+} 
 .flex-space-between label{
     font-family: 'Oleo Script';
 }

@@ -8,6 +8,8 @@ import { Flight } from 'src/app/entities/flight/flight'
 })
 export class FlightComponent implements OnInit {
   CurrentUser ;
+  seats:string;
+  Flights:any;
   tripType = ['Return', 'One Way'];
   cabinClass = ['Economy', 'Premium Economy', 'Business Class', 'First Class'];
   travellers = ['1 adult', '2 adults', '1 adult and 1 child', '1 adult and 2 children', 
@@ -20,7 +22,11 @@ export class FlightComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.seats = "00000000000000000000000000000000000000";
     this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
+     fetch("/DiemApi/Flights")
+    .then(data => data.json())
+    .then(flights => {this.Flights = flights;})
   }
 
 }

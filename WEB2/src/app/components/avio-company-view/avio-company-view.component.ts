@@ -21,7 +21,7 @@ export class AvioCompanyViewComponent implements OnInit {
   this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
   fetch(`DiemApi/AvioCompany/Get/${this.AvioCompanyId}`)
     .then(res=>res.json())
-    .then(company => {this.AvioCompany = company;console.log(company)});
+    .then(company => {this.AvioCompany = company});
   }
   EditAvio(event:any,toEdit:string){
     let toSend = 
@@ -36,7 +36,6 @@ export class AvioCompanyViewComponent implements OnInit {
           'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey")
       }
   })
-    console.log(toSend);
   }
   AddFlightViewToggle(){
     this.AddFlightHidden = ! this.AddFlightHidden;

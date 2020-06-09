@@ -28,7 +28,7 @@
     <li><a routerLink="/rentacar" routerLinkActive="active">RENT A CAR</a></li>
     <img *ngIf = "CurrentUser == null" (click)="showDialog()" src="assets/user.png" />
     <li *ngIf = "CurrentUser"><a [routerLink]="'/:MeMyselfAndI/'">{{CurrentUser?.Username.toUpperCase()}}</a></li>
-    <li *ngIf = "CurrentUser?.OwnedAvioCompanies"><a [routerLink]="'/:ViewAvioCompany/' + CurrentUser.OwnedAvioCompanies[0]?.Id"></a>{{CurrentUser?.OwnedAvioCompanies[0]?.Name}}</li>
+    <li *ngIf = "CurrentUser?.Role == 1"><a [routerLink]="this.link">{{this.AviocompanyName?.toUpperCase()}}</a></li>
     <li *ngIf = "CurrentUser"><a (click) = "LogOut()">LOG OUT</a></li>
   </div>
 </div>
