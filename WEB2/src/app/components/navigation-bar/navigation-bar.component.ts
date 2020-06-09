@@ -5,12 +5,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation-bar.component.css'],
 })
 export class NavigationBarComponent implements OnInit {
-  Cookie: any;
+  CurrentUser:any;
   Dialog: boolean;
   logInActive: boolean;
   constructor() {}
 
   ngOnInit(): void {
+    this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
     this.Dialog = false;
     this.logInActive = true;
   }
@@ -29,7 +30,11 @@ export class NavigationBarComponent implements OnInit {
   }
 
   close(event:any):void {
-    this.Dialog = false;
+    this.ngOnInit();
+  }
+  LogOut(){
+    sessionStorage.clear();
+    this.ngOnInit();
   }
 
 }

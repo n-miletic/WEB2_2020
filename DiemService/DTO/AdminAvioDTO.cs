@@ -29,7 +29,9 @@ namespace DiemService.DTO
             PendingFriends = user.PendingFriends;
             Friends = user.Friends;
             FriendRequestsSent = user.FriendRequestsSent;
-            OwnedAvioCompanies =  _context.AdminAvioDbSet.Include(x => x.OwnedAvioCompanies).Where(u => u.Id == user.UlogaID).FirstOrDefault().OwnedAvioCompanies;
+            OwnedAvioCompanies =  _context.AdminAvioDbSet.Where(u => u.Id == user.UlogaID)
+                                                         .Include(x => x.OwnedAvioCompanies.Select(y=> y.Address))
+                                                         .FirstOrDefault().OwnedAvioCompanies; // UVEK IDE WHERE PA INCLUDE
 
 
         }

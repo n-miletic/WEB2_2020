@@ -1,0 +1,45 @@
+<div class="wrapper">
+    <img class ="img2" src = "assets/tempbg2.jpg"/>
+
+    <div class = "company-div">
+        <div class = "img-div">
+            <img  class = "logo-img" 
+                [src] = " 'data:image/jpeg;base64,' + AvioCompany?.Logo"/>
+        </div>
+
+        <textarea (change) = "EditAvio($event,'Name')"  
+            class ="company-name">
+            {{AvioCompany?.Name}}
+        </textarea>
+        <div   
+            class = "promo-description-text">
+            <textarea 
+                (change) = "EditAvio($event,'Promo_description')" 
+                class="fuk-u">
+                "{{AvioCompany?.Promo_description}}"
+            </textarea>
+        </div>
+        <textarea 
+            contenteditable="true" 
+            (change) = "EditAvio($event,'Address')" 
+            class="address-of-company">
+            {{AvioCompany?.Address?.State}}
+        </textarea>
+        <div class="flights-flex">
+            <label>Our flights <img (click) = "AddFlightViewToggle()" class="add-icon" src = "assets/add-icon.svg"/></label>
+            <div class="red-line"></div>
+            <div [hidden] = "AddFlightHidden" class = "flight-div">
+                <add-flight (reload) = "reload()" [AvioCompanyId] = "AvioCompany?.Id"  >
+
+                </add-flight>
+            </div>
+            <div *ngFor="let flight of AvioCompany?.Flights" class = "flight-div">
+                <flight-card  [Flight] = flight>
+
+                </flight-card>
+            </div>
+            <div class="red-line2"></div>
+        </div>
+        
+    </div>
+</div>

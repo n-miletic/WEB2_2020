@@ -29,7 +29,8 @@
         <button type="submit" class="btn btn-success" >Submit</button>
     </div>
     </form>
-    <admin-users-view [hidden] = "this.CurrentUser.Role !== 3">
+    <admin-users-view 
+    [hidden] = "this.CurrentUser?.Role !== 3">
 
     </admin-users-view>
 </div>

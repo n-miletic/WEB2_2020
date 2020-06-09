@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,EventEmitter,Input, OnInit, Output } from '@angular/core';
+
 
 @Component({
-  selector: 'flights-view',
+  selector: 'add-flight',
   templateUrl: './flights-view.component.html',
   styleUrls: ['./flights-view.component.css']
 })
 export class FlightsViewComponent implements OnInit {
 
-  AllFlights;
+  // AllFlights;
+  @Input() AvioCompanyId: string;
+  @Output() reload: EventEmitter<any> = new EventEmitter()
   constructor() { }
-
   ngOnInit(): void {
-    fetch("/DiemApi/Flights")
-    .then(data => {
-      this.AllFlights = data;
-    })
+    // fetch("/DiemApi/Flights")
+    // .then(data => {
+    //   this.AllFlights = data;
+    // })
   }
 
   getAddress(place:any){
@@ -34,13 +36,14 @@ export class FlightsViewComponent implements OnInit {
       price:this['cena']
     }
 
-    fetch('/DiemApi/Flights/Add', {
+    fetch(`/DiemApi/AvioCompany/${this.AvioCompanyId}/Flights/Add`, {
       method: 'post',
       body: JSON.stringify(flightForm),
       headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey"),
       }
-  })
+  }).then(()=> this.reload.emit("reload"))
     console.log(flightForm)
    
    

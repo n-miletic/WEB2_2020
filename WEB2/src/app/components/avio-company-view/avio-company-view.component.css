@@ -1,0 +1,107 @@
+.wrapper{
+   
+    position: fixed;
+    top:0;
+}
+.img2{
+  
+    width: 100vw;
+    height:30vh;
+}
+.company-div{
+  border-radius: 25px;
+  border: 2px solid #E54B4B;
+  width: 100%;
+  position: relative;
+  height:600px;
+  background: linear-gradient(#E54B4B 20%, lightgray 20%);
+}
+.logo-img{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.img-div{
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    left: 0%;
+    top:10%;
+    width:10%;
+    height:20%;
+    overflow: hidden;
+}
+.company-name{
+    position: absolute;
+    font: 24px 'Oleo Script';
+    top: 15%;
+    left: 11.5%;
+}
+.promo-description-text{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    align-items: center;
+    height: 20%;
+    width: 70%;
+    left: 30%;
+    font: 16px 'Oleo Script';
+}
+.fuk-u{
+   
+    width: 100%;
+    
+}
+textarea{
+    border: none;
+    background: transparent;
+    resize: none;
+    overflow: hidden;
+}
+
+.address-of-company{
+    position: absolute;
+    font: 12px 'Oleo Script';
+    top: 13%;
+    right: 1%;
+    text-align: end;
+    width: 300px;
+}
+.flights-flex{
+    position: absolute;
+    left: 15.5%;
+    width:70vw;
+    height: 40vh;
+    /* display: flex;
+    flex-wrap: wrap; */
+}
+.flights-flex  *{
+    /* flex:0 100% */
+}
+.red-line{
+    border-bottom: 2px solid #E54B4B;
+    opacity: 0.7;
+    width: 100%;
+    display: block;
+}
+.red-line2{
+    border-bottom: 2px solid #E54B4B;
+    opacity: 0.7;
+    display: block;
+    width: 100%;
+    
+}
+.flights-flex label{
+   font:  24px 'Oleo Script';
+   color:#E54B4B ;
+}
+.add-icon{
+    width: 30px;
+    fill: #E54B4B;
+}
+.flight-div{
+    border: 2px solid #E54B4B ;
+    border-radius: 20px;
+    height: 10em;
+}

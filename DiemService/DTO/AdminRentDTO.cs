@@ -29,7 +29,9 @@ namespace DiemService.DTO
             PendingFriends = user.PendingFriends;
             Friends = user.Friends;
             FriendRequestsSent = user.FriendRequestsSent;
-             OwnedRentServices = _context.AdminRentDbSet.Include(x => x.OwnedRentServices).Where(u => u.Id == user.UlogaID).FirstOrDefault().OwnedRentServices;
+             OwnedRentServices = _context.AdminRentDbSet.Where(u => u.Id == user.UlogaID)
+                                                        .Include(x => x.OwnedRentServices.Select(y => y.Address))
+                                                        .FirstOrDefault().OwnedRentServices;
         }
     }
 }
