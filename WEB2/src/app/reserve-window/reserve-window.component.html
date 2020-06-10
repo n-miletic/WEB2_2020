@@ -1,0 +1,58 @@
+<div class="greyout">
+   
+</div>
+<div class="popup">
+    <img class="exitimg" (click)="close()" src="assets/exit.svg" />
+    <div class="main-flex">
+        <div>
+            <div class = "flex-space-between">
+                <label>From:</label>
+                <label>{{Flight?.From_Location?.City}}</label>
+            </div>
+            <div class = "flex-space-between">
+                <label>To:</label>
+                <label>{{Flight?.To_Location?.City}}</label>
+               
+            </div> 
+            <div class = "flex-space-between">
+                <label>Datum poletanja:</label>
+                <label>{{Flight?.Flight_Departure_Time}}</label>
+            </div>
+            <div class = "flex-space-between">
+                <label>Datum sletanja:</label>
+                <label>{{Flight?.Flight_Arrival_Time}}</label>
+            </div> 
+            <div class = "flex-space-between">
+                <label>Vreme:</label>
+                <label>{{Flight?.Flight_Duration}}</label>
+            </div>
+            <div  class = "flex-space-between">
+                <label>Cena:</label>
+                <label>{{Flight?.Price?.Value}}</label>
+            </div>
+        </div>
+        <div>
+           <select-seats (emitSeat) = "NextStep($event)"[seats] = "this.Seats">
+           </select-seats>
+        </div>
+        <div>
+            <div class = "flex-space-between">
+                <label>First name:</label>
+                <input [value] = "first_name"  type="text"/>
+            </div>
+            <div class = "flex-space-between">
+                <label>Last Name:</label>
+                <input [value] = "last_name" type="text"/>
+            </div> 
+            <div class = "flex-space-between">
+                <label>Passport number:</label>
+                <input type="text"/>
+            </div>
+            <input type="submit"(click) = "ReserveAndNext()" value="Reserve"/>
+            <invite-users-view (Next) = "InviteNext($event)" *ngIf = "this.PersonCounter > 0" [Users] = "CurrentUser.Friends" >
+
+            </invite-users-view>
+        </div>
+        
+    </div>
+    

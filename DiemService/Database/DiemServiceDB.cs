@@ -15,11 +15,12 @@ namespace DiemService.Database
         public virtual DbSet<AdminRent> AdminRentDbSet { get; set; }
         public virtual DbSet<RegisteredUser> RegisteredUserDbSet { get; set; }
         public virtual DbSet<AvioCompany> AvioCompanyDbSet { get; set; }
+        public virtual DbSet<Review> ReviewDbSet { get; set; }
         public virtual DbSet<RentACar> RentACarDbSet { get; set; }
         public virtual DbSet<Vehicle> VehicleDbSet { get; set; }
         public virtual DbSet<Location> LocationDbSet { get; set; }
         public virtual DbSet<Address> AddressDbSet { get; set; }
-
+        public virtual DbSet<FlightReservation> FlightReservationDbSet { get; set; }
         public virtual DbSet<TempUser> TempUserDbSet { get; set; }
 
         public void ThePurge()
@@ -35,6 +36,8 @@ namespace DiemService.Database
             LocationDbSet.RemoveRange(LocationDbSet);
             AddressDbSet.RemoveRange(AddressDbSet);
             TempUserDbSet.RemoveRange(TempUserDbSet);
+            ReviewDbSet.RemoveRange(ReviewDbSet);
+            FlightReservationDbSet.RemoveRange(FlightReservationDbSet);
             this.SaveChanges();
         }
     }

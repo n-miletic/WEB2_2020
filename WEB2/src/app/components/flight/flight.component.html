@@ -29,19 +29,12 @@
         <button type="submit" class="btn btn-success" >Submit</button>
     </div>
     </form>
-    <div *ngFor="let flight of Flights" class = "flight-div">
-      <flight-card   [Flight] = flight>
+    <div  *ngFor="let flight of Flights" class = "flight-div">
+      <flight-card *ngIf = "!Reserving" (alertReserve) = "OpenReserveWindow()"   [Flight] = flight>
 
       </flight-card>
+      <reserve-window *ngIf = "Reserving" (alertClose) = "ReserveAndClose($event)" [Flight] = flight >
+      </reserve-window>
     </div>
-    <div class="dot-container">
-      <div>
-        <label *ngFor = "let taken of seats.split('')">
-          {{taken}}
-        </label>
-      </div>
-      <div>
-        asd
-      </div>
-    </div>
+    
 </div>

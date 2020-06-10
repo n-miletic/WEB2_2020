@@ -27,7 +27,7 @@
   fill: #e54b4b;
 }
 .navbar {
-  z-index: 2;
+  z-index: 1;
   list-style-type: none;
   box-sizing: border-box;
   display: flex;

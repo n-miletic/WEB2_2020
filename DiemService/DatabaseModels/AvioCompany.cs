@@ -32,6 +32,22 @@ namespace DiemService.Database
             Logo = logo;
         }
     }
+    public class Review
+    {
+        public int Id { get; set; }
+        public User User { get; set; }
+        public int Stars { get; set; }
+
+        public Review(User user, int stars)
+        {
+            User = user;
+            Stars = stars;
+        }
+
+        public Review()
+        {
+        }
+    }
     public class Flight
     {
      
@@ -42,6 +58,8 @@ namespace DiemService.Database
         public Price Price { get; set; }
         public DateTime Flight_Departure_Time { get; set; }
         public DateTime Flight_Arrival_Time { get; set; }
+        public ICollection<Review> Reviews { get; set; }
+        public ICollection<FlightReservation> Reservations { get; set; } 
         public string Flight_Duration { get; set; }
         public string Seats { get; set; }
         public string Flight_Distance { get; set; }
@@ -70,10 +88,11 @@ namespace DiemService.Database
 
         public Flight()
         {
+            Reviews = new List<Review>();
+            Reservations = new List<FlightReservation>();
         }
     }
     #region Address
-    
     public class Address
     {
         public int Id { get; set; }

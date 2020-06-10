@@ -41,11 +41,11 @@ namespace DiemService.Controllers
                 toAdd.From_Location = _context.LocationDbSet.Add(toAdd.From_Location);
                 toAdd.Provider = found;
                 int[] Seats = new int[100];
-                for (int i = 0; i < 50; i++)
+                for (int i = 0; i < 48; i++)
                 {
                     Seats[i] = 0;
                 }
-                toAdd.Seats = Seats.ToString();
+                toAdd.Seats = string.Join("", Seats);
                 found.Flights.Add(_context.FlightDbSet.Add(toAdd));
                 _context.SaveChanges();
 

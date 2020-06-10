@@ -23,4 +23,5 @@
         <div  class = "flex-space-between">
             <label>Cena:</label>
             <label>{{Flight?.Price?.Value}}</label>
+        <input *ngIf = "CurrentUser?.Role == 0" (click) = "reserve()" value = "Reserve" type="submit"/>
 </div>

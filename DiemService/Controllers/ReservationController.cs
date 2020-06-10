@@ -1,4 +1,5 @@
-﻿using DiemService.ManageMeLikeOneOfYourDbSets;
+﻿using DiemService.Forms;
+using DiemService.ManageMeLikeOneOfYourDbSets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,11 @@ namespace DiemService.Controllers
     public class ReservationController : ApiController
     {
         [HttpPost]
+        [Authorize]
         [Route("User/AddFlightReservation")]
-        public HttpResponseMessage AddFlightReservation([FromBody]string myid, string flightid)
+        public HttpResponseMessage AddFlightReservation(ReservationForm form )
         {
-            ReservationDbManager.AddFlightReservation(Int32.Parse(myid), Int32.Parse(flightid));
+            ReservationDbManager.AddFlightReservation(form);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 

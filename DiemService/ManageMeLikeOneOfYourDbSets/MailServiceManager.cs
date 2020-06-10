@@ -34,6 +34,42 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
             SmtpServer.Send(mail);
         }
 
+        public static void SendReservationEmail(FlightReservation flight)
+        {
+
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("diem.service.api@gmail.com");
+            mail.To.Add(flight.User.Email);
+            mail.Subject = "You have reserved a seat ";
+            mail.Body = "Loads of info here.";
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("diem.service.api@gmail.com", "web2projekat2020");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+        }
+
+        public static void SendInvitationEmail(FlightReservation flight)
+        {
+
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("diem.service.api@gmail.com");
+            mail.To.Add(flight.User.Email);
+            mail.Subject = "You have been invited by " + flight.Invited_By.Name + "to an a fucking mazing flight to somewhere idk";
+            mail.Body = "Loads of info here.";
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("diem.service.api@gmail.com", "web2projekat2020");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+        }
+
         public static void ActivateUser(string actId)
         {
             using (var _context = new DiemServiceDB())

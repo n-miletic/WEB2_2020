@@ -10,17 +10,9 @@
     width: 30%;
     align-items: center;
 }
-div > label + *{
-    width:150px;
-}
+
 label{
     font-family: 'Oleo Script';
-}
-AutocompleteComponent input{
-    width: 150px;
-}
-input{
-    background: transparent;
 }
 input[type = submit]{
     background: #E54B4B;

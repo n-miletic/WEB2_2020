@@ -8,6 +8,7 @@ import { Flight } from 'src/app/entities/flight/flight'
 })
 export class FlightComponent implements OnInit {
   CurrentUser ;
+  Reserving = false;
   seats:string;
   Flights:any;
   tripType = ['Return', 'One Way'];
@@ -22,11 +23,18 @@ export class FlightComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.seats = "00000000000000000000000000000000000000";
+    
     this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
      fetch("/DiemApi/Flights")
     .then(data => data.json())
     .then(flights => {this.Flights = flights;})
+  }
+  OpenReserveWindow(){
+    this.Reserving = true;
+  }
+  ReserveAndClose(getReservationDetails:any){
+    this.Reserving = false;
+    //Reload
   }
 
 }

@@ -129,12 +129,53 @@ namespace DiemService.Database
     public class RegisteredUser
     {
         public int Id { get; set; }
-        public ICollection<Flight> FlightReservations { get; set; }//FlightReservation class
-        public ICollection<Vehicle> VehicleReservations { get; set; }//VehicleReservation class
-        //invite trip collection
+        public ICollection<FlightReservation> FlightReservations { get; set; }//FlightReservation class
         public RegisteredUser()
         {
+            FlightReservations = new List<FlightReservation>();
+        }
+    }
+    public class FlightReservation
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public int Seat_Reserved { get; set; }
+        public int Passport_Number { get; set; }
+        public Flight Flight { get; set; }
+        public User User { get; set; }
+        public User Invited_By { get; set; }
 
+        public FlightReservation(string name, string lastName, int seat_Reserved, int passport_Number, User appropriate_User,Flight flight)
+        {
+            Name = name;
+            LastName = lastName;
+            Seat_Reserved = seat_Reserved;
+            Passport_Number = passport_Number;
+            User = appropriate_User;
+            Flight = flight;
+        }
+
+        public FlightReservation(string name, string lastName, int seat_Reserved, int passport_Number, Flight flight)
+        {
+            Name = name;
+            LastName = lastName;
+            Seat_Reserved = seat_Reserved;
+            Passport_Number = passport_Number;
+            Flight = flight;
+        }
+
+        public FlightReservation(string name, string lastName, int seat_Reserved, User user, Flight flight)
+        {
+            Name = name;
+            LastName = lastName;
+            Seat_Reserved = seat_Reserved;
+            User = user;
+            Flight = flight;
+        }
+
+        public FlightReservation()
+        {
         }
     }
 

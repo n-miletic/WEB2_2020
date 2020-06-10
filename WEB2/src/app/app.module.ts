@@ -19,6 +19,9 @@ import { AvioCompanyViewComponent } from './components/avio-company-view/avio-co
 import { RentCompanyViewComponent } from './components/rent-company-view/rent-company-view.component';
 import { FlightCardComponent } from './flight-card/flight-card.component';
 import { MyUserComponent } from './my-user/my-user.component';
+import { SelectSeatsComponent } from './select-seats/select-seats.component';
+import { ReserveWindowComponent } from './reserve-window/reserve-window.component';
+import { InviteUsersViewComponent } from './invite-users-view/invite-users-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +36,10 @@ import { MyUserComponent } from './my-user/my-user.component';
     AvioCompanyViewComponent,
     RentCompanyViewComponent,
     FlightCardComponent,
-    MyUserComponent
+    MyUserComponent,
+    SelectSeatsComponent,
+    ReserveWindowComponent,
+    InviteUsersViewComponent
   ],
   imports: [
     BrowserModule,
