@@ -9,11 +9,14 @@ export class AdminUsersViewComponent implements OnInit {
 
   Users:any;
   CurrentUser:any;
+  AddCompanyViewHidden:boolean;
+  SelectedUser:string;
   constructor() { }
 
   ngOnInit(): void {
 
     this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
+    this.AddCompanyViewHidden = true;
     this.getUsers();
   }
   getUsers(){
@@ -26,7 +29,6 @@ export class AdminUsersViewComponent implements OnInit {
       ).then(
         users => {
           this.Users = users
-          console.log(users)
         }
         )
 
@@ -61,11 +63,15 @@ export class AdminUsersViewComponent implements OnInit {
     }).then(()=>{this.getUsers(); this.updateLoggedUser()});
   }
   AddCompany(username:string){
-    //redirect
+    this.SelectedUser = username;
+    this.AddCompanyViewHidden = false;
   }
 
   ViewCompany(username:string){
     //redirect
+  }
+  close(event:any){
+    this.AddCompanyViewHidden = false;
   }
 
 

@@ -46,7 +46,7 @@
                         <ng-template #other>
                             <div *ngIf = "user.Role === 1 ;else rentadmin">
                                 <div [hidden] = "user.OwnedAvioCompanies.length == 0" >
-                                    <button (click) = "ViewCompany(user.Username)">
+                                    <button [routerLink]="'/:ViewAvioCompany/' + user.OwnedAvioCompanies[0]?.Id">
                                         HAS COMPANY
                                     </button>
                                 </div>
@@ -58,7 +58,7 @@
                             </div>
                             <ng-template #rentadmin>
                                 <div  [hidden] = "user.OwnedRentServices.length == 0"  >
-                                    <button (click) = "ViewCompany(user.Username)">
+                                    <button [routerLink]="'ViewRentCompany/user.OwnedRentServices[0].Id'">
                                         HAS COMPANY
                                     </button>
                                 </div>
@@ -73,10 +73,11 @@
                     </div>
                 </td>
            </tr>
-           
-           
-           
-           
        </tbody>
     </table>
+    <add-avio-company 
+                    [ownerUsername] = "this.SelectedUser" 
+                    (imDone) = "close($event)"
+                    [hidden] = "this.AddCompanyViewHidden">
+    </add-avio-company>
 </div>

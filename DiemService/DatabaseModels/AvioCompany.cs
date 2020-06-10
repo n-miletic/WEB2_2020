@@ -14,18 +14,22 @@ namespace DiemService.Database
         public Address Address { get; set; }
         public string Promo_description { get; set; }
         public int Average_Rating { get; set; }
-        public virtual ICollection<Location> Destinations { get; set; }
-        public virtual ICollection<Flight> Flights { get; set; }
+        public  ICollection<Location> Destinations { get; set; }
+        public  ICollection<Flight> Flights { get; set; }
         public User Owner { get; set; }
+        public string Logo { get; set; }
         public AvioCompany()
         {
+            Destinations = new List<Location>();
+            Flights = new List<Flight>();
         }
 
-        public AvioCompany(Address address, string promo_description, int prosecna_ocena)
+        public AvioCompany(string name, Address address, string promo_description,string logo)
         {
             Address = address;
             Promo_description = promo_description;
-            Average_Rating = prosecna_ocena;
+            Name = name;
+            Logo = logo;
         }
     }
     public class Flight
@@ -39,6 +43,7 @@ namespace DiemService.Database
         public DateTime Flight_Departure_Time { get; set; }
         public DateTime Flight_Arrival_Time { get; set; }
         public string Flight_Duration { get; set; }
+        public string Seats { get; set; }
         public string Flight_Distance { get; set; }
 
         public AvioCompany Provider { get; set; }

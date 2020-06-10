@@ -5,18 +5,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation-bar.component.css'],
 })
 export class NavigationBarComponent implements OnInit {
-  Cookie: any;
+  CurrentUser:any;
   Dialog: boolean;
+  link:string;
+  AviocompanyName:string;
   logInActive: boolean;
   constructor() {}
 
   ngOnInit(): void {
+    this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
+    console.log(this.CurrentUser)
     this.Dialog = false;
+    this.link = '/:ViewAvioCompany/'
+    if(this.CurrentUser?.hasOwnProperty("OwnedAvioCompanies")){
+      this.link += this.CurrentUser.OwnedAvioCompanies[0].Id
+      this.AviocompanyName = this.CurrentUser.OwnedAvioCompanies[0].Name
+    }
     this.logInActive = true;
   }
   showDialog(): void {
     this.Dialog = true;
-    console.log('super');
   }
   hideDialog(): void {
     this.Dialog = false;
@@ -29,7 +37,11 @@ export class NavigationBarComponent implements OnInit {
   }
 
   close(event:any):void {
-    this.Dialog = false;
+    this.ngOnInit();
+  }
+  LogOut(){
+    sessionStorage.clear();
+    this.ngOnInit();
   }
 
 }

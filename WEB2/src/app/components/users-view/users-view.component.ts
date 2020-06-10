@@ -1,64 +1,22 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'users-view',
+  selector: 'userlist',
   templateUrl: './users-view.component.html',
   styleUrls: ['./users-view.component.css']
 })
 export class UsersViewComponent implements OnInit {
- 
-  Users:any;
-  CurrentUser:any;
+ @Input() Users:any;
+ @Input() CurrentUser:any;
+ @Input() TableName:string;
   constructor() { }
 
   ngOnInit(): void {
-
-    this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
-    this.getUsers();
-  }
-
-  getUsers(){
-    if (this.CurrentUser == null)
-    fetch('/DiemApi/User/GetAll').then(
-      data => data.json()
-    ).then(
-      users => {
-        this.Users = users
-        console.log(users)
-      }
-      )
-      else
-      fetch('/DiemApi/User/GetAll/Logged',{
-        headers:{
-          'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey")
-        }
-      }).then(
-        data => data.json()
-      ).then(
-        users => {
-          this.Users = users
-          console.log(users)
-        }
-        )
-
-  }
-
-  updateLoggedUser(){
-    fetch('/DiemApi/User/GetLogged',
-    {
-      headers:{
-        'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey")
-      }
-    }
-    ).then(res=> res.json()).then(
-      user => {sessionStorage.setItem("LoggedUser",JSON.stringify(user)); this.CurrentUser = user}
-    )
   }
 
   DetermineRelationship(userName:string,relationship:string):boolean{
     if(relationship == "friends")
     {
-      console.log(this.CurrentUser)
       return this.CurrentUser.Friends.map(user => user.Username).includes(userName);
     }
     else if(relationship == "hasTheirRequest")
@@ -83,7 +41,7 @@ export class UsersViewComponent implements OnInit {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey"),
       },
-    }).then(()=>{this.getUsers(); this.updateLoggedUser()});
+    })
   }
 
 }

@@ -24,7 +24,6 @@ export class SignInComponent implements OnInit {
      Email:this['Email'],
      PhoneNumber:this['PhoneNumber']
    }
-   console.log(userForm)
    fetch('/DiemApi/User/Register', {
      method: 'post',
      body: JSON.stringify(userForm),
@@ -32,7 +31,6 @@ export class SignInComponent implements OnInit {
          'Content-Type': 'application/json'
      }
  })
-   console.log(userForm)
   
   
  }

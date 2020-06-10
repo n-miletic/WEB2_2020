@@ -15,6 +15,10 @@ import { ActivatedAccountComponent } from './components/activated-account/activa
 import { UsersViewComponent } from './components/users-view/users-view.component';
 import { AdminUsersViewComponent } from './components/admin-users-view/admin-users-view.component';
 import { AddAvioCompanyComponent } from './components/add-avio-company/add-avio-company.component';
+import { AvioCompanyViewComponent } from './components/avio-company-view/avio-company-view.component';
+import { RentCompanyViewComponent } from './components/rent-company-view/rent-company-view.component';
+import { FlightCardComponent } from './flight-card/flight-card.component';
+import { MyUserComponent } from './my-user/my-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +29,11 @@ import { AddAvioCompanyComponent } from './components/add-avio-company/add-avio-
     ActivatedAccountComponent,
     UsersViewComponent,
     AdminUsersViewComponent,
-    AddAvioCompanyComponent
+    AddAvioCompanyComponent,
+    AvioCompanyViewComponent,
+    RentCompanyViewComponent,
+    FlightCardComponent,
+    MyUserComponent
   ],
   imports: [
     BrowserModule,

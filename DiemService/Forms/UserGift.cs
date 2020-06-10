@@ -9,9 +9,9 @@ namespace DiemService.Forms
     public class UserGift
     {
         public string Token { get; set; }
-        public User User { get; set; }
+        public object User { get; set; }
 
-        public UserGift(string token, User user)
+        public UserGift(string token, object user)
         {
             Token = token;
             User = user;

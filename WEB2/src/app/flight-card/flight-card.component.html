@@ -1,0 +1,26 @@
+<div class = "main-div">
+        <div class = "flex-space-between">
+            <label>From:</label>
+            <label>{{Flight?.From_Location?.City}}</label>
+        </div>
+        <div class = "flex-space-between">
+            <label>To:</label>
+            <label>{{Flight?.To_Location?.City}}</label>
+           
+        </div> <br>
+        <div class = "flex-space-between">
+            <label>Datum poletanja:</label>
+            <label>{{Flight?.Flight_Departure_Time}}</label>
+        </div>
+        <div class = "flex-space-between">
+            <label>Datum sletanja:</label>
+            <label>{{Flight?.Flight_Arrival_Time}}</label>
+        </div> <br>
+        <div class = "flex-space-between">
+            <label>Vreme:</label>
+            <label>{{Flight?.Flight_Duration}}</label>
+        </div>
+        <div  class = "flex-space-between">
+            <label>Cena:</label>
+            <label>{{Flight?.Price?.Value}}</label>
+</div>

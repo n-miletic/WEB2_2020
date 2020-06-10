@@ -6,7 +6,7 @@
         </div>
         <div class = "flex-space-between">
             <label>Address:</label>
-            <AutocompleteComponent inputName ="Address"  (setAddress)="getAddress($event)" addressType = "(cities)">
+            <AutocompleteComponent inputName ="Address"  (setAddress)="getAddress($event)" addressType = "(address)">
             </AutocompleteComponent>
         </div>
         <div class = "flex-space-between">
@@ -15,7 +15,7 @@
         </div>
         <div class = "flex-space-between">
             <label>Select logo:</label>
-            <input name ="Logo" type="file" required/>
+            <input   name ="Logo" type="file" accept="image/*" #Logoref required/>
         </div>
         <input type="submit" value="Add company"/>
     </form>

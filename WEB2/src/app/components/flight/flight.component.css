@@ -1,3 +1,21 @@
+.dot-container{
+    width: 300px;
+    height: 600px;
+    border: #E54B4B 2px solid;
+    display: flex;
+    justify-content: space-between;
+}
+.dot-container div {
+    display: inline-flex;
+    width: 40%;
+    border: #E54B4B 2px solid;
+   
+}
+
+
+
+
+
 .wrapper{
    
     position: fixed;
@@ -32,4 +50,9 @@
     width:10vh;
     background-color: #E54B4B;
     border-radius: 0;
+}
+.flight-div{
+    border: 2px solid #E54B4B ;
+    border-radius: 20px;
+    height: 10em;
 }

@@ -1,20 +1,30 @@
 .main-div{
-    width : 400px;
     border:2px  #E54B4B;
     box-sizing: border-box;
     padding: 15px;
 }
 
 .flex-space-between{
-    display: flex;
+    display: inline-flex;
     justify-content: space-between;
-    width: 100%;
+    width: 30%;
     align-items: center;
 }
-div > label + *{
+div .flex-space-between > label + *{
     width:150px;
+} 
+.flex-space-between label{
+    font-family: 'Oleo Script';
 }
-
 AutocompleteComponent input{
     width: 150px;
+}
+input{
+    background: transparent;
+}
+.flex-space-between input[type = submit]{
+    background: #E54B4B;
+    font-family: 'Oleo Script';
+    border: none;
+    border-radius: 20px;
 }

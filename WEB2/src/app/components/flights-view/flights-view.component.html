@@ -2,7 +2,7 @@
     <form ngNativeValidate (ngSubmit)="onSubmit($event)" (change) = "onChange($event)">
         <div class = "flex-space-between">
             <label>From:</label>
-            <AutocompleteComponent inputName = "from" (setAddress)="getAddress($event)" addressType = "(cities)">
+            <AutocompleteComponent  inputName = "from" (setAddress)="getAddress($event)" addressType = "(cities)">
             </AutocompleteComponent>
         </div>
         <div class = "flex-space-between">
@@ -11,23 +11,23 @@
 
             </AutocompleteComponent>
            
-        </div>
+        </div> <br>
         <div class = "flex-space-between">
             <label>Datum poletanja:</label>
-            <input name = "datum_poletanja" type="date" required/>
+            <input name = "datum_poletanja" type="datetime-local" required/>
         </div>
         <div class = "flex-space-between">
             <label>Datum sletanja:</label>
-            <input name ="datum_sletanja" type="date" required/>
-        </div>
+            <input name ="datum_sletanja" type="datetime-local" required/>
+        </div> <br>
         <div class = "flex-space-between">
             <label>Vreme:</label>
             <input name = "vreme" type="time" required/>
         </div>
         <div  class = "flex-space-between">
-            <label>CENA:</label>
+            <label>Cena:</label>
             <input name = "cena" type="number" required/>
-        </div>
+        </div> <br>
         <input type="submit" value="Add flight"/>
     </form>
 </div>

@@ -8,23 +8,27 @@ namespace DiemService.Database
     public class RentACar
     {
         public int Id { get; set; }
-        public string RentACarName { get; set; }
+        public string Name { get; set; }
+        public string Logo { get; set; }
         public Address Address { get; set; }
         public string Promo_description { get; set; }
-        public double AverageRating { get; set; }
-        public List<Address> Holdings { get; set; }
-        public virtual ICollection<Vehicle> Vehicles { get; set; }
+        public double Average_Rating { get; set; }
+        public ICollection<Address> Holdings { get; set; }
+        public ICollection<Vehicle> Vehicles { get; set; }
+        public User Owner { get; set; }
 
-        public RentACar(string name, Address address, string promo_description)
+        public RentACar(string name, Address address, string promo_description, string logo)
         {
-            RentACarName = name;
+            Name = name;
             Address = address;
             Promo_description = promo_description;
-            Holdings = new List<Address>();
+            Logo = logo;
         }
 
         public RentACar()
         {
+            Holdings = new List<Address>();
+            Vehicles = new List<Vehicle>();
         }
     }
 

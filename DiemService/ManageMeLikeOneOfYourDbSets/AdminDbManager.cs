@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using DiemService.Forms;
+using System.IO;
+
 namespace DiemService.ManageMeLikeOneOfYourDbSets
 {
     public static class AdminDbManager
@@ -33,25 +36,42 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
             }
         }
 
-        public static void AddRentCompany(string username, RentACar rent)
+        public static void AddCompany(AddCompanyForm rent)
         {
             using (var _context = new DiemServiceDB())
             {
-                User found = _context.UserDbSet.Where(user => user.Username == username).FirstOrDefault();
-                _context.AdminRentDbSet.Find(found.UlogaID).OwnedRentServices.Add(rent);
+                
+                User found = _context.UserDbSet.Where(user => user.Username == rent.OwnerUsername).FirstOrDefault();
+                switch (found.Role)
+                {
+                    case Role.AdminAvio:
+                        AvioCompany toAdd = rent.getAvio();
+                        string imgName = "avioCompany" + toAdd.Id;
+                        File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory + "/" + imgName, Convert.FromBase64String(toAdd.Logo));
+                        toAdd.Logo = imgName;
+                        toAdd.Owner = found;
+                        _context.AdminAvioDbSet.Include(x => x.OwnedAvioCompanies)
+                                                .Where(x => x.Id == found.UlogaID)
+                                                .FirstOrDefault().OwnedAvioCompanies
+                                                .Add(_context.AvioCompanyDbSet.Add(toAdd));
+                        break;
+                    case Role.AdminRentACar:
+                        RentACar toAdd2 = rent.getRent();
+                        toAdd2.Owner = found;
+                        _context.AdminRentDbSet.Include(x => x.OwnedRentServices)
+                                                .Where(x => x.Id == found.UlogaID)
+                                                .FirstOrDefault().OwnedRentServices
+                                                .Add(_context.RentACarDbSet.Add(toAdd2));
+                        break;
+                    default:
+                        break;
+                }
+                
                 _context.SaveChanges();
             }
         }
 
-        public static void AddAvioCompany(string username, AvioCompany ac)
-        {
-            using (var _context = new DiemServiceDB())
-            {
-                User found = _context.UserDbSet.Where(user => user.Username == username).FirstOrDefault();
-                _context.AdminAvioDbSet.Find(found.UlogaID).OwnedAvioCompanies.Add(ac);
-                _context.SaveChanges();
-            }
-        }
+
 
     }
 }

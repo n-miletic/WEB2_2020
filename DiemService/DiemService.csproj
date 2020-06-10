@@ -132,20 +132,20 @@
     <Compile Include="Authorization\TokenManager.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AvioCompanyController.cs" />
-    <Compile Include="Controllers\RentACarController.cs" />
+    <Compile Include="Controllers\RentCompanyController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="DTO\AdminAvioDTO.cs" />
     <Compile Include="DTO\AdminRentDTO.cs" />
     <Compile Include="DTO\RegisteredUserDTO.cs" />
+    <Compile Include="Forms\AvioCompanyEditForm.cs" />
     <Compile Include="Forms\FlightFormUpdate.cs" />
     <Compile Include="Forms\PromoteForm.cs" />
     <Compile Include="Forms\SendReqForm.cs" />
     <Compile Include="Forms\SignForm.cs" />
     <Compile Include="Forms\UserGift.cs" />
-    <Compile Include="Forms\VehicleForm.cs" />
     <Compile Include="ManageMeLikeOneOfYourDbSets\AdminDbManager.cs" />
+    <Compile Include="ManageMeLikeOneOfYourDbSets\AvioCompanyDbManager.cs" />
     <Compile Include="ManageMeLikeOneOfYourDbSets\FlightDbManager.cs" />
     <Compile Include="Controllers\FlightsController.cs" />
     <Compile Include="DatabaseModels\AvioCompany.cs" />
@@ -156,9 +156,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ManageMeLikeOneOfYourDbSets\MailServiceManager.cs" />
+    <Compile Include="ManageMeLikeOneOfYourDbSets\RentCompanyDbManager.cs" />
     <Compile Include="ManageMeLikeOneOfYourDbSets\ReservationDbManager.cs" />
     <Compile Include="ManageMeLikeOneOfYourDbSets\UserDbManager.cs" />
-    <Compile Include="ManageMeLikeOneOfYourDbSets\VehicleDbManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Forms\FlightForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

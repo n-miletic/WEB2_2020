@@ -24,10 +24,11 @@ namespace DiemService.Controllers
         }
 
         [HttpPost]
-        [Route("Flights/Add")]
-        public HttpResponseMessage AddFlight([FromBody] FlightForm form)
+        [Authorize]
+        [Route("AvioCompany/{avioCompanyId}/Flights/Add")]
+        public HttpResponseMessage AddFlight([FromUri] int avioCompanyId, [FromBody] FlightForm form)
         { 
-            FlightDbManager.AddFlight(form);
+            FlightDbManager.AddFlight(form, avioCompanyId);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 

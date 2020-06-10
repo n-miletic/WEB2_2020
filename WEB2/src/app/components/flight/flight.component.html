@@ -29,7 +29,19 @@
         <button type="submit" class="btn btn-success" >Submit</button>
     </div>
     </form>
-    <admin-users-view [hidden] = "this.CurrentUser.Role !== 3">
+    <div *ngFor="let flight of Flights" class = "flight-div">
+      <flight-card   [Flight] = flight>
 
-    </admin-users-view>
+      </flight-card>
+    </div>
+    <div class="dot-container">
+      <div>
+        <label *ngFor = "let taken of seats.split('')">
+          {{taken}}
+        </label>
+      </div>
+      <div>
+        asd
+      </div>
+    </div>
 </div>

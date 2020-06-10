@@ -7,6 +7,10 @@ using System.Web;
 
 namespace DiemService.Forms
 {
+    public class IdForm
+    {
+        public string Id { get; set; }
+    }
     public class FlightForm
     {
         public string toLocation { get; set; }

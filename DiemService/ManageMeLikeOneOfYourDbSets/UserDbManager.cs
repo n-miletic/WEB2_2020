@@ -51,11 +51,18 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
             }
         }
 
-        public static User GetLoggedUser(string username)
+        public static object GetLoggedUser(string username)
         {
             using (var _context = new DiemServiceDB())
             {
                 User retVal = _context.UserDbSet.Where(user => user.Username == username).Include(x => x.FriendRequestsSent).Include(x => x.Friends).Include(x => x.PendingFriends).FirstOrDefault();
+                switch (retVal.Role)
+                {
+                        case Role.AdminAvio:
+                            return new AdminAvioDTO(retVal, _context);
+                        case Role.AdminRentACar:
+                            return new AdminRentDTO(retVal, _context);
+                }
                 return retVal;
             }
         }
@@ -123,11 +130,24 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
             using(var _context = new DiemServiceDB())
             {
                 User logIn = _context.UserDbSet.Where(s => s.Username == username).Include(x => x.FriendRequestsSent).Include(x => x.Friends).Include(x => x.PendingFriends).FirstOrDefault();
+                object optionalReturn = logIn;
                 if ( logIn != null)
                 {
-                    if(logIn.Hash == password)
+                    
+                    switch (logIn.Role)
                     {
-                        return new UserGift(TokenManager.GetToken(logIn),logIn);
+                        case Role.AdminAvio:
+                            optionalReturn =  new AdminAvioDTO(logIn, _context);
+                            break;
+                        case Role.AdminRentACar:
+                            optionalReturn =  new AdminRentDTO(logIn, _context);
+                            break;
+                         default:
+                            break;
+                    }
+                    if (logIn.Hash == password)
+                    {
+                        return new UserGift(TokenManager.GetToken(logIn), optionalReturn);
                     }
                 }
                 throw new Exception("Pogresna loyinka, ili je juzer nepostojeci");

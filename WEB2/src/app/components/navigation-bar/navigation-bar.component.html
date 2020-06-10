@@ -26,6 +26,9 @@
     <li><a routerLink="" routerLinkActive="active">HOME</a></li>
     <li><a routerLink="/flight" routerLinkActive="active">FLIGHTS</a></li>
     <li><a routerLink="/rentacar" routerLinkActive="active">RENT A CAR</a></li>
-    <img (click)="showDialog()" src="assets/user.png" />
+    <img *ngIf = "CurrentUser == null" (click)="showDialog()" src="assets/user.png" />
+    <li *ngIf = "CurrentUser"><a [routerLink]="'/:MeMyselfAndI/'">{{CurrentUser?.Username.toUpperCase()}}</a></li>
+    <li *ngIf = "CurrentUser?.Role == 1"><a [routerLink]="this.link">{{this.AviocompanyName?.toUpperCase()}}</a></li>
+    <li *ngIf = "CurrentUser"><a (click) = "LogOut()">LOG OUT</a></li>
   </div>
 </div>

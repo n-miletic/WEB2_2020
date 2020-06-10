@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using System.Security.Claims;
 
 namespace DiemService.Controllers
 {
@@ -26,14 +27,26 @@ namespace DiemService.Controllers
             }
         }
 
-        public static void AddFlight(FlightForm flight)
+        public static void AddFlight(FlightForm flight,int avioId)
         {
             using (var _context = new DiemServiceDB())
             {
+                string caller = ((ClaimsPrincipal)HttpContext.Current.User).FindFirst("username").Value;
+                User loggedUser = _context.UserDbSet.Where(u => u.Username == caller).FirstOrDefault();
+                AvioCompany found = _context.AvioCompanyDbSet.Where(u => u.Id == avioId).Include(x => x.Owner).FirstOrDefault();
+                if (loggedUser.Role != Role.Admin && loggedUser.Username != found.Owner.Username)
+                    return;
                 Flight toAdd = flight.toFlight();
                 toAdd.To_Location = _context.LocationDbSet.Add(toAdd.To_Location);
                 toAdd.From_Location = _context.LocationDbSet.Add(toAdd.From_Location);
-                _context.FlightDbSet.Add(toAdd);
+                toAdd.Provider = found;
+                int[] Seats = new int[100];
+                for (int i = 0; i < 50; i++)
+                {
+                    Seats[i] = 0;
+                }
+                toAdd.Seats = Seats.ToString();
+                found.Flights.Add(_context.FlightDbSet.Add(toAdd));
                 _context.SaveChanges();
 
             }

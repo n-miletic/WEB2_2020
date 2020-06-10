@@ -28,26 +28,14 @@ namespace DiemService.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("Admin/AddRentCompany")]
-        public HttpResponseMessage AddRent(AddRentForm promote)
+        [Route("Admin/AddCompany")]
+        public HttpResponseMessage AddCompany(AddCompanyForm promote)
         {
             ClaimsPrincipal loggedUser = (ClaimsPrincipal)HttpContext.Current.User;
             //check if admin
-            AdminDbManager.AddRentCompany(promote.username, promote.toAdd);
+            AdminDbManager.AddCompany(promote);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
-
-        [HttpPost]
-        [Authorize]
-        [Route("Admin/AddAvioCompany")]
-        public HttpResponseMessage AddAvioCompany(AddAvioForm promote)
-        {
-            ClaimsPrincipal loggedUser = (ClaimsPrincipal)HttpContext.Current.User;
-            //check if admin
-            AdminDbManager.AddAvioCompany(promote.username, promote.toAdd);
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
-
 
     }
 }
