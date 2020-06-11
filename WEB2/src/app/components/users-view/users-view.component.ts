@@ -1,16 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,OnChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'userlist',
   templateUrl: './users-view.component.html',
   styleUrls: ['./users-view.component.css']
 })
-export class UsersViewComponent implements OnInit {
+export class UsersViewComponent implements OnInit, OnChanges {
  @Input() Users:any;
  @Input() CurrentUser:any;
  @Input() TableName:string;
+ @Output() update = new EventEmitter();
   constructor() { }
-
+  ngOnChanges(){
+    
+  }
   ngOnInit(): void {
   }
 
@@ -41,7 +44,7 @@ export class UsersViewComponent implements OnInit {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey"),
       },
-    })
+    }).then( () => this.update.emit())
   }
 
 }

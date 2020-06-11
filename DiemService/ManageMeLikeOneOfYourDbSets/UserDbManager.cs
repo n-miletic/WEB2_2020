@@ -58,6 +58,8 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
                 User retVal = _context.UserDbSet.Where(user => user.Username == username).Include(x => x.FriendRequestsSent).Include(x => x.Friends).Include(x => x.PendingFriends).FirstOrDefault();
                 switch (retVal.Role)
                 {
+                        case Role.RegisteredUser:
+                            return new RegisteredUserDTO(retVal, _context);
                         case Role.AdminAvio:
                             return new AdminAvioDTO(retVal, _context);
                         case Role.AdminRentACar:
@@ -81,7 +83,10 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
         {
             using (var _context = new DiemServiceDB())
             {
-                return _context.UserDbSet.Where(u => u.Role != Role.Admin).Where(u => u.Username != loggedUsername).ToList();
+                User caller = _context.UserDbSet.Where(u => u.Username == loggedUsername).Include(u=> u.Friends).FirstOrDefault();
+                List<User> allUsers = _context.UserDbSet.Where(u => u.Role != Role.Admin).Where(u => u.Username != loggedUsername).ToList();
+                return allUsers.Where(u => !caller.Friends.Contains(u)).ToList();
+                
             }
         }
 
@@ -136,6 +141,9 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
                     
                     switch (logIn.Role)
                     {
+                        case Role.RegisteredUser:
+                            optionalReturn =  new RegisteredUserDTO(logIn, _context);
+                            break;
                         case Role.AdminAvio:
                             optionalReturn =  new AdminAvioDTO(logIn, _context);
                             break;
@@ -165,6 +173,8 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
 
                 fromUser.FriendRequestsSent.Add(toUser);
                 _context.SaveChanges();
+
+                List <User> all = _context.UserDbSet.Include(x => x.FriendRequestsSent).Include(x => x.Friends).Include(x => x.PendingFriends).ToList();
 
             }
         }

@@ -22,6 +22,24 @@ namespace DiemService.Controllers
         }
 
         [HttpPost]
+        [Authorize]
+        [Route("User/AddRandomFlightReservation")]
+        public HttpResponseMessage AddRandomFlightReservation(ReservationForm form)
+        {
+            ReservationDbManager.AddRandomFlightReservation(form);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("User/InviteReservation")]
+        public HttpResponseMessage InviteUser(ReservationForm form)
+        {
+            ReservationDbManager.InviteUser(form);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
         [Route("User/CancelFlightReservation")] // moras i za vehicle add/cancel 
         public HttpResponseMessage CancelFlightReservation([FromBody]string myid, string flightid)
         {

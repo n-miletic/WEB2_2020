@@ -36,5 +36,6 @@ export class FlightComponent implements OnInit {
     this.Reserving = false;
     //Reload
   }
+  getAddress($event){}
 
 }

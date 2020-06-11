@@ -46,8 +46,12 @@ export class GoogleAutocompletePlacesComponent
     );
 
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
+      
       const place = autocomplete.getPlace();
-      this.invokeEvent(place);
+      if(place.types.includes('airport')){
+        console.log('gud')
+        this.invokeEvent(place);
+      }
     });
   }
 

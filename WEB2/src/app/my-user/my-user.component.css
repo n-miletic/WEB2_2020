@@ -8,3 +8,67 @@
     width: 100vw;
     height:30vh;
 }
+.button-crap{
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  background: #E54B4B;
+  border-radius: 15px;
+  font-family:  'Oleo Script';
+}
+.flights-flex{
+    position: relative;
+    display: block;
+    left: 15.5%;
+    width:70vw;
+    flex-grow:1;
+}
+
+.red-line{
+    border-bottom: 2px solid #E54B4B;
+    opacity: 0.7;
+    width: 100%;
+    display: block;
+}
+.red-line2{
+    border-bottom: 2px solid #E54B4B;
+    opacity: 0.7;
+    display: block;
+    width: 100%;
+    
+}
+.flights-flex label{
+   font:  24px 'Oleo Script';
+   color:#E54B4B ;
+}
+ .flights-flex >div{
+     border: 2px solid #E54B4B ;
+     border-radius: 15px;
+ }
+.users-flex{
+    display: flex;
+    position: relative;
+    left: 15.5%;
+    width:70vw;
+    flex-direction: row;
+}
+.lbl{
+    position: relative;
+    display: block;
+    left: 15.5%;
+    width:70vw;
+    font:  24px 'Oleo Script';
+    color:#E54B4B ;
+ }
+.red-line2-nodiv{
+    position: relative;
+    border-bottom: 2px solid #E54B4B;
+    opacity: 0.7;
+    left: 15.5%;
+    width:70vw;
+    display: block;
+}
+
+userlist{
+    min-width: 33%;
+}

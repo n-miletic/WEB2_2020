@@ -1,4 +1,4 @@
-<div class = "main-wrap">
+
     <table class="user-div" >
        <thead>
            <tr>
@@ -43,21 +43,21 @@
                         <ng-template #notfriendsBlock>
                             <div *ngIf = "DetermineRelationship(user.Username,'hasTheirRequest'); else doesntHaveIt">
                                 <button (click) = "HandleRequests(user.Username,'Accept')">
-                                    ACCEPT REQUEST
+                                    Accept request
                                 </button>
                                 <button (click) = "HandleRequests(user.Username,'Decline')">
-                                    DENY REQUEST
+                                    Deny request
                                 </button>
                             </div>
                             <ng-template #doesntHaveIt>
                                 <div *ngIf = "DetermineRelationship(user.Username,'didTheySend'); else didntsend">
                                     <button>
-                                        FRIEND REQUEST SENT
+                                        Friend request sent
                                     </button>
                                 </div>
                             <ng-template #didntsend>
                                 <button (click) = "HandleRequests(user.Username,'Send')">
-                                    SEND REQUEST
+                                    Send request
                                 </button>
                             </ng-template>
                             </ng-template>
@@ -72,4 +72,4 @@
            
        </tbody>
     </table>
-</div>
+

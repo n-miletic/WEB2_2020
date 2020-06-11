@@ -38,15 +38,15 @@
         <div>
             <div class = "flex-space-between">
                 <label>First name:</label>
-                <input [value] = "first_name"  type="text"/>
+                <input [(ngModel)] = "first_name"  type="text"/>
             </div>
             <div class = "flex-space-between">
                 <label>Last Name:</label>
-                <input [value] = "last_name" type="text"/>
+                <input [(ngModel)] = "last_name" type="text"/>
             </div> 
             <div class = "flex-space-between">
                 <label>Passport number:</label>
-                <input type="text"/>
+                <input [(ngModel)] = "passport" type="text"/>
             </div>
             <input type="submit"(click) = "ReserveAndNext()" value="Reserve"/>
             <invite-users-view (Next) = "InviteNext($event)" *ngIf = "this.PersonCounter > 0" [Users] = "CurrentUser.Friends" >

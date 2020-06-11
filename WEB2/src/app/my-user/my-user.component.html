@@ -1,12 +1,71 @@
+
 <div class="wrapper">
+    
     <img class ="img" src = "assets/tempbg2.jpg"/>
+    
+    <div class="flights-flex">
+        <label>Your past reservations</label>
+        <div class="red-line"></div>
+        <div *ngFor="let reservation of MyPastReservations; let i = index" >
+            <flight-card   [Flight] = reservation.Flight>
+                <button [id] = "i" *ngIf= "reservation.Review == null"  #ratestaywindow class="button-crap"  custombtn>
+                    Rate your stay
+                </button>
+            </flight-card>
+            <review [doneReview] = "reservation.Review" [pendingReview] = "reservation" (ReviewDone) = "rate($event)"  [hidden] = "togglecomment[i]">
+                    
+            </review>
+            
+           
+        </div>
+        <div class="red-line2"></div>
+    </div>
+    <div class="flights-flex">
+        <label>Your reservations</label>
+        <div class="red-line"></div>
+        <div *ngFor="let reservation of MyReservations" >
+            <flight-card  [Flight] = reservation.Flight>
+                <button class="button-crap">
+                    Cancel
+                </button>
+            </flight-card>
+            
+        </div>
+        <div class="red-line2"></div>
+    </div>
+    <div class="flights-flex">
+        <label>Your invitations</label>
+        <div class="red-line"></div>
+        <div *ngFor="let reservation of ReservationInvitations" >
+            <flight-card  [Flight] = reservation.Flight>
+                <button class="button-crap">
+                    Accept
+                </button>
+                <button class="button-crap">
+                    Deny
+                </button>
+            </flight-card>
+        </div>
+        <div class="red-line2"></div>
+    </div>
+    <label class="lbl">People</label>
+    <div class="red-line2-nodiv"></div>
+    <div class="users-flex">
+        <userlist  (update) = "update($event)" [hidden] = "MyUser?.Role !== 0" TableName = "Friends" [CurrentUser] = "MyUser" [Users] = "MyUser?.Friends">
+        </userlist>
+        <userlist (update) = "update($event)" [hidden] = "MyUser?.Role !== 0" TableName = "Requests" [CurrentUser] = "MyUser" [Users] = "MyUser?.PendingFriends">
+        </userlist>
+        <userlist (update) = "update($event)" [hidden] = "MyUser?.Role !== 0" TableName = "Add Friends" [CurrentUser] = "MyUser" [Users] = "AllUsers">
+        </userlist> 
+    </div>
+    <div class="users-flex">
+        <div class="red-line2"></div>
+    </div>
+    
     <admin-users-view 
     [hidden] = "MyUser?.Role !== 3">
     </admin-users-view>
-    <userlist [hidden] = "MyUser?.Role !== 1" TableName = "Friends" [CurrentUser] = "MyUser" [Users] = "MyUser?.Friends">
-    </userlist>
-    <userlist [hidden] = "MyUser?.Role !== 1" TableName = "Requests" [CurrentUser] = "MyUser" [Users] = "MyUser?.PendingFriends">
-    </userlist>
+   
 </div>
 
 

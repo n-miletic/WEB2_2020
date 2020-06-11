@@ -37,16 +37,24 @@ namespace DiemService.Database
         public int Id { get; set; }
         public User User { get; set; }
         public int Stars { get; set; }
+        public string Comment { get; set; }
 
-        public Review(User user, int stars)
+        public Review(User user, int stars,string comment)
         {
             User = user;
             Stars = stars;
+            Comment = comment;
         }
 
         public Review()
         {
         }
+    }
+    public enum FlightClass
+    {
+        Economy,
+        Bussiness,
+        FirstClass
     }
     public class Flight
     {
@@ -58,15 +66,15 @@ namespace DiemService.Database
         public Price Price { get; set; }
         public DateTime Flight_Departure_Time { get; set; }
         public DateTime Flight_Arrival_Time { get; set; }
-        public ICollection<Review> Reviews { get; set; }
         public ICollection<FlightReservation> Reservations { get; set; } 
         public string Flight_Duration { get; set; }
         public string Seats { get; set; }
         public string Flight_Distance { get; set; }
+        public FlightClass FlightClass { get; set; }
 
         public AvioCompany Provider { get; set; }
 
-        public Flight(Location from_Location, Location to_Location, Price price, DateTime flight_Departure_Time, DateTime flight_Arrival_Time, string flight_Duration, string flight_Distance)
+        public Flight(Location from_Location, Location to_Location, Price price, DateTime flight_Departure_Time, DateTime flight_Arrival_Time, string flight_Duration, string flight_Distance,FlightClass flightClass)
         {
             From_Location = from_Location;
             To_Location = to_Location;
@@ -75,6 +83,7 @@ namespace DiemService.Database
             Flight_Arrival_Time = flight_Arrival_Time;
             Flight_Duration = flight_Duration;
             Flight_Distance = flight_Distance;
+            FlightClass = flightClass;
         }
 
         public Flight(Price price, DateTime flight_Departure_Time, DateTime flight_Arrival_Time,string flightDuration, string flight_Distance)
@@ -88,7 +97,6 @@ namespace DiemService.Database
 
         public Flight()
         {
-            Reviews = new List<Review>();
             Reservations = new List<FlightReservation>();
         }
     }

@@ -80,7 +80,10 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
                     throw new Exception("Activation link expired or wrong");
                 }
                     
-                _context.UserDbSet.Add(new User(toAdd));
+                User toInjectPoison = _context.UserDbSet.Add(new User(toAdd));
+                RegisteredUser dumbshit = _context.RegisteredUserDbSet.Add(new RegisteredUser());
+                _context.SaveChanges();
+                toInjectPoison.UlogaID = dumbshit.Id;
                 _context.TempUserDbSet.Remove(toAdd);
                 _context.SaveChanges();
             }

@@ -134,6 +134,7 @@
     <Compile Include="Controllers\AvioCompanyController.cs" />
     <Compile Include="Controllers\RentCompanyController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DTO\AdminAvioDTO.cs" />
     <Compile Include="DTO\AdminRentDTO.cs" />
@@ -142,6 +143,8 @@
     <Compile Include="Forms\FlightFormUpdate.cs" />
     <Compile Include="Forms\PromoteForm.cs" />
     <Compile Include="Forms\ReservationForm.cs" />
+    <Compile Include="Forms\ReviewForm.cs" />
+    <Compile Include="Forms\SearchFlightForm.cs" />
     <Compile Include="Forms\SendReqForm.cs" />
     <Compile Include="Forms\SignForm.cs" />
     <Compile Include="Forms\UserGift.cs" />
@@ -159,6 +162,7 @@
     <Compile Include="ManageMeLikeOneOfYourDbSets\MailServiceManager.cs" />
     <Compile Include="ManageMeLikeOneOfYourDbSets\RentCompanyDbManager.cs" />
     <Compile Include="ManageMeLikeOneOfYourDbSets\ReservationDbManager.cs" />
+    <Compile Include="ManageMeLikeOneOfYourDbSets\ReviewDbManager.cs" />
     <Compile Include="ManageMeLikeOneOfYourDbSets\UserDbManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Forms\FlightForm.cs" />

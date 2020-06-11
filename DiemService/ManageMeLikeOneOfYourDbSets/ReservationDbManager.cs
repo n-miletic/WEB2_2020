@@ -52,7 +52,7 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
             {
                 string caller = ((ClaimsPrincipal)HttpContext.Current.User).FindFirst("username").Value;
                 User instigator = _context.UserDbSet.Where(u => u.Username == caller).FirstOrDefault();
-                User invited = _context.UserDbSet.Where(u => u.Username == caller).FirstOrDefault();
+                User invited = _context.UserDbSet.Where(u => u.Username == form.InvitedUsername).FirstOrDefault();
                 Flight wanted = _context.FlightDbSet.Where(u => u.Id == form.FlightId).FirstOrDefault();
                 if (invited.Role != Role.RegisteredUser || invited == null)
                     return;

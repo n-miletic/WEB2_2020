@@ -145,6 +145,7 @@ namespace DiemService.Database
         public Flight Flight { get; set; }
         public User User { get; set; }
         public User Invited_By { get; set; }
+        public Review Review { get; set; }
 
         public FlightReservation(string name, string lastName, int seat_Reserved, int passport_Number, User appropriate_User,Flight flight)
         {

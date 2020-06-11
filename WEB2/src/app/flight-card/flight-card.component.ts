@@ -9,6 +9,7 @@ export class FlightCardComponent implements OnInit {
 
   constructor() { }
   @Input() Flight: any;
+  @Input() shut_up:any;
   CurrentUser:any;
   @Output() alertReserve = new EventEmitter();
   ngOnInit(): void {
@@ -17,6 +18,7 @@ export class FlightCardComponent implements OnInit {
   reserve(){
     this.alertReserve.emit("OPEN THE DAMN THING")
   }
+  
   
 
 }

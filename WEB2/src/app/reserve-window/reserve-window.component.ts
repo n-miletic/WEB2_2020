@@ -10,9 +10,9 @@ export class ReserveWindowComponent implements OnInit {
   @Input() Flight:any;
   Seats:any;
   CurrentUser:any;
+  passport;
   PersonCounter = 0;
   first_name = ''
-  inviteDiv = false;
   last_name = ''
   SelectedSeats:any;
   @Output() alertClose = new EventEmitter();
@@ -23,6 +23,12 @@ export class ReserveWindowComponent implements OnInit {
     console.log(this.Flight)
   }
   close(){
+    this.Seats = null;
+    this.passport = '';
+    this.PersonCounter = 0;
+    this.first_name = '';
+    this.last_name = '';
+    this.SelectedSeats = null;
     this.alertClose.emit();
   }
   NextStep(seats:any){
@@ -36,19 +42,69 @@ export class ReserveWindowComponent implements OnInit {
   }
    
   ReserveAndNext(){
-    this.inviteDiv = true;
+    let toSend;
+    if(this.PersonCounter == 0){
+      toSend = {
+        Seat : this.SelectedSeats[this.PersonCounter],
+        Passport : this.passport,
+        FlightId : this.Flight.Id
+      }
+      fetch('/DiemApi/User/AddFlightReservation', {
+        method: 'post',
+        body: JSON.stringify(toSend),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey")
+        }
+    })
+    }else{
+        toSend = {
+          Name: this.first_name,
+          last_name : this.last_name,
+          Seat : this.SelectedSeats[this.PersonCounter],
+          Passport : this.passport,
+          FlightId : this.Flight.Id
+        }
+        fetch('/DiemApi/User/AddRandomFlightReservation', {
+          method: 'post',
+          body: JSON.stringify(toSend),
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey")
+          }
+      })
+
+    }
     this.first_name = ''
     this.last_name = ''
+    this.passport = ''
     this.PersonCounter++;
     this.Seats[this.SelectedSeats[this.PersonCounter]] = "3";
     this.Seats = this.Seats.toString().replace(/,/g,'');
+    if(this.PersonCounter  == this.SelectedSeats.length - 1)
+      this.close();
   }
-  InviteNext(){
+  InviteNext(User:any){
+    let toSend = {
+      InvitedUsername : User.Username,
+      Seat : this.SelectedSeats[this.PersonCounter],
+      FlightId : this.Flight.Id
+    }
+    fetch('/DiemApi/User/InviteReservation', {
+      method: 'post',
+      body: JSON.stringify(toSend),
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey")
+      }
+  })
     this.first_name = ''
     this.last_name = ''
     this.PersonCounter++;
     this.Seats[this.SelectedSeats[this.PersonCounter]] = "3";
     this.Seats = this.Seats.toString().replace(/,/g,'');
+    if(this.PersonCounter  == this.SelectedSeats.length - 1)
+      this.close();
   }
 
 }

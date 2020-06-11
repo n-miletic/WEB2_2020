@@ -12,6 +12,28 @@ namespace DiemService.Controllers
 {
     public static  class FlightDbManager
     {
+        public static List<Flight> SearchFlights(SearchFlightForm form)
+        {
+            using (var _context = new DiemServiceDB())
+            {
+                List<Flight> retVal = new List<Flight>();
+                if (form.Flight_Arrival_Time == null || form.Flight_Departure_Time == null || form.From_Location == null || form.To_Location == null)
+                    throw new Exception("BAD QUERY VERY BAD QUERY");
+
+                retVal = _context.FlightDbSet.Include(x => x.From_Location).Include(x => x.To_Location).Include(x => x.Transits)
+                                             .Where(x => x.To_Location.State == form.To_Location 
+                                                 && x.From_Location.State == form.From_Location 
+                                                 && x.Flight_Arrival_Time == form.Flight_Arrival_Time 
+                                                 && x.Flight_Departure_Time == form.Flight_Departure_Time)
+                                             .ToList();
+                if (form.Free_seats != 0)
+                   retVal =  retVal.Where(u => u.Seats.Count(x => x == '0') > form.Free_seats).ToList();
+                if (form.Flight_class != 0)
+                    retVal = retVal.Where(u => u.FlightClass == form.Flight_class).ToList();
+
+                return retVal;
+            }
+        }
         public static List<Flight> GetAllFlights()
         {
             using (var _context = new DiemServiceDB())
@@ -31,6 +53,10 @@ namespace DiemService.Controllers
         {
             using (var _context = new DiemServiceDB())
             {
+                if (flight.FlightClass == 0 || flight.Flight_Arrival_Time == null || flight.Flight_Departure_Time == null || flight.fromLocation == null || flight.toLocation == null || flight.price == null)
+                {
+                    throw new Exception("BAD QEURY");
+                }
                 string caller = ((ClaimsPrincipal)HttpContext.Current.User).FindFirst("username").Value;
                 User loggedUser = _context.UserDbSet.Where(u => u.Username == caller).FirstOrDefault();
                 AvioCompany found = _context.AvioCompanyDbSet.Where(u => u.Id == avioId).Include(x => x.Owner).FirstOrDefault();

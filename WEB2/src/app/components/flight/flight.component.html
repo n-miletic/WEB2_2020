@@ -2,12 +2,12 @@
     <img class ="img" src = "assets/tempbg2.jpg"/>
 
     <form>
-        
-    <div class="container">
+
+    <div class="taken-flex">
         <h1>Where to next?</h1>
         <div class="destination-group">
-            <input type="text" placeholder= "From:" class="form-control" id="fromDestination" required>
-            <input type="text" placeholder= "To:" class="form-control" id="toDestination" required>
+            <AutocompleteComponent   inputName = "Address"  (setAddress)="getAddress($event)" addressType = "(airport)" ></AutocompleteComponent>  
+            <AutocompleteComponent inputName = "Address"  (setAddress)="getAddress($event)" addressType = "(airport)"  ></AutocompleteComponent>  
         </div>
         <br>
         <div class="select-group">
@@ -24,17 +24,29 @@
               <option *ngFor="let traveller of travellers" [value]="traveller">{{traveller}}</option>
             </select>
         </div>
-          
+
 
         <button type="submit" class="btn btn-success" >Submit</button>
     </div>
     </form>
-    <div  *ngFor="let flight of Flights" class = "flight-div">
+  
+    <!-- <div  *ngFor="let flight of Flights" class = "flight-div">
       <flight-card *ngIf = "!Reserving" (alertReserve) = "OpenReserveWindow()"   [Flight] = flight>
 
       </flight-card>
       <reserve-window *ngIf = "Reserving" (alertClose) = "ReserveAndClose($event)" [Flight] = flight >
       </reserve-window>
-    </div>
-    
+    </div> -->
+    <div class="flights-flex">
+      <label>Search Results</label>
+      <div class="red-line"></div>
+      <div *ngFor="let flight of Flights" >
+          <flight-card   *ngIf = "!Reserving" (alertReserve) = "OpenReserveWindow()"   [Flight] = flight>
+          </flight-card>
+          <reserve-window *ngIf = "Reserving" (alertClose) = "ReserveAndClose($event)" [Flight] = flight >
+          </reserve-window>
+      </div>
+      <div class="red-line2"></div>
+  </div>
 </div>
+

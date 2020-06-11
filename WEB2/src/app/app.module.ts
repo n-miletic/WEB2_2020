@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { RatingModule } from 'ng-starrating';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
@@ -22,6 +22,7 @@ import { MyUserComponent } from './my-user/my-user.component';
 import { SelectSeatsComponent } from './select-seats/select-seats.component';
 import { ReserveWindowComponent } from './reserve-window/reserve-window.component';
 import { InviteUsersViewComponent } from './invite-users-view/invite-users-view.component';
+import { ReviewComponent } from './review/review.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,11 +40,13 @@ import { InviteUsersViewComponent } from './invite-users-view/invite-users-view.
     MyUserComponent,
     SelectSeatsComponent,
     ReserveWindowComponent,
-    InviteUsersViewComponent
+    InviteUsersViewComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RatingModule,
     BrowserAnimationsModule, 
     GoogleMapsModule,
     FormsModule
