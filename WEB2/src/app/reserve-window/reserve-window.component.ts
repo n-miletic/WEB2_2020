@@ -12,7 +12,10 @@ export class ReserveWindowComponent implements OnInit {
   CurrentUser:any;
   passport;
   PersonCounter = 0;
+  SeatsArray
+  currentSeat = ''
   first_name = ''
+  doneSelectingSeats= false;
   last_name = ''
   SelectedSeats:any;
   @Output() alertClose = new EventEmitter();
@@ -29,12 +32,17 @@ export class ReserveWindowComponent implements OnInit {
     this.first_name = '';
     this.last_name = '';
     this.SelectedSeats = null;
+    
     this.alertClose.emit();
   }
   NextStep(seats:any){
+    
+    this.doneSelectingSeats = true;
     this.SelectedSeats = seats.chosenSeats;
     seats.allSeats[seats.chosenSeats[this.PersonCounter]] = "3";
     this.Seats = seats.allSeats.toString().replace(/,/g,'');
+    this.SeatsArray = seats.allSeats
+    this.currentSeat = this.SelectedSeats[this.PersonCounter];
     if(this.PersonCounter == 0){
       this.first_name = this.CurrentUser.Name
       this.last_name = this.CurrentUser.LastName
@@ -79,9 +87,10 @@ export class ReserveWindowComponent implements OnInit {
     this.last_name = ''
     this.passport = ''
     this.PersonCounter++;
-    this.Seats[this.SelectedSeats[this.PersonCounter]] = "3";
-    this.Seats = this.Seats.toString().replace(/,/g,'');
-    if(this.PersonCounter  == this.SelectedSeats.length - 1)
+    this.SeatsArray[this.SelectedSeats[this.PersonCounter]] = "3";
+    this.currentSeat = this.SelectedSeats[this.PersonCounter];
+    this.Seats = this.SeatsArray.toString().replace(/,/g,'');
+    if(this.PersonCounter  == this.SelectedSeats.length)
       this.close();
   }
   InviteNext(User:any){
@@ -102,6 +111,7 @@ export class ReserveWindowComponent implements OnInit {
     this.last_name = ''
     this.PersonCounter++;
     this.Seats[this.SelectedSeats[this.PersonCounter]] = "3";
+    this.currentSeat = this.SelectedSeats[this.PersonCounter];
     this.Seats = this.Seats.toString().replace(/,/g,'');
     if(this.PersonCounter  == this.SelectedSeats.length - 1)
       this.close();

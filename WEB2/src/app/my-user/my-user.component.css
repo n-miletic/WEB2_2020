@@ -1,12 +1,12 @@
-.wrapper{
-   
-    position: fixed;
-    top:0;
+.flex-space-between{
+    display: flex;
+    justify-content: space-between;
 }
-.wrapper img{
-  
-    width: 100vw;
-    height:30vh;
+.flex-space-between > input{
+    width: 50%;
+}
+.edit-user-btn{
+    width: 100px;
 }
 .button-crap{
   position: absolute;

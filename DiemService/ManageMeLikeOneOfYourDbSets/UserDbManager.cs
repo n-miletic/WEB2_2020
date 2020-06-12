@@ -9,11 +9,37 @@ using System.Net.Mail;
 using System.Web;
 using System.Data.Entity;
 using DiemService.DTO;
+using System.Security.Claims;
 
 namespace DiemService.ManageMeLikeOneOfYourDbSets
 {
     public static class UserDbManager
     {
+        public static UserGift EditUser(EditUserForm form)
+        {
+            if (form == null)
+                throw new Exception("BAD");
+            using (var _context = new DiemServiceDB())
+            {
+                string caller = ((ClaimsPrincipal)HttpContext.Current.User).FindFirst("username").Value;
+                User found = _context.UserDbSet.Where(u => u.Username == caller).FirstOrDefault();
+                if(String.IsNullOrEmpty(form.Hash) || found.Hash != form.Hash )
+                    throw new Exception("EW");
+                if (!String.IsNullOrEmpty(form.Name) && form.Name != found.Name)
+                    found.Name = form.Name;
+                if (!String.IsNullOrEmpty(form.LastName) && found.LastName != form.LastName)
+                    found.LastName = form.LastName;
+                if (!String.IsNullOrEmpty(form.Email)  && found.Email != form.Email)
+                    found.Email = form.Email;
+                if (!String.IsNullOrEmpty(form.Username)  && found.Username != form.Username)
+                    found.Username = form.Username;
+                if (!String.IsNullOrEmpty(form.NewHash))
+                    found.Hash = form.NewHash;
+                _context.SaveChanges();
+
+                return new UserGift(TokenManager.GetToken(found), found);
+            }
+        }
         public static List<object> GetHardcoreUsers()
         {
             List<object> retVal = new List<object>();

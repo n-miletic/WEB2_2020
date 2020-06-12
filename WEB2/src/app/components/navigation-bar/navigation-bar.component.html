@@ -20,6 +20,12 @@
     <app-sign-in> </app-sign-in>
   </ng-template>
 </div>
+
+<div class="position">
+  <div class="restrict-img">
+    <img src = "assets/tempbackground.jpg" class = "top"/>
+  </div>
+ 
 <div class="navbar">
   <img routerLink="" src="assets/logo.png" />
   <div>
@@ -31,4 +37,5 @@
     <li *ngIf = "CurrentUser?.Role == 1"><a [routerLink]="this.link">{{this.AviocompanyName?.toUpperCase()}}</a></li>
     <li *ngIf = "CurrentUser"><a (click) = "LogOut()">LOG OUT</a></li>
   </div>
+</div>
 </div>

@@ -12,6 +12,7 @@ export class SelectSeatsComponent implements OnInit,OnChanges {
   seatsFirstNum: any;
   seatsSecond = new Array();
   seatsSecondNum:any;
+  doneSelecting = false;
   selectedSeats:any;
   toEmit = new Array();
   constructor() {
@@ -87,6 +88,7 @@ export class SelectSeatsComponent implements OnInit,OnChanges {
       allSeats :this.seats,
       chosenSeats: this.toEmit
     }
+    this.doneSelecting = true;
     this.emitSeat.emit(totoEmit);
   }
 

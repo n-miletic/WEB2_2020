@@ -1,3 +1,19 @@
+.restrict-img{
+  position: absolute;
+  height:30vh;
+  overflow: hidden;
+}
+.top{
+  
+  top: 0;
+  width: 100vw;
+  
+  display: block;
+}
+.position{
+  height:30vh;
+  overflow:hidden;
+}
 .DialogNavBar {
   display: flex;
   justify-content: space-between;

@@ -1,5 +1,4 @@
 <div class="wrapper">
-    <img class ="img2" src = "assets/tempbg2.jpg"/>
 
     <div class = "company-div">
         <div class = "img-div">
@@ -30,13 +29,18 @@
             <div class="red-line"></div>
             <div [hidden] = "AddFlightHidden" class = "flight-div">
                 <add-flight (reload) = "reload()" [AvioCompanyId] = "AvioCompany?.Id"  >
-
+                  
                 </add-flight>
             </div>
-            <div *ngFor="let flight of AvioCompany?.Flights" class = "flight-div">
+            <div *ngFor="let flight of AvioCompany?.Flights;let i = index" class = "flight-div">
                 <flight-card  [Flight] = flight>
-
+                    <button [id] = "i"  #ratestaywindow class="button-crap"  custombtn>
+                        Add discount
+                    </button>
                 </flight-card>
+                <discount-div-avio [hidden] = "toggleDiscount[i]" (alertClose) = "FinishDiscounting($event)" [Flight] = flight >
+                </discount-div-avio>
+                
             </div>
             <div class="red-line2"></div>
         </div>

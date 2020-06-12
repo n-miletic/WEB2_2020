@@ -1,11 +1,9 @@
 .dot-container{
-    /* width: 300px;
-    height: 150px; */
     display: flex;
     justify-content: space-between;
 
 }
-.dot-container div {
+.dot-container > div {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -16,14 +14,20 @@
 }
 .dot-container div img{
     padding: 1px;
-    width: 25%;
+    
     box-sizing: border-box;
 }
 input{
     display: block;
-    border-radius: 15px;
+    border-radius: 10px;
+    width: 100px;
     background-color: #e54b4b;
+    position: absolute;
+    bottom:10px;
 }
 label,input{
     font-family: 'Oleo Script';
+}
+.container{
+    position: relative;
 }

@@ -34,10 +34,10 @@ export class FlightComponent implements OnInit {
 
   ngOnInit(): void {
     
-    // this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
-    //  fetch("/DiemApi/Flights")
-    // .then(data => data.json())
-    // .then(flights => {this.Flights = flights;})
+    this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
+     fetch("/DiemApi/Flights")
+    .then(data => data.json())
+    .then(flights => {this.ShowFlights = flights;})
   }
   transitsToggle(){
     this.transitsActive = !this.transitsActive;

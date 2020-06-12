@@ -23,6 +23,7 @@ import { SelectSeatsComponent } from './select-seats/select-seats.component';
 import { ReserveWindowComponent } from './reserve-window/reserve-window.component';
 import { InviteUsersViewComponent } from './invite-users-view/invite-users-view.component';
 import { ReviewComponent } from './review/review.component';
+import { DiscountDivAvioComponent } from './discount-div-avio/discount-div-avio.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { ReviewComponent } from './review/review.component';
     SelectSeatsComponent,
     ReserveWindowComponent,
     InviteUsersViewComponent,
-    ReviewComponent
+    ReviewComponent,
+    DiscountDivAvioComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,4 @@
 <div class="wrapper">
-    <img class ="img" src = "assets/tempbg2.jpg"/>
 
     <form ngNativeValidate (ngSubmit)="onSubmit($event)" (change) = "onChange($event)">
 
@@ -28,25 +27,6 @@
         <button type="submit" class="btn btn-success" >Submit</button>
     </div>
     </form>
-    <!-- <div class="flights-flex" *ngIf = "filterWinActive">
-      <label>Still have trouble?</label>
-      <div class="red-line"></div>
-      <form  (ngSubmit)= "filter($event)" (change) = "onChange($event)">
-        <div class="select-group">
-          <select class="form-control"  name = "FlightClass">
-            <option class="form-control" *ngFor="let class of FlightClasses"  [value]="class">{{class}}</option>
-          </select>
-
-        </div>
-      </form>
-    </div> -->
-    <!-- <div  *ngFor="let flight of Flights" class = "flight-div">
-      <flight-card *ngIf = "!Reserving" (alertReserve) = "OpenReserveWindow()"   [Flight] = flight>
-
-      </flight-card>
-      <reserve-window *ngIf = "Reserving" (alertClose) = "ReserveAndClose($event)" [Flight] = flight >
-      </reserve-window>
-    </div> -->
     <form (keyup) = "filter($event)" >
       <div *ngIf = "filterWinActive"class = "button-flex">
         <button [ngClass]="{'opacitydrop':!priceActive}">
@@ -78,7 +58,9 @@
       <label>Search Results</label>
       <div class="red-line"></div>
       <div *ngFor="let flight of ShowFlights" >
-          <flight-card   *ngIf = "!Reserving" (alertReserve) = "OpenReserveWindow()"   [Flight] = flight>
+          <flight-card    (alertReserve) = "OpenReserveWindow()"   [Flight] = flight>
+            
+           
           </flight-card>
           <reserve-window *ngIf = "Reserving" (alertClose) = "ReserveAndClose($event)" [Flight] = flight >
           </reserve-window>

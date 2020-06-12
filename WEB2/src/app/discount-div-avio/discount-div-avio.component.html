@@ -1,0 +1,24 @@
+<div class="main-flex">
+    <div class="half">
+        <div [ngClass]="{'blockdiv': doneSelectingSeats}">
+            <select-seats (emitSeat) = "NextStep($event)"[seats] = "this.Seats">
+            </select-seats>
+        </div>
+       
+    </div>
+    <div class="half">
+        <div class="invite-form-flex">
+            <div>
+                <label>Fill details</label><br>
+                <div class="red-line"></div>
+                <div class = "flex-space-between">
+                    <label>Price discount:</label>
+                    <input [(ngModel)] = "new_price" name="new_price"  type="text"/>
+                </div>
+                <input type="submit"(click) = "SendDiscount()" value="Reserve"/>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>

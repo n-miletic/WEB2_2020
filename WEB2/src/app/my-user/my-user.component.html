@@ -1,8 +1,39 @@
 
 <div class="wrapper">
   
-    <img class ="img" src = "assets/tempbg2.jpg"/>
-    
+    <div class="flights-flex">
+        <label>Your info</label>
+        <form  ngNativeValidate (ngSubmit)="editUser($event)">
+
+        <div class="red-line"></div>
+        <div class = "flex-space-between">
+            <label>Name:</label>
+            <input class="form-control" name="Name" [(ngModel)] = "MyUser.Name" type="text"/>
+        </div> 
+        <div class = "flex-space-between">
+            <label>Last name:</label>
+            <input class="form-control" name = "LastName" [(ngModel)] = "MyUser.LastName" type="text"/>
+        </div> 
+        <div class = "flex-space-between">
+            <label>Username:</label>
+            <input class="form-control" name="Username" [(ngModel)] = "MyUser.Username" type="text"/>
+        </div> 
+        <div class = "flex-space-between">
+            <label>Email:</label>
+            <input class="form-control" name = "Email" [(ngModel)] = "MyUser.Email" type="text"/>
+        </div> 
+        <div class = "flex-space-between">
+            <label>Current password:</label>
+            <input class="form-control" name = "pass" placeholder="Enter current" [(ngModel)] = "pass" type="password" required/>
+        </div> 
+        <div class = "flex-space-between">
+            <label>Change password</label>
+            <input class="form-control" name="pass_new" placeholder="Enter new" [(ngModel)] = "pass_new" type="text"/>
+        </div> 
+        <input class="edit-user-btn" value = "Edit my user" type="submit">
+        </form>
+        <div class="red-line2"></div>
+    </div>
     <div class="flights-flex">
         <label>Your past reservations</label>
         <div class="red-line"></div>

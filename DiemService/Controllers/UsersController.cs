@@ -23,6 +23,14 @@ namespace DiemService.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, UserDbManager.GetUser(Int32.Parse(userId)));
         }
 
+        [HttpPost]
+        [Authorize]
+        [Route("User/Edit")]
+        public HttpResponseMessage EditUser(EditUserForm form)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, UserDbManager.EditUser(form));
+        }
+
         [HttpGet]
         [Authorize]
         [Route("User/GetLogged")]

@@ -141,6 +141,7 @@
     <Compile Include="DTO\RegisteredUserDTO.cs" />
     <Compile Include="Forms\AddOfferForm.cs" />
     <Compile Include="Forms\AvioCompanyEditForm.cs" />
+    <Compile Include="Forms\EditUserForm.cs" />
     <Compile Include="Forms\FlightFormUpdate.cs" />
     <Compile Include="Forms\PromoteForm.cs" />
     <Compile Include="Forms\ReservationForm.cs" />
