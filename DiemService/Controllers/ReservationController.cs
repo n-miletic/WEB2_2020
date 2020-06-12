@@ -40,10 +40,11 @@ namespace DiemService.Controllers
         }
 
         [HttpPost]
-        [Route("User/CancelFlightReservation")] // moras i za vehicle add/cancel 
-        public HttpResponseMessage CancelFlightReservation([FromBody]string myid, string flightid)
+        [Authorize]
+        [Route("User/CancelFlightReservation/{reservationId}")] // moras i za vehicle add/cancel 
+        public HttpResponseMessage CancelFlightReservation([FromUri]int reservationId)
         {
-            ReservationDbManager.CancelFlightReservation(Int32.Parse(myid), Int32.Parse(flightid));
+            ReservationDbManager.CancelFlightReservation(reservationId);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 

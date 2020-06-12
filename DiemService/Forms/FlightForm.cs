@@ -20,13 +20,27 @@ namespace DiemService.Forms
         public FlightClass FlightClass { get; set; }
         
         public string price { get; set; }
+        public int seats { get; set; }
+        public List<string> transits { get; set; }
         
         public Flight toFlight()
         {
 
-            Location to = new Location(toLocation.Split(',')[1], toLocation.Split(',')[0]);
-            Location from = new Location(fromLocation.Split(',')[1],fromLocation.Split(',')[0]);
-            return new Flight(from, to, new Price(Double.Parse(price)), Flight_Departure_Time, Flight_Arrival_Time, (Flight_Arrival_Time - Flight_Departure_Time).ToString(), "", FlightClass) ;
+            Location to = new Location() { State = toLocation};
+            Location from = new Location() { State = fromLocation};
+            int[] Seats = new int[seats];
+            for (int i = 0; i < seats; i++)
+            {
+                Seats[i] = 0;
+            }
+            string seatsString = string.Join("", Seats);
+            List <Location> Transits = new List<Location>();
+            if(transits != null)
+            foreach (string item in transits)
+            {
+                Transits.Add(new Location() { State = item });
+            }
+            return new Flight(from, to, new Price(Double.Parse(price)), Flight_Departure_Time, Flight_Arrival_Time, (Flight_Arrival_Time - Flight_Departure_Time).ToString(), "", FlightClass,seatsString,Transits) ;
         }
     }
 }

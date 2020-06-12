@@ -139,6 +139,7 @@
     <Compile Include="DTO\AdminAvioDTO.cs" />
     <Compile Include="DTO\AdminRentDTO.cs" />
     <Compile Include="DTO\RegisteredUserDTO.cs" />
+    <Compile Include="Forms\AddOfferForm.cs" />
     <Compile Include="Forms\AvioCompanyEditForm.cs" />
     <Compile Include="Forms\FlightFormUpdate.cs" />
     <Compile Include="Forms\PromoteForm.cs" />

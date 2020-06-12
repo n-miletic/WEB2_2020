@@ -19,12 +19,11 @@ namespace DiemService.Controllers
                 List<Flight> retVal = new List<Flight>();
                 if (form.Flight_Arrival_Time == null || form.Flight_Departure_Time == null || form.From_Location == null || form.To_Location == null)
                     throw new Exception("BAD QUERY VERY BAD QUERY");
-
-                retVal = _context.FlightDbSet.Include(x => x.From_Location).Include(x => x.To_Location).Include(x => x.Transits)
+                retVal = _context.FlightDbSet.Include(x => x.From_Location).Include(x => x.To_Location).Include(x => x.Transits).Include(x=>x.Provider)
                                              .Where(x => x.To_Location.State == form.To_Location 
                                                  && x.From_Location.State == form.From_Location 
-                                                 && x.Flight_Arrival_Time == form.Flight_Arrival_Time 
-                                                 && x.Flight_Departure_Time == form.Flight_Departure_Time)
+                                                 && DbFunctions.TruncateTime(x.Flight_Arrival_Time) == form.Flight_Arrival_Time.Date
+                                                 && DbFunctions.TruncateTime(x.Flight_Departure_Time) == form.Flight_Departure_Time.Date)
                                              .ToList();
                 if (form.Free_seats != 0)
                    retVal =  retVal.Where(u => u.Seats.Count(x => x == '0') > form.Free_seats).ToList();
@@ -53,7 +52,10 @@ namespace DiemService.Controllers
         {
             using (var _context = new DiemServiceDB())
             {
-                if (flight.FlightClass == 0 || flight.Flight_Arrival_Time == null || flight.Flight_Departure_Time == null || flight.fromLocation == null || flight.toLocation == null || flight.price == null)
+                if (flight.FlightClass == 0 || flight.seats == 0 || flight.Flight_Arrival_Time == null || flight.Flight_Departure_Time == null || flight.fromLocation == null || flight.toLocation == null || flight.price == null ||
+                    flight.Flight_Departure_Time < DateTime.Now || 
+                    flight.Flight_Departure_Time.Date > flight.Flight_Arrival_Time.Date
+                    )
                 {
                     throw new Exception("BAD QEURY");
                 }
@@ -66,12 +68,6 @@ namespace DiemService.Controllers
                 toAdd.To_Location = _context.LocationDbSet.Add(toAdd.To_Location);
                 toAdd.From_Location = _context.LocationDbSet.Add(toAdd.From_Location);
                 toAdd.Provider = found;
-                int[] Seats = new int[100];
-                for (int i = 0; i < 48; i++)
-                {
-                    Seats[i] = 0;
-                }
-                toAdd.Seats = string.Join("", Seats);
                 found.Flights.Add(_context.FlightDbSet.Add(toAdd));
                 _context.SaveChanges();
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Web;
-
+using System.Data.Entity;
 namespace DiemService.ManageMeLikeOneOfYourDbSets
 {
     public class ReservationDbManager
@@ -73,12 +73,21 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
                 //flight id or reservation id?
             }
         }
-        public static void CancelFlightReservation(int myid, int flightid)
+        public static void CancelFlightReservation(int flightid)
         {
             using (var _context = new DiemServiceDB())
             {
-                //_context.RegisteredUserDbSet.Find(_context.UserDbSet.Find(myid).UlogaID).FlightReservations.Remove(_context.FlightDbSet.Find(flightid));
-                //_context.SaveChanges();
+                string caller = ((ClaimsPrincipal)HttpContext.Current.User).FindFirst("username").Value;
+                User found = _context.UserDbSet.Where(u => u.Username == caller).FirstOrDefault();
+                FlightReservation toCancel = _context.FlightReservationDbSet.Where(u => u.Id == flightid).Include(u => u.User).Include(u=> u.Flight).FirstOrDefault();
+                if (toCancel.User.Username != caller)
+                    throw new Exception("NOT AUTHORIZED");
+                if (DateTime.Now.Date - toCancel.Flight.Flight_Departure_Time.Date < TimeSpan.FromDays(3))
+                    throw new Exception("TOO LATE TO CANCEL");
+                toCancel.Cancelled = true;
+                StringBuilder sb = new StringBuilder(toCancel.Flight.Seats);
+                sb[toCancel.Seat_Reserved] = '0';
+                _context.SaveChanges();
             }
         }
 

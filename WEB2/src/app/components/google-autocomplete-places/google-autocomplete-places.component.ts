@@ -23,6 +23,8 @@ export class GoogleAutocompletePlacesComponent
   implements OnInit, AfterViewInit {
   @Input() adressType: string;
   @Input() inputName: string;
+  @Input() transitId: Number;
+  @Input() onlyAvio;
   @Output() setAddress: EventEmitter<any> = new EventEmitter();
   @ViewChild('addresstext') addresstext: any;
 
@@ -48,10 +50,10 @@ export class GoogleAutocompletePlacesComponent
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
       
       const place = autocomplete.getPlace();
-      if(place.types.includes('airport')){
-        console.log('gud')
-        this.invokeEvent(place);
+      if(!place.types.includes('airport') && this.onlyAvio != null){
+        return
       }
+      this.invokeEvent(place);
     });
   }
 

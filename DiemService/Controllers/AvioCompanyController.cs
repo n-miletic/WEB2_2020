@@ -27,5 +27,14 @@ namespace DiemService.Controllers
             AvioCompanyDbManager.EditAvio(form, avioId);
             return Request.CreateResponse(HttpStatusCode.OK );
         }
+
+        [HttpPost]
+        [Authorize]
+        [Route("AdminAvio/Flight/AddDiscount")]
+        public HttpResponseMessage AddSpecialOffer(AddOfferForm form)
+        {
+            AvioCompanyDbManager.AddSpecialOffer(form);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
     }
 }

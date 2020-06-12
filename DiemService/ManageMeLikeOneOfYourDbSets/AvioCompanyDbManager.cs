@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.IO;
 using DiemService.Forms;
 using System.Security.Claims;
+using System.Text;
 
 namespace DiemService.ManageMeLikeOneOfYourDbSets
 {
@@ -58,6 +59,32 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
                     _context.SaveChanges();
             }
         }
+        public static void AddSpecialOffer(AddOfferForm form)
+        {
+            if (form == null || form.seatsToDiscount != null || form.slashedPrice != 0 || form.flightId != 0)
+                throw new Exception("BAD QUERY");
+            using (var _context = new DiemServiceDB())
+            {
+                string caller = ((ClaimsPrincipal)HttpContext.Current.User).FindFirst("username").Value;
+                User found = _context.UserDbSet.Where(u => u.Username == caller).FirstOrDefault();
+                Flight flight = _context.FlightDbSet.Where(u => u.Id == form.flightId).Include(u => u.Provider).Include(u => u.Provider.Owner).FirstOrDefault();
+                if(found.Username != flight.Provider.Owner.Username || flight.Price.Value < form.slashedPrice)
+                    throw new Exception("BAD QUERY");
+
+                StringBuilder sb = new StringBuilder(flight.Seats);
+                foreach (int item in form.seatsToDiscount)
+                {
+                    sb[item] = '5';
+                }
+                
+                flight.Seats = sb.ToString();
+                flight.DiscountedPrice = form.slashedPrice;
+                _context.SaveChanges();
+
+
+            }
+        }
+  
 
     }
 }

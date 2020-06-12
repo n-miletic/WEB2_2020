@@ -52,9 +52,9 @@ namespace DiemService.Controllers
         [Route("Flights/SearchFlights")]
         public HttpResponseMessage SearchFlights(SearchFlightForm form)
         {
-            FlightDbManager.SearchFlights(form);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, FlightDbManager.SearchFlights(form));
         }
+       
     }
 
 

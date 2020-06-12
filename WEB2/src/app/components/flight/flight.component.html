@@ -1,35 +1,45 @@
 <div class="wrapper">
     <img class ="img" src = "assets/tempbg2.jpg"/>
 
-    <form>
+    <form ngNativeValidate (ngSubmit)="onSubmit($event)" (change) = "onChange($event)">
 
     <div class="taken-flex">
         <h1>Where to next?</h1>
         <div class="destination-group">
-            <AutocompleteComponent   inputName = "Address"  (setAddress)="getAddress($event)" addressType = "(airport)" ></AutocompleteComponent>  
-            <AutocompleteComponent inputName = "Address"  (setAddress)="getAddress($event)" addressType = "(airport)"  ></AutocompleteComponent>  
+            <AutocompleteComponent onlyAvio = 'truedat'   inputName = "from"  (setAddress)="getAddress($event)" addressType = "(airport)" ></AutocompleteComponent>  
+            <AutocompleteComponent onlyAvio = 'truedat' inputName = "to"  (setAddress)="getAddress($event)" addressType = "(airport)"  ></AutocompleteComponent>  
         </div>
-        <br>
         <div class="select-group">
-            <label for="tripType"></label>
-            <select class="form-control" id="tripType" required>
-              <option *ngFor="let trip of tripType" [value]="trip">{{trip}}</option>
-            </select>
-            <label for="cabinClass"></label>
-            <select class="form-control" id="cabinClass" required>
-              <option *ngFor="let cabin of cabinClass" [value]="cabin">{{cabin}}</option>
-            </select>
-            <label for="travellers"></label>
-            <select class="form-control" id="travellers" required>
-              <option *ngFor="let traveller of travellers" [value]="traveller">{{traveller}}</option>
-            </select>
+            <input  placeholder="Time of departure?" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name = 'datum_poletanja'  required/>
+            <input placeholder="Time of arrival?" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name = 'datum_sletanja'  required/>
+            
+        </div>
+        <div class="select-group">
+          <select class="form-control"  name = "seatSearch">
+            <option class="form-control" *ngFor="let seatNum of seatNums"  [value]="seatNum">{{seatNum}}</option>
+          </select>
+          <select class="form-control"  name = "FlightClass">
+            <option class="form-control" *ngFor="let class of FlightClasses"  [value]="class">{{class}}</option>
+          </select>
+
         </div>
 
 
         <button type="submit" class="btn btn-success" >Submit</button>
     </div>
     </form>
-  
+    <!-- <div class="flights-flex" *ngIf = "filterWinActive">
+      <label>Still have trouble?</label>
+      <div class="red-line"></div>
+      <form  (ngSubmit)= "filter($event)" (change) = "onChange($event)">
+        <div class="select-group">
+          <select class="form-control"  name = "FlightClass">
+            <option class="form-control" *ngFor="let class of FlightClasses"  [value]="class">{{class}}</option>
+          </select>
+
+        </div>
+      </form>
+    </div> -->
     <!-- <div  *ngFor="let flight of Flights" class = "flight-div">
       <flight-card *ngIf = "!Reserving" (alertReserve) = "OpenReserveWindow()"   [Flight] = flight>
 
@@ -37,10 +47,37 @@
       <reserve-window *ngIf = "Reserving" (alertClose) = "ReserveAndClose($event)" [Flight] = flight >
       </reserve-window>
     </div> -->
+    <form (keyup) = "filter($event)" >
+      <div *ngIf = "filterWinActive"class = "button-flex">
+        <button [ngClass]="{'opacitydrop':!priceActive}">
+          Price?
+         
+          <div >
+            <input class="form-control" name = "fromprice" type="number"/>
+            -
+            <input class="form-control" name = "toprice" type="number"/>
+            $
+          </div>
+        </button>
+        <button [ngClass]="{'opacitydrop':!durationActive}" >
+          Flight duration?
+         
+          <div >
+            <input class="form-control" name = "fromhours" type="number"/>
+            -
+            <input class="form-control" name = "tohours" type="number"/>
+            hr
+          </div>
+        </button>
+        <button [ngClass]="{'opacitydrop':!transitsActive}" (click) = "transitsToggle()" >
+          No transits?
+        </button>
+      </div>
+      </form>
     <div class="flights-flex">
       <label>Search Results</label>
       <div class="red-line"></div>
-      <div *ngFor="let flight of Flights" >
+      <div *ngFor="let flight of ShowFlights" >
           <flight-card   *ngIf = "!Reserving" (alertReserve) = "OpenReserveWindow()"   [Flight] = flight>
           </flight-card>
           <reserve-window *ngIf = "Reserving" (alertClose) = "ReserveAndClose($event)" [Flight] = flight >

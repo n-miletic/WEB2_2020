@@ -146,6 +146,7 @@ namespace DiemService.Database
         public User User { get; set; }
         public User Invited_By { get; set; }
         public Review Review { get; set; }
+        public bool Cancelled { get; set; }
 
         public FlightReservation(string name, string lastName, int seat_Reserved, int passport_Number, User appropriate_User,Flight flight)
         {
@@ -155,6 +156,7 @@ namespace DiemService.Database
             Passport_Number = passport_Number;
             User = appropriate_User;
             Flight = flight;
+            Cancelled = false;
         }
 
         public FlightReservation(string name, string lastName, int seat_Reserved, int passport_Number, Flight flight)
@@ -164,6 +166,7 @@ namespace DiemService.Database
             Seat_Reserved = seat_Reserved;
             Passport_Number = passport_Number;
             Flight = flight;
+            Cancelled = false;
         }
 
         public FlightReservation(string name, string lastName, int seat_Reserved, User user, Flight flight)
@@ -173,6 +176,7 @@ namespace DiemService.Database
             Seat_Reserved = seat_Reserved;
             User = user;
             Flight = flight;
+            Cancelled = false;
         }
 
         public FlightReservation()

@@ -52,6 +52,7 @@ namespace DiemService.Database
     }
     public enum FlightClass
     {
+        NotSelected,
         Economy,
         Bussiness,
         FirstClass
@@ -71,10 +72,11 @@ namespace DiemService.Database
         public string Seats { get; set; }
         public string Flight_Distance { get; set; }
         public FlightClass FlightClass { get; set; }
+        public int DiscountedPrice { get; set; }
 
         public AvioCompany Provider { get; set; }
 
-        public Flight(Location from_Location, Location to_Location, Price price, DateTime flight_Departure_Time, DateTime flight_Arrival_Time, string flight_Duration, string flight_Distance,FlightClass flightClass)
+        public Flight(Location from_Location, Location to_Location, Price price, DateTime flight_Departure_Time, DateTime flight_Arrival_Time, string flight_Duration, string flight_Distance,FlightClass flightClass,string seats,List<Location> transits)
         {
             From_Location = from_Location;
             To_Location = to_Location;
@@ -84,6 +86,8 @@ namespace DiemService.Database
             Flight_Duration = flight_Duration;
             Flight_Distance = flight_Distance;
             FlightClass = flightClass;
+            Seats = seats;
+            Transits = transits;
         }
 
         public Flight(Price price, DateTime flight_Departure_Time, DateTime flight_Arrival_Time,string flightDuration, string flight_Distance)
@@ -97,6 +101,7 @@ namespace DiemService.Database
 
         public Flight()
         {
+            Transits = new List<Location>();
             Reservations = new List<FlightReservation>();
         }
     }

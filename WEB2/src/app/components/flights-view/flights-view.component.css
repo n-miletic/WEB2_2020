@@ -2,29 +2,75 @@
     border:2px  #E54B4B;
     box-sizing: border-box;
     padding: 15px;
+    
 }
-
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
 .flex-space-between{
-    display: inline-flex;
+    box-sizing: border-box;
+    display: flex;
     justify-content: space-between;
-    width: 30%;
     align-items: center;
+    width:70vw;
 }
-div .flex-space-between > label + *{
-    width:150px;
-} 
+.flex-space-between2{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width:70vw;
+}
+.flex-space-between2 input:not([type = submit]){
+    width: 50%;
+}
+.flexdiv input:not([type = submit]){
+    width: 50%;
+}
+select{
+    width: 50%;
+}
 .flex-space-between label{
     font-family: 'Oleo Script';
 }
-AutocompleteComponent input{
-    width: 150px;
+.flex-space-between2 label{
+    font-family: 'Oleo Script';
 }
-input{
-    background: transparent;
+AutocompleteComponent {
+    width: 50% ;
+    height: 100%;
 }
-.flex-space-between input[type = submit]{
+
+input[type = submit]{
     background: #E54B4B;
     font-family: 'Oleo Script';
     border: none;
     border-radius: 20px;
+    position: relative;
+    width: 60px;
+    left: calc(50% - 30px);
+}
+/* .easier-flex input:not([type = submit]){
+    width: 50%;
+} */
+.flexdiv{
+    display: inline-flex;
+    justify-content: space-between;
+    width: 50%;
+}
+.flexdiv label{
+    font-family: 'Oleo Script';
+}
+/* div{
+    border: black 2px solid;
+} */
+.spesldiv{
+    display: inline-block;
+    width: 50%;
+}
+.flexdivspesl{
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
 }
