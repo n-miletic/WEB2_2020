@@ -7,14 +7,20 @@
 }
 .edit-user-btn{
     width: 100px;
+    position: relative;
+    left: calc(50% - 50px);
+    background: #E54B4B;
+    font-family:  'Oleo Script';
 }
 .button-crap{
   position: absolute;
-  top: 50%;
-  right: 0%;
+  width: 100px;
+  left: calc(50% - 50px);
   background: #E54B4B;
   border-radius: 15px;
+  bottom: 2px;
   font-family:  'Oleo Script';
+
 }
 .flights-flex{
     position: relative;
@@ -23,7 +29,9 @@
     width:70vw;
     flex-grow:1;
 }
-
+.itsallrelative{
+    position: relative;
+}
 .red-line{
     border-bottom: 2px solid #E54B4B;
     opacity: 0.7;

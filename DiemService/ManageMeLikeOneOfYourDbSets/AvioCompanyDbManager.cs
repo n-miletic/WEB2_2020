@@ -19,11 +19,14 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
             {
                 AvioCompany retVal = _context.AvioCompanyDbSet.Where(u => u.Id == id)
                                                 .Include(x => x.Owner)
-                                                .Include(y=> y.Flights)
-                                                .Include(y=>y.Flights.Select(x=>x.To_Location))
+                                                .Include(y => y.Flights)
+                                                .Include(y => y.Flights.Select(x => x.To_Location))
                                                 .Include(y => y.Flights.Select(x => x.From_Location))
                                                 .Include(y => y.Flights.Select(x => x.Provider))
                                                 .Include(y => y.Flights.Select(x => x.Transits))
+                                                .Include(y => y.Flights.Select(x => x.Reservations))
+                                                .Include("Flights.Reservations.Review")
+                                                 .Include("Flights.Reservations.Review.User")
                                                 .Include(z=> z.Destinations)
                                                 .Include(i=> i.Address)
                                                 .FirstOrDefault();
@@ -61,19 +64,23 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
         }
         public static void AddSpecialOffer(AddOfferForm form)
         {
-            if (form == null || form.seatsToDiscount != null || form.slashedPrice != 0 || form.flightId != 0)
+            if (form == null || form.seatsToDiscount == null || form.slashedPrice == 0 || form.flightId == 0)
                 throw new Exception("BAD QUERY");
             using (var _context = new DiemServiceDB())
             {
                 string caller = ((ClaimsPrincipal)HttpContext.Current.User).FindFirst("username").Value;
                 User found = _context.UserDbSet.Where(u => u.Username == caller).FirstOrDefault();
                 Flight flight = _context.FlightDbSet.Where(u => u.Id == form.flightId).Include(u => u.Provider).Include(u => u.Provider.Owner).FirstOrDefault();
+                if (flight == null)
+                    throw new Exception("BAD QUERY");
                 if(found.Username != flight.Provider.Owner.Username || flight.Price.Value < form.slashedPrice)
                     throw new Exception("BAD QUERY");
 
                 StringBuilder sb = new StringBuilder(flight.Seats);
                 foreach (int item in form.seatsToDiscount)
                 {
+                    if (sb[item] == '1')
+                        throw new Exception("SEAT ALREADY TAKEN");
                     sb[item] = '5';
                 }
                 

@@ -33,20 +33,22 @@ export class DiscountDivAvioComponent implements OnInit {
   }
    
   SendDiscount(){
+     this.SelectedSeats.forEach((u,index)=> this.SelectedSeats[index] = parseInt(u))
     let toSend;
       toSend = {
         seatsToDiscount : this.SelectedSeats,
         slashedPrice:this.new_price,
         FlightId : this.Flight.Id
       }
-      fetch('/DiemApi/AdminAvio/AddDiscount', {
+      console.log(toSend)
+      fetch('/DiemApi/AdminAvio/Flight/AddDiscount', {
         method: 'post',
         body: JSON.stringify(toSend),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey")
         }
-    })
+    }).then(()=> this.close())
     
   }
   

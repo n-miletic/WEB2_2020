@@ -23,6 +23,15 @@ namespace DiemService.Controllers
 
         [HttpPost]
         [Authorize]
+        [Route("User/AddFastFlightReservation")]
+        public HttpResponseMessage AddFastFlightReservation(ReservationForm form)
+        {
+            ReservationDbManager.AddFastFlightReservation(form);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        [Authorize]
         [Route("User/AddRandomFlightReservation")]
         public HttpResponseMessage AddRandomFlightReservation(ReservationForm form)
         {

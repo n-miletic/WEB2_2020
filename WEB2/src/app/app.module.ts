@@ -24,6 +24,7 @@ import { ReserveWindowComponent } from './reserve-window/reserve-window.componen
 import { InviteUsersViewComponent } from './invite-users-view/invite-users-view.component';
 import { ReviewComponent } from './review/review.component';
 import { DiscountDivAvioComponent } from './discount-div-avio/discount-div-avio.component';
+import { OfferCardComponent } from './offer-card/offer-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { DiscountDivAvioComponent } from './discount-div-avio/discount-div-avio.
     ReserveWindowComponent,
     InviteUsersViewComponent,
     ReviewComponent,
-    DiscountDivAvioComponent
+    DiscountDivAvioComponent,
+    OfferCardComponent
   ],
   imports: [
     BrowserModule,

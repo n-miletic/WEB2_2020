@@ -14,6 +14,7 @@ export class FlightCardComponent implements OnInit {
   @Output() alertReserve = new EventEmitter();
   ngOnInit(): void {
     this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
+    console.log(this.Flight)
   }
   reserve(){
     this.alertReserve.emit("OPEN THE DAMN THING")

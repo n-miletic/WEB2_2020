@@ -29,7 +29,9 @@ textarea{
     width: 100%;
 }
 button{
-    justify-self: center;
+    position: relative;
+    width: 100px;
+    left: calc(50% - 50px);
     background: #E54B4B;
     font-family: 'Oleo Script';
     border: none;

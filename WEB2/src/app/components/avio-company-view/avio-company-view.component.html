@@ -1,31 +1,47 @@
 <div class="wrapper">
 
     <div class = "company-div">
+        <div class="info-div">
+
+        
         <div class = "img-div">
             <img  class = "logo-img" 
                 [src] = " 'data:image/jpeg;base64,' + AvioCompany?.Logo"/>
         </div>
-
         <textarea (change) = "EditAvio($event,'Name')"  
+            ng-readonly = "!isAvioAdminViewing"
             class ="company-name">
             {{AvioCompany?.Name}}
         </textarea>
-        <div   
-            class = "promo-description-text">
-            <textarea 
-                (change) = "EditAvio($event,'Promo_description')" 
-                class="fuk-u">
-                "{{AvioCompany?.Promo_description}}"
-            </textarea>
-        </div>
         <textarea 
-            contenteditable="true" 
-            (change) = "EditAvio($event,'Address')" 
-            class="address-of-company">
-            {{AvioCompany?.Address?.State}}
+            (change) = "EditAvio($event,'Promo_description')" 
+            ng-readonly = "!isAvioAdminViewing"
+            class="promo_description">
+            {{AvioCompany?.Promo_description}}
         </textarea>
+        <textarea 
+                contenteditable="true" 
+                ng-readonly = "!isAvioAdminViewing"
+                (change) = "EditAvio($event,'Address')" 
+                class="address-of-company">
+                {{AvioCompany?.Address?.State}}
+        </textarea>
+    </div>
+        
+       
+       <div  class="flights-flex" *ngIf= "!isAvioAdminViewing">
+            <label>Special offers</label>
+            <div class="red-line"></div>
+            <div *ngFor="let flight of SpecialFlights" >
+                <offer-card      [Flight] = flight>
+                  
+                 
+                </offer-card>
+            </div>
+            <div class="red-line"></div>
+       </div>
         <div class="flights-flex">
-            <label>Our flights <img (click) = "AddFlightViewToggle()" class="add-icon" src = "assets/add-icon.svg"/></label>
+            <label>Our flights <img *ngIf= "isAvioAdminViewing" (click) = "AddFlightViewToggle()" class="add-icon" src = "assets/add-icon.svg"/></label>
             <div class="red-line"></div>
             <div [hidden] = "AddFlightHidden" class = "flight-div">
                 <add-flight (reload) = "reload()" [AvioCompanyId] = "AvioCompany?.Id"  >
@@ -34,16 +50,31 @@
             </div>
             <div *ngFor="let flight of AvioCompany?.Flights;let i = index" class = "flight-div">
                 <flight-card  [Flight] = flight>
-                    <button [id] = "i"  #ratestaywindow class="button-crap"  custombtn>
+                    <button [id] = "i" *ngIf = "!toggleDiscount[i] && isAvioAdminViewing"  #ratestaywindow class="button-crap"  custombtn>
                         Add discount
                     </button>
+                    <button [id] = "i" *ngIf = "!toggleReserving[i] && !isAvioAdminViewing"  #ratestaywindow class="button-crap"  custombtn>
+                        Reserve
+                    </button>
                 </flight-card>
-                <discount-div-avio [hidden] = "toggleDiscount[i]" (alertClose) = "FinishDiscounting($event)" [Flight] = flight >
+                <discount-div-avio *ngIf = "toggleDiscount[i]" (alertClose) = "FinishDiscounting($event)" [Flight] = flight >
                 </discount-div-avio>
+                <reserve-window *ngIf = "toggleReserving[i]" (alertClose) = "ReserveAndClose($event)" [Flight] = flight >
+                </reserve-window>
                 
             </div>
             <div class="red-line2"></div>
         </div>
+        <div class="flights-flex">
+            <label>Our reviews {{averageRating}}</label>
+            <div class="red-line"></div>
+            <review *ngFor = 'let review of allReviews' [doneReview] = 'review' >
+
+            </review>
+            <div class="red-line"></div>
+        </div>
         
-    </div>
+        
+        </div>
+       
 </div>

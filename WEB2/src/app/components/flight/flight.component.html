@@ -55,14 +55,24 @@
       </div>
       </form>
     <div class="flights-flex">
+      <label>Special Offers</label>
+      <div class="red-line"></div>
+      <div *ngFor="let flight of SpecialFlights" >
+        <offer-card    (alertDone) = "OpenReserveWindow()"   [Flight] = flight>
+          
+         
+        </offer-card>
+    </div>
+      <div class="red-line2"></div>
       <label>Search Results</label>
       <div class="red-line"></div>
-      <div *ngFor="let flight of ShowFlights" >
+      <div *ngFor="let flight of ShowFlights; let i = index" >
           <flight-card    (alertReserve) = "OpenReserveWindow()"   [Flight] = flight>
-            
-           
+            <button [id] = "i" *ngIf = "!toggleReserving[i] && CurrentUser?.Role == 0"  #ratestaywindow class="button-crap"  custombtn>
+              Reserve
+            </button>
           </flight-card>
-          <reserve-window *ngIf = "Reserving" (alertClose) = "ReserveAndClose($event)" [Flight] = flight >
+          <reserve-window *ngIf = "toggleReserving[i]" (alertClose) = "ReserveAndClose($event)" [Flight] = flight >
           </reserve-window>
       </div>
       <div class="red-line2"></div>

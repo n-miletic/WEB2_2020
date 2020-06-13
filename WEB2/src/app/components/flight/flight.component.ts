@@ -1,4 +1,4 @@
-import { Component,ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component,ViewChildren,ChangeDetectorRef, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { Flight } from 'src/app/entities/flight/flight'
 import { getLocaleDateTimeFormat } from '@angular/common';
 
@@ -7,14 +7,17 @@ import { getLocaleDateTimeFormat } from '@angular/common';
   templateUrl: './flight.component.html',
   styleUrls: ['./flight.component.css']
 })
-export class FlightComponent implements OnInit {
+export class FlightComponent implements OnInit,AfterViewChecked {
+  @ViewChildren('ratestaywindow') toggleratewindow;
   searchResult
   transitsActive = false;
   priceActive = false;
   durationActive = false;
   ShowFlights:any;
+  toggleReserving = new Array(50).fill(false)
   CurrentUser ;
   Reserving = false;
+  SpecialFlights ;
   filterWinActive = true; //PROMENI
   seats:string;
   Flights:any;
@@ -37,8 +40,22 @@ export class FlightComponent implements OnInit {
     this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
      fetch("/DiemApi/Flights")
     .then(data => data.json())
-    .then(flights => {this.ShowFlights = flights;})
+    .then(flights => {
+      this.ShowFlights = flights
+      this.SpecialFlights = flights.filter(u=> u.Seats.split('').includes('5'))
+    console.log(this.SpecialFlights)
+      ;})
   }
+  RateMe = ($event) =>  {
+
+     let num = Number($event.target.id)
+     this.toggleReserving[num] = !this.toggleReserving[num]
+ }
+  ngAfterViewChecked(){
+    if(this.toggleratewindow != undefined){
+      this.toggleratewindow.toArray().forEach(ref => ref.nativeElement.addEventListener('click',this.RateMe))
+    }
+   }
   transitsToggle(){
     this.transitsActive = !this.transitsActive;
     this.filterBaby();
@@ -101,7 +118,13 @@ filterBaby(){
          'Content-Type': 'application/json'
         // 'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey"),
      }
- }).then( res => res.json()).then(searchRes => {this.Flights = searchRes;this.ShowFlights = searchRes;})
+ }).then( res => res.json()).then(searchRes => 
+  {
+    this.Flights = searchRes;
+    this.ShowFlights = searchRes;
+    this.SpecialFlights = searchRes.filter(u=> u.Seats.split('').includes('5'))
+    console.log(this.SpecialFlights)
+  })
   
   
  }

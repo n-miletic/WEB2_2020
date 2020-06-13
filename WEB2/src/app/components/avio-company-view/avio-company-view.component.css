@@ -7,10 +7,12 @@
 .company-div{
   border-radius: 25px;
   border: 2px solid #E54B4B;
-  width: 100%;
   position: relative;
-  height:600px;
   background: linear-gradient(#E54B4B 20%, lightgray 20%);
+  height: max-content;
+}
+.rest-div{
+    position: relative;
 }
 .logo-img{
     width: 100%;
@@ -18,35 +20,35 @@
     display: block;
 }
 .img-div{
+    display: inline-block;
     position: absolute;
     border-radius: 50%;
     background: white;
-    left: 0%;
+    left: 5%;
     top:10%;
-    width:10%;
-    height:20%;
+    width: 10vw;
+    height:15vh;
     overflow: hidden;
 }
 .company-name{
     position: absolute;
     font: 24px 'Oleo Script';
-    top: 15%;
-    left: 11.5%;
+    left:12.5vw;
+    top:calc(50% - 1.5vh);
+    height:5vh;
 }
-.promo-description-text{
+.info-div{
     position: relative;
-    display: flex;
-    justify-content: center;
-    background: transparent;
-    align-items: center;
-    height: 20%;
-    width: 70%;
-    left: 30%;
-    font: 16px 'Oleo Script';
+    width: 100vw;
+    height: 20vh;
 }
-.fuk-u{
-   
-    width: 100%;
+
+.promo_description{
+   position: absolute;
+   min-width: 300px;
+   top:calc(50% - 5.5vh);
+   left:calc(50% - 150px );
+   font: 16px 'Oleo Script';
     
 }
 textarea{
@@ -60,15 +62,16 @@ textarea{
     position: absolute;
     font: 12px 'Oleo Script';
     top: 13%;
-    right: 1%;
+    right: 0px;
+    top:calc(50% - 3.5vh);
     text-align: end;
     width: 300px;
 }
 .flights-flex{
-    position: absolute;
+    position: relative;
     left: 15.5%;
     width:70vw;
-    height: 40vh;
+    
     /* display: flex;
     flex-wrap: wrap; */
 }
@@ -100,9 +103,9 @@ textarea{
     position: relative;
 }
 .button-crap{
-    position: absolute;
-    top: 50%;
-    right: 0%;
+    position: relative;
+    width: 100px;
+    left: calc(50% - 50);
     background: #E54B4B;
     border-radius: 15px;
     font-family:  'Oleo Script';

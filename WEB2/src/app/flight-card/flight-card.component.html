@@ -9,24 +9,28 @@
            
         </div> 
         <div class = "flex-space-between">
-            <label>Datum poletanja:</label>
+            <label>Date of departure:</label>
             <div class="white">
 
                 <label>{{Flight?.Flight_Departure_Time}}</label>
             </div>
         </div>
         <div class = "flex-space-between">
-            <label>Datum sletanja:</label>
+            <label>Date of arrival:</label>
             <label>{{Flight?.Flight_Arrival_Time}}</label>
         </div>
         <div class = "flex-space-between">
-            <label>Vreme:</label>
+            <label>Flight duration:</label>
             <label>{{Flight?.Flight_Duration}}</label>
         </div>
         <div  class = "flex-space-between">
-            <label>Cena:</label>
+            <label>Price:</label>
             <label>{{Flight?.Price?.Value}}</label>
         </div>
-        <input *ngIf = "CurrentUser?.Role == 0 && shut_up == null" (click) = "reserve()" value = "Reserve" type="submit"/>
+        <div  class = "flex-space-between">
+            <label>Aviocompany:</label>
+            <label><a [routerLink]="'/:ViewAvioCompany/' + Flight?.Provider?.Id">{{Flight?.Provider?.Name}}</a></label>
+        </div>
+        <!-- <input *ngIf = "CurrentUser?.Role == 0 && shut_up == null" (click) = "reserve()" value = "Reserve" type="submit"/> -->
         <ng-content select="[custombtn]"></ng-content>
 

@@ -41,6 +41,7 @@ namespace DiemService.Controllers
                 List<Flight> retVal = _context.FlightDbSet.Include(x => x.From_Location)
                                                            .Include(x => x.To_Location)
                                                            .Include(x => x.Transits)
+                                                           .Include(x=>x.Provider)
                                                            .ToList();
                     
                 return retVal;

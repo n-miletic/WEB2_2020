@@ -34,16 +34,18 @@
         </form>
         <div class="red-line2"></div>
     </div>
+    <div *ngIf = "MyUser?.Role == 0">
+
     <div class="flights-flex">
         <label>Your past reservations</label>
         <div class="red-line"></div>
-        <div *ngFor="let reservation of MyPastReservations; let i = index" >
-            <flight-card   [Flight] = reservation.Flight>
-                <button [id] = "i" *ngIf= "reservation.Review == null"  #ratestaywindow class="button-crap"  custombtn>
+        <div *ngFor="let reservation of MyPastReservations; let i = index" class="itsallrelative" >
+            <flight-card shut_up = "yes"   [Flight] = reservation.Flight>
+                <button [id] = "i" *ngIf= "reservation.Review == null && !togglecomment[i]"  #ratestaywindow class="button-crap"  custombtn>
                     Rate your stay
                 </button>
             </flight-card>
-            <review [doneReview] = "reservation.Review" [pendingReview] = "reservation" (ReviewDone) = "rate($event)"  [hidden] = "togglecomment[i]">
+            <review [doneReview] = "reservation.Review" [pendingReview] = "reservation" (ReviewDone) = "rate($event)"  *ngIf = "togglecomment[i] || reservation.Review != null">
                     
             </review>
             
@@ -93,9 +95,18 @@
         <div class="red-line2"></div>
     </div>
     
-    <admin-users-view 
-    [hidden] = "MyUser?.Role !== 3">
-    </admin-users-view>
+</div>
+<label *ngIf = "MyUser?.Role == 3" class="lbl">All users</label>
+    <div *ngIf = "MyUser?.Role == 3" class="flights-flex">
+        
+        <div class="red-line"></div>
+        <admin-users-view 
+        >
+        
+        </admin-users-view>
+        <div class="red-line"></div>
+    </div>
+   
    
 </div>
 

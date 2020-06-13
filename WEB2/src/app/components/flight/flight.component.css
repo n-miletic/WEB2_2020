@@ -3,7 +3,15 @@
    position: relative;
     display: block;
 }
-
+.button-crap{
+    position: absolute;
+    bottom: 10px;
+    width: 100px;
+    left: calc(50% - 50);
+    background: #E54B4B;
+    border-radius: 15px;
+    font-family:  'Oleo Script';
+}
 .destination-group{
     display:flex;
 }

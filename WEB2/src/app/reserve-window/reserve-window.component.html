@@ -35,7 +35,7 @@
                         <label>Seat:</label>
                         <label>{{currentSeat}}:</label>
                     </div>
-                    <input type="submit"(click) = "ReserveAndNext()" value="Reserve"/>
+                    <input *ngIf = "doneSelectingSeats" type="submit"(click) = "ReserveAndNext()" value="Reserve"/>
                 </div>
             </div>
             

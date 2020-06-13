@@ -4,17 +4,31 @@
     padding: 15px;
     position: relative;
 }
+.offerbtn{
+    position: relative;
+    display: block;
+   
+    width:100px;
+    left:calc(50% - 50px)
+}
 
 .flex-space-between{
     display: inline-flex;
     justify-content: space-between;
-    width: 50%;
+    width: 49%;
     align-items: center;
 }
 
 label{
     font-family: 'Oleo Script';
 }
+.crossed-out{
+text-decoration: line-through;
+}
+.slowdown{
+    width: 50%;
+}
+
 input[type = submit]{
     background: #E54B4B;
     font-family: 'Oleo Script';

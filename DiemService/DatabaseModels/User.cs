@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -52,6 +53,8 @@ namespace DiemService.Database
         public int Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
+        [Index(IsUnique = true)]
+        [Column(TypeName = "VARCHAR")]
         public string Username { get; set; }
         [JsonIgnore]
         public string Hash { get; set; }

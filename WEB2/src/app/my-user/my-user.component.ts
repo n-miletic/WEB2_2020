@@ -63,7 +63,7 @@ export class MyUserComponent implements OnInit, AfterViewChecked {
 }
   ngOnInit(): void {
     this.MyUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
-    console.log(this.MyUser)
+    console.log(this.MyUser?.FlightReservations[0])
     fetch('/DiemApi/User/GetAll/Logged',
     {
       headers:{
@@ -71,9 +71,10 @@ export class MyUserComponent implements OnInit, AfterViewChecked {
       }
     }).then(res => res.json()).then( users => this.AllUsers = users ).then(
       ()=>{
-        this.MyReservations = this.MyUser.FlightReservations.filter(u=> u.Invited_By == null && new Date().toLocaleDateString() < u.Flight.Flight_Departure_Time)
-        this.MyPastReservations = this.MyUser.FlightReservations.filter(u=> u.Invited_By == null && new Date().toLocaleDateString() > u.Flight.Flight_Departure_Time)
-        this.ReservationInvitations = this.MyUser.FlightReservations.filter(u=> u.Invited_By != null)
+        console.log(this.MyUser)
+        this.MyReservations = this.MyUser?.FlightReservations?.filter(u=> u.Invited_By == null && new Date().toLocaleDateString() < u.Flight.Flight_Departure_Time)
+        this.MyPastReservations = this.MyUser?.FlightReservations?.filter(u=> u.Invited_By == null && new Date().toLocaleDateString() > u.Flight.Flight_Departure_Time)
+        this.ReservationInvitations = this.MyUser?.FlightReservations?.filter(u=> u.Invited_By != null)
       }
     )
   }
@@ -92,8 +93,10 @@ export class MyUserComponent implements OnInit, AfterViewChecked {
         'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey")
       }
     }
-    )
-    this.togglecomment = new Array(50).fill(false);
+    ).then(()=>{
+      this.updateLoggedUser()
+      this.togglecomment = new Array(50).fill(false);
+    })
    
   }
   

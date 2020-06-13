@@ -33,9 +33,11 @@ namespace DiemService.DTO
                                                        .Include(x => x.FlightReservations.Select(y => y.Flight.To_Location))
                                                       .Include(x => x.FlightReservations.Select(y => y.Flight.From_Location))
                                                       .Include(x => x.FlightReservations.Select(y => y.Flight.Transits))
+                                                      .Include(x => x.FlightReservations.Select(y => y.Flight.Provider))
+
                                                         .Include(x => x.FlightReservations.Select(y => y.Invited_By))
                                                         .Include(x=>x.FlightReservations.Select(y => y.Review).Select(z=>z.User))
-                                                       .FirstOrDefault().FlightReservations;
+                                                       .FirstOrDefault().FlightReservations.Where(u=>!u.Cancelled).ToList();
         }
 
     }
