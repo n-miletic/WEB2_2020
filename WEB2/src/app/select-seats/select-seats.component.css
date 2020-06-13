@@ -22,8 +22,9 @@ input{
     border-radius: 10px;
     width: 100px;
     background-color: #e54b4b;
-    position: absolute;
-    bottom:10px;
+    position: relative;
+    left: calc(50% - 50px);
+
 }
 label,input{
     font-family: 'Oleo Script';

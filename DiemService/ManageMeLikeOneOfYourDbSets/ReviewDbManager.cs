@@ -17,7 +17,7 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
                 string caller = ((ClaimsPrincipal)HttpContext.Current.User).FindFirst("username").Value;
                 User found = _context.UserDbSet.Where(u => u.Username == caller).FirstOrDefault();
                 FlightReservation wanted = _context.FlightReservationDbSet.Where(u => u.Id == form.ReservationId).Include(u => u.User).Include(u=> u.Flight).Include(u=>u.Review).FirstOrDefault();
-                if (wanted == null)
+                if (wanted == null || wanted.Flight.Flight_Departure_Time.Date > DateTime.Today)
                     throw new Exception("");
                 if (wanted.User.Username != caller)
                     throw new Exception("");

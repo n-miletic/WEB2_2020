@@ -4,10 +4,10 @@
     display: block;
 }
 .button-crap{
-    position: absolute;
-    bottom: 10px;
+    position: relative;
+    display: block;
     width: 100px;
-    left: calc(50% - 50);
+    right: calc(50% - 50);
     background: #E54B4B;
     border-radius: 15px;
     font-family:  'Oleo Script';

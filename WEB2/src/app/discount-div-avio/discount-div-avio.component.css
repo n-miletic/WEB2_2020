@@ -39,9 +39,11 @@ label{
   display: block;
 }
 input[type = 'submit']{
-  position: absolute;
-  bottom: 10px;
-  width: 100px;
+  position: relative;
+  background: #E54B4B;
+  border-radius: 10px;
+  left: calc(50% - 75px);
+  width: 150px;
 }
 .blockdiv{
   background: transparent;

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter,OnInit, ViewChild, Output } from '@angular/core';
+import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 
 @Component({
   selector: 'app-sign-in',
@@ -6,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-
+  @ViewChild('repPass') repeatPass;
+  @Output('imDone') done = new EventEmitter(); 
+  Repeat_pass = ''
+  Pass = ''
   constructor() { }
 
   ngOnInit(): void {
@@ -16,6 +20,10 @@ export class SignInComponent implements OnInit {
    
  }
  onSubmit(event:any){
+   if(this.Repeat_pass != this.Pass)
+  {
+    this.repeatPass.nativeElement.setCustomValidity("VERY VERY BAD JOB!");
+  }
    let userForm = {
      Pass : this['Pass'] ,
      Username: this['Username'],
@@ -30,7 +38,9 @@ export class SignInComponent implements OnInit {
      headers: {
          'Content-Type': 'application/json'
      }
- })
+ }).then(()=> 
+ this.done.emit("great"))
+
   
   
  }

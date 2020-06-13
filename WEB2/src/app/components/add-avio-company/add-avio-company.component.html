@@ -2,7 +2,7 @@
     <form ngNativeValidate (ngSubmit)="onSubmit($event)" (change) = "onChange($event)">
         <div class = "flex-space-between">
             <label>Name:</label>
-            <input name ="Name" type="text" required/>
+            <input class="form-control" name ="Name" type="text" required/>
         </div>
         <div class = "flex-space-between">
             <label>Address:</label>
@@ -11,11 +11,11 @@
         </div>
         <div class = "flex-space-between">
             <label>Description:</label>
-            <input name = "Promo_description" type="text" required/>
+            <input class="form-control" name = "Promo_description" type="text" required/>
         </div>
         <div class = "flex-space-between">
             <label>Select logo:</label>
-            <input   name ="Logo" type="file" accept="image/*" #Logoref required/>
+            <input class="form-control"  name ="Logo" type="file" accept="image/*" #Logoref required/>
         </div>
         <input type="submit" value="Add company"/>
     </form>

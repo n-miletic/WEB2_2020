@@ -9,14 +9,14 @@
         </div>
         <div class="half">
             <div class="invite-form-flex">
-                <div>
+                <div class="child-flex"> 
                     <label>Invite users</label><br>
                     <div class="red-line"></div>
                     <invite-users-view (Next) = "InviteNext($event)" *ngIf = "this.PersonCounter > 0" [Users] = "CurrentUser.Friends" >
     
                     </invite-users-view>
                 </div>
-                <div>
+                <div class="child-flex">
                     <label>Fill details</label><br>
                     <div class="red-line"></div>
                     <div class = "flex-space-between">

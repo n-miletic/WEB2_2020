@@ -15,11 +15,13 @@
 label{
     font-family: 'Oleo Script';
 }
-input[type = submit]{
+.main-div input[type = submit]{
+    /* position: relative;
+    display: block;
     background: #E54B4B;
     font-family: 'Oleo Script';
     border: none;
-    border-radius: 20px;
+    border-radius: 20px; */
 }
 .white{
     background: white;

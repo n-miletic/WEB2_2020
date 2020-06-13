@@ -1,20 +1,22 @@
 .main-div{
-    width : 400px;
     border:2px  #E54B4B;
     box-sizing: border-box;
     padding: 15px;
 }
 
 .flex-space-between{
+    min-width: 50vw;
     display: flex;
     justify-content: space-between;
     width: 100%;
     align-items: center;
 }
-div > label + *{
-    width:150px;
+.flex-space-between input{
+    width: 50%;
 }
-
-AutocompleteComponent input{
-    width: 150px;
+.main-div input[type = 'submit']{
+    width: 100px;
+    position: relative;
+    left:calc(50% - 50px);
+    background: #E54B4B;
 }

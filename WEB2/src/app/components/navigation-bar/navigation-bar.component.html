@@ -17,7 +17,9 @@
   >
   </app-log-in>
   <ng-template #signDiv>
-    <app-sign-in> </app-sign-in>
+    <app-sign-in
+    (imDone) = "close($event)"
+    > </app-sign-in>
   </ng-template>
 </div>
 

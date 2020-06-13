@@ -80,3 +80,18 @@
 userlist{
     min-width: 33%;
 }
+.button-fix2{
+    position: relative;
+    background: #E54B4B ;
+    border-radius: 10px;
+    width: 100px;
+    left: calc(50% - 100px)
+
+}
+.button-fix1{
+    width: 100px;
+    left: calc(50% - 200px) ;
+    position: relative;
+    border-radius: 10px;
+    background: #E54B4B ;
+}

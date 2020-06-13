@@ -71,13 +71,13 @@
         <div class="red-line"></div>
         <div *ngFor="let reservation of ReservationInvitations" >
             <flight-card  [Flight] = reservation.Flight>
-                <button class="button-crap">
-                    Accept
-                </button>
-                <button class="button-crap">
-                    Deny
-                </button>
             </flight-card>
+            <button class="button-fix1"  (click) = "HandleInvitation('Accept',reservation.Id)"    >
+                Accept
+            </button>
+            <button  class="button-fix2" (click) = "HandleInvitation('Cancel',reservation.Id)"   >
+               Deny
+            </button>
         </div>
         <div class="red-line2"></div>
     </div>

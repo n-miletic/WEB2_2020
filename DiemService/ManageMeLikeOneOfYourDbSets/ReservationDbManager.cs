@@ -22,7 +22,7 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
                 
                 Flight wanted = _context.FlightDbSet.Where(u => u.Id == form.FlightId).FirstOrDefault();
                 StringBuilder sb = new StringBuilder(wanted.Seats);
-                if (sb[form.Seat] != '0')
+                if (sb[form.Seat] == '1')
                     throw new Exception("ALREADY TAKEN OR BAD");
                 sb[form.Seat] = '1';
                 wanted.Seats = sb.ToString();
@@ -61,8 +61,12 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
         {
             using (var _context = new DiemServiceDB())
             {
+                if (form == null || String.IsNullOrEmpty(form.Name) || String.IsNullOrEmpty(form.LastName) || form.Passport == 0 || form.Seat == 0)
+                    throw new Exception("BAD");
                 Flight wanted = _context.FlightDbSet.Where(u => u.Id == form.FlightId).FirstOrDefault();
                 StringBuilder sb = new StringBuilder(wanted.Seats);
+                if (sb[form.Seat] == '1')
+                    throw new Exception("ALREADY TAKEN");
                 sb[form.Seat] = '1';
                 wanted.Seats = sb.ToString();
                 FlightReservation fr = _context.FlightReservationDbSet.Add(new FlightReservation(form.Name, form.LastName, form.Seat, form.Passport, wanted));
@@ -113,7 +117,7 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
                 string caller = ((ClaimsPrincipal)HttpContext.Current.User).FindFirst("username").Value;
                 User found = _context.UserDbSet.Where(u => u.Username == caller).FirstOrDefault();
                 FlightReservation toCancel = _context.FlightReservationDbSet.Where(u => u.Id == flightid).Include(u => u.User).Include(u=> u.Flight).FirstOrDefault();
-                if (toCancel.User.Username != caller)
+                if (toCancel == null || toCancel.User.Username != caller)
                     throw new Exception("NOT AUTHORIZED");
                 if (DateTime.Now.Date - toCancel.Flight.Flight_Departure_Time.Date < TimeSpan.FromDays(3))
                     throw new Exception("TOO LATE TO CANCEL");

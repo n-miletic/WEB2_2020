@@ -103,7 +103,9 @@ textarea{
     position: relative;
 }
 .button-crap{
-    position: relative;
+    display: block;
+    position: absolute;
+    bottom: 0%;
     width: 100px;
     left: calc(50% - 50);
     background: #E54B4B;

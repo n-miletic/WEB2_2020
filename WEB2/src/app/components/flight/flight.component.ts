@@ -1,6 +1,7 @@
 import { Component,ViewChildren,ChangeDetectorRef, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { Flight } from 'src/app/entities/flight/flight'
 import { getLocaleDateTimeFormat } from '@angular/common';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-flight',
@@ -27,10 +28,10 @@ export class FlightComponent implements OnInit,AfterViewChecked {
   FlightClasses = ['Select class','Economy', 'Bussiness','First class'];
  
 
-  fromprice = 0
-  toprice = 0
-  fromhours = 0
-  tohours = 0
+  fromprice ;
+  toprice ;
+  fromhours ;
+  tohours ;
 
   seatSearch;
   constructor(private ref:ChangeDetectorRef) { }
@@ -41,6 +42,7 @@ export class FlightComponent implements OnInit,AfterViewChecked {
      fetch("/DiemApi/Flights")
     .then(data => data.json())
     .then(flights => {
+      this.Flights = flights;
       this.ShowFlights = flights
       this.SpecialFlights = flights.filter(u=> u.Seats.split('').includes('5'))
     console.log(this.SpecialFlights)
@@ -78,26 +80,29 @@ export class FlightComponent implements OnInit,AfterViewChecked {
  
  filter(event:any){
    console.log("HEJ GURL")
-  this[event.srcElement.name] = event.srcElement.value.replace(/ /g,'')
-  if(this.fromprice != 0 || this.toprice != 0)
+  this[event.srcElement.name] = event.srcElement.value
+  if(this.fromprice != undefined || this.toprice != undefined)
         this.priceActive = true;
       else
         this.priceActive = false;
-      if(this.fromhours != 0 || this.tohours != 0)
-        this.durationActive = true;
-      else this.durationActive = false;
+  if(this.fromhours != undefined || this.tohours != undefined)
+      this.durationActive = true;
+  else this.durationActive = false;
   this.filterBaby();
 }
 filterBaby(){
   let toShow = this.Flights
-  if(!isNaN(this.fromprice) )
-    toShow = this.Flights.filter(u=> u.Price >this.fromprice)
-  if(!isNaN(this.toprice) )
-    toShow = toShow.filter(u=>u.Price < this.toprice)
-  if(!isNaN(this.fromhours) )
-    toShow = toShow.filter(u=> {console.log(u.Flight_Duration);console.log(new Date(u.FlightDuration))} ) // THIS IS STUPID BUT WHATEVER
-  if(!isNaN(this.tohours) )
-
+  console.log(this.toprice)
+  console.log(this.fromprice)
+  if(this.transitsActive)
+    toShow = this.Flights.filter(u=>u.Transits.length == 0)
+  if(this.fromprice !== undefined && this.fromprice != '')
+    toShow = toShow.filter(u=> u.Price.Value > this.fromprice)
+  if(this.toprice !== undefined && this.toprice != '')
+    toShow = toShow.filter(u=> u.Price.Value < this.toprice)
+  // if(!isNaN(this.fromhours) )
+  //   toShow = toShow.filter(u=> {console.log(u.Flight_Duration);console.log(new Date(u.FlightDuration))} ) // THIS IS STUPID BUT WHATEVER
+  // if(!isNaN(this.tohours) )
   this.ShowFlights = toShow;
 }
  onSubmit(event:any){

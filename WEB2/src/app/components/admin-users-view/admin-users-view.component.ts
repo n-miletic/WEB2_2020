@@ -71,7 +71,7 @@ export class AdminUsersViewComponent implements OnInit {
     //redirect
   }
   close(event:any){
-    this.AddCompanyViewHidden = false;
+    this.AddCompanyViewHidden = true;
   }
 
 

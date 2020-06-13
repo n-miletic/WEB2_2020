@@ -52,7 +52,7 @@ export class AvioCompanyViewComponent implements OnInit,AfterViewChecked {
       if(company.Owner.Username == this.CurrentUser.Username)
         this.isAvioAdminViewing = true
       this.SpecialFlights =  this.AvioCompany?.Flights.filter(u=> u.Seats.split('').includes('5'))
-      this.allReviews = this.AvioCompany.Flights.flatMap(s=>s.Reservations).flatMap(s=> s.Review)
+      this.allReviews = this.AvioCompany.Flights.flatMap(s=>s.Reservations).flatMap(s=> s.Review).filter( s=> s!= null)
       this.allReviews.forEach( review => this.averageRating += review.Stars)
       
       console.log(this.allReviews)
