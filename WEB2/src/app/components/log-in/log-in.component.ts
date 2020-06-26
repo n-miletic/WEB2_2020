@@ -8,6 +8,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { UserService } from 'src/app/user-service.service';
 
 @Component({
   selector: 'app-log-in',
@@ -16,7 +17,7 @@ import {
 })
 export class LogInComponent implements OnInit {
   @Output() imDone: EventEmitter<any> = new EventEmitter();
-  constructor() {}
+  constructor(private UserService:UserService) {}
 
   ngOnInit(): void {}
   onChange(event: any) {
@@ -35,11 +36,17 @@ export class LogInComponent implements OnInit {
         'Content-Type': 'application/json',
       },
     })
-      .then((res) => res.json())
+      .then((res) =>{
+        if(res.status != 200)
+          return Promise.reject("Bad")
+       return  res.json()
+      })
       .then((UserGift) => {
-        sessionStorage.setItem("tokenKey",UserGift.Token)
-        sessionStorage.setItem("LoggedUser",JSON.stringify(UserGift.User))
+        
+        sessionStorage.setItem("tokenKey", UserGift)
+        this.UserService.updateUser();
         this.imDone.emit("BYE")
+
       })
   }
 }

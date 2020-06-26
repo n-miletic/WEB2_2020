@@ -136,6 +136,7 @@
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Database\DiemServiceDB.Views.cs" />
     <Compile Include="DTO\AdminAvioDTO.cs" />
     <Compile Include="DTO\AdminRentDTO.cs" />
     <Compile Include="DTO\RegisteredUserDTO.cs" />

@@ -36,7 +36,8 @@ namespace DiemService.Controllers
         [Route("User/GetLogged")]
         public HttpResponseMessage GetLoggedUser()
         {
-            return Request.CreateResponse(HttpStatusCode.OK, UserDbManager.GetLoggedUser(((ClaimsPrincipal)HttpContext.Current.User).FindFirst("username").Value));
+            object retVal = UserDbManager.GetLoggedUser(((ClaimsPrincipal)HttpContext.Current.User).FindFirst("username").Value);
+            return Request.CreateResponse(HttpStatusCode.OK,retVal );
         }
         
         [HttpGet]
@@ -77,7 +78,15 @@ namespace DiemService.Controllers
         [Route("User/SignIn")]
         public HttpResponseMessage SignIn(SignForm credentials)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, UserDbManager.LogIn(credentials.Username, credentials.Password));
+            try
+            {
+                string retVal = UserDbManager.LogIn(credentials.Username, credentials.Password);
+                return Request.CreateResponse(HttpStatusCode.OK, retVal);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
         }
         //[AllowAnonymous]
         [HttpPost]

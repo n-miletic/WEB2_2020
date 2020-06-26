@@ -156,35 +156,25 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
                 _context.SaveChanges();
             }
         }
-        public static UserGift LogIn(string username,string password)
+        public static string LogIn(string username,string password)
         {
+            if(username == null || password == null)
+                throw new Exception("Username or password N U L L !");
+
             using(var _context = new DiemServiceDB())
             {
-                User logIn = _context.UserDbSet.Where(s => s.Username == username).Include(x => x.FriendRequestsSent).Include(x => x.Friends).Include(x => x.PendingFriends).FirstOrDefault();
+                User logIn = _context.UserDbSet.AsNoTracking().Where(s => s.Username == username).FirstOrDefault();
                 object optionalReturn = logIn;
-                if ( logIn != null)
-                {
+
+                if (logIn == null)
+                    throw new Exception("No specified username exists in the database.");
+
+                if(logIn.Hash != password)
+                    throw new Exception("Wrong password!");
+               
+                return TokenManager.GetToken(logIn);
                     
-                    switch (logIn.Role)
-                    {
-                        case Role.RegisteredUser:
-                            optionalReturn =  new RegisteredUserDTO(logIn, _context);
-                            break;
-                        case Role.AdminAvio:
-                            optionalReturn =  new AdminAvioDTO(logIn, _context);
-                            break;
-                        case Role.AdminRentACar:
-                            optionalReturn =  new AdminRentDTO(logIn, _context);
-                            break;
-                         default:
-                            break;
-                    }
-                    if (logIn.Hash == password)
-                    {
-                        return new UserGift(TokenManager.GetToken(logIn), optionalReturn);
-                    }
-                }
-                throw new Exception("Pogresna loyinka, ili je juzer nepostojeci");
+               
             }
         }
 
@@ -192,12 +182,14 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
         {
             using(var _context = new DiemServiceDB())
             {
-                User fromUser = _context.UserDbSet.Where(s => s.Username == from).Include(x=> x.FriendRequestsSent).FirstOrDefault();
-                User toUser = _context.UserDbSet.Where(s => s.Username == to).Include(x=> x.PendingFriends).FirstOrDefault();
+                User fromUser = _context.UserDbSet.Include(x => x.FriendRequestsSent).Where(s => s.Username == from).FirstOrDefault();
+                User toUser = _context.UserDbSet.Include(x => x.PendingFriends).Where(s => s.Username == to).FirstOrDefault();
 
                 toUser.PendingFriends.Add(fromUser);
 
                 fromUser.FriendRequestsSent.Add(toUser);
+                _context.Entry(toUser).State = EntityState.Modified;
+                _context.Entry(fromUser).State = EntityState.Modified;
                 _context.SaveChanges();
 
                 List <User> all = _context.UserDbSet.Include(x => x.FriendRequestsSent).Include(x => x.Friends).Include(x => x.PendingFriends).ToList();

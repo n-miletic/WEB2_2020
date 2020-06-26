@@ -23,15 +23,16 @@ namespace DiemService.Authorization
                 //Create a List of Claims, Keep claims name short    
                 var permClaims = new List<Claim>();
                 permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));    
-                permClaims.Add(new Claim("username", user.Username));    
-  
-                //Create Security Token object by giving required parameters    
+                permClaims.Add(new Claim("username", user.Username));
+                permClaims.Add(new Claim("Roles", user.Role.ToString()));
+
+            //Create Security Token object by giving required parameters    
                 var token = new JwtSecurityToken(issuer, //Issuer    
-                                issuer,  //Audience    
-                                permClaims,
-                                expires: DateTime.Now.AddDays(1),
-                                signingCredentials: credentials);
-                    return new JwtSecurityTokenHandler().WriteToken(token);    
+                                    issuer,  //Audience    
+                                    permClaims,
+                                    expires: DateTime.Now.AddDays(1),
+                                    signingCredentials: credentials);
+                        return new JwtSecurityTokenHandler().WriteToken(token);    
                 
         }
 }

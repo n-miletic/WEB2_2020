@@ -1,6 +1,7 @@
 import { Component,ChangeDetectorRef,ViewChildren, ContentChildren,forwardRef,OnInit, ContentChild, AfterViewInit, Renderer2, ViewChild, AfterViewChecked, ElementRef } from '@angular/core';
 import { getLocaleDateTimeFormat } from '@angular/common';
 import { FlightCardComponent } from '../flight-card/flight-card.component';
+import { UserService } from '../user-service.service';
 
 @Component({
   selector: 'app-my-user',
@@ -18,7 +19,7 @@ export class MyUserComponent implements OnInit, AfterViewChecked {
   
   MyPastReservations:any;
   togglecomment = new Array(50).fill(false);
-  constructor() {
+  constructor(public userService:UserService) {
    
    }
  ngAfterViewChecked(){
@@ -35,7 +36,7 @@ export class MyUserComponent implements OnInit, AfterViewChecked {
     'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey")
     }
   }
-  ).then(()=> {this.updateLoggedUser()})
+  ).then(()=> {this.userService.updateUser()})
  }
  editUser($event){
  console.log(this.MyUser)
@@ -57,23 +58,11 @@ export class MyUserComponent implements OnInit, AfterViewChecked {
   },
 }).then(res => res.json()).then((UserGift)=>{
   sessionStorage.setItem("tokenKey",UserGift.Token)
-  sessionStorage.setItem("LoggedUser",JSON.stringify(UserGift.User))
-  this.MyUser = UserGift.User;
+  this.userService.updateUser();
 });
  }
- updateLoggedUser(){
-  fetch('/DiemApi/User/GetLogged',
-  {
-    headers:{
-      'Authorization': 'Bearer ' + sessionStorage.getItem("tokenKey")
-    }
-  }
-  ).then(res=> res.json()).then(
-    user => {sessionStorage.setItem("LoggedUser",JSON.stringify(user)); this.MyUser = user}
-  )
-}
   ngOnInit(): void {
-    this.MyUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
+    this.MyUser = this.userService.CurrentUser;
     fetch('/DiemApi/User/GetAll/Logged',
     {
       headers:{
@@ -104,7 +93,7 @@ export class MyUserComponent implements OnInit, AfterViewChecked {
       }
     }
     ).then(()=>{
-      this.updateLoggedUser()
+      this.userService.updateUser()
       this.togglecomment = new Array(50).fill(false);
     })
    

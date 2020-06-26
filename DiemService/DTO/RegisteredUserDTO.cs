@@ -29,7 +29,7 @@ namespace DiemService.DTO
             PendingFriends = user.PendingFriends;
             Friends = user.Friends;
             FriendRequestsSent = user.FriendRequestsSent;
-            FlightReservations = _context.RegisteredUserDbSet.Where(u => u.Id == user.UlogaID).Include(x=> x.FlightReservations)
+            FlightReservations = _context.RegisteredUserDbSet.AsNoTracking().Where(u => u.Id == user.UlogaID).Include(x=> x.FlightReservations)
                                                        .Include(x => x.FlightReservations.Select(y => y.Flight.To_Location))
                                                       .Include(x => x.FlightReservations.Select(y => y.Flight.From_Location))
                                                       .Include(x => x.FlightReservations.Select(y => y.Flight.Transits))

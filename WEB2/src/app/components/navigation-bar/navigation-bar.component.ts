@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/user-service.service';
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
@@ -10,16 +11,14 @@ export class NavigationBarComponent implements OnInit {
   link:string;
   AviocompanyName:string;
   logInActive: boolean;
-  constructor() {}
+  constructor(public userService:UserService) {}
 
   ngOnInit(): void {
-    this.CurrentUser = JSON.parse(sessionStorage.getItem("LoggedUser"))
-    console.log(this.CurrentUser)
     this.Dialog = false;
     this.link = '/:ViewAvioCompany/'
-    if(this.CurrentUser?.hasOwnProperty("OwnedAvioCompanies")){
-      this.link += this.CurrentUser.OwnedAvioCompanies[0].Id
-      this.AviocompanyName = this.CurrentUser.OwnedAvioCompanies[0].Name
+    if(this.userService.CurrentUser?.hasOwnProperty("OwnedAvioCompanies")){
+      this.link += this.userService.CurrentUser.OwnedAvioCompanies[0].Id
+      this.AviocompanyName = this.userService.CurrentUser.OwnedAvioCompanies[0].Name
     }
     this.logInActive = true;
   }
@@ -40,7 +39,7 @@ export class NavigationBarComponent implements OnInit {
     this.ngOnInit();
   }
   LogOut(){
-    sessionStorage.clear();
+    this.userService.logOut();
     this.ngOnInit();
   }
 

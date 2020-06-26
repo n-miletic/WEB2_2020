@@ -128,7 +128,6 @@ filterBaby(){
     this.Flights = searchRes;
     this.ShowFlights = searchRes;
     this.SpecialFlights = searchRes.filter(u=> u.Seats.split('').includes('5'))
-    console.log(this.SpecialFlights)
   })
   
   
