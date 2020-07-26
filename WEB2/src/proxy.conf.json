@@ -1,7 +1,0 @@
-{
-    "/DiemApi/*": {
-        "target": "https://localhost:44357/",
-        "secure": false,
-        "logLevel": "debug"
-    }
-}
