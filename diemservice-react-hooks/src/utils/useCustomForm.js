@@ -1,0 +1,38 @@
+import { useState, useEffect, useRef } from "react";
+
+const useCustomForm = ({ initialValues, onSubmit }) => {
+  // WHY {}
+  const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState("");
+  // const [onSubmitting, setOnSubmitting] = useState({});
+
+  useEffect(() => {
+    setValues(initialValues);
+  }, []);
+
+  const handleChange = (event) => {
+    const { target } = event;
+    const { name, value } = target;
+    event.persist(); // SET STATE JE ASINHRON, DA BISMO SE OSIGURALI
+    setValues({ ...values, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    if (event) event.preventDefault();
+    setErrors({ ...errors });
+    onSubmit().catch((err) => {
+      setServerError(err.message);
+    });
+  };
+
+  return {
+    values,
+    errors,
+    serverError,
+    handleChange,
+    handleSubmit,
+  };
+};
+
+export default useCustomForm;

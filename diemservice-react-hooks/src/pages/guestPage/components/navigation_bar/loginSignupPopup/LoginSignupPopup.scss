@@ -1,0 +1,40 @@
+.log-sign-div{
+    
+    background: white;
+}
+
+.gray-overlay{
+    position:fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: black ;
+    opacity: 0.5;
+    z-index: 2;
+}
+
+.log-sign-navbar{
+    background-color: none;
+    
+    position:fixed;
+    left: 40vw;
+    width: 20vw;
+    top: 20vh;
+    z-index: 3;
+}
+
+// .selected[selectedOption = "LOGIN"]{
+//     background-color: white;
+    
+//     z-index: 4;
+//     height: 100%;
+  
+// }
+
+span{
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+

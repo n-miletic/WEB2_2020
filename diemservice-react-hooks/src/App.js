@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import useLoggedUser from "./utils/useLoggedUser";
+import GuestPage from "./pages/guestPage/GuestPage";
+import RegisteredPage from "./pages/registeredPage/RegisteredPage";
 
+const Pages = {
+  RegisteredUser: <RegisteredPage />,
+  Guest: <GuestPage />,
+};
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const { user } = useLoggedUser();
+  console.log(user.Role);
+  if (user) return Pages[user.Role];
+
+  return <h3>{console.log(user)}Error</h3>;
 }
 
 export default App;
