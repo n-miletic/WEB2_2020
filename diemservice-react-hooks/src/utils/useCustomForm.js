@@ -1,6 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
-const useCustomForm = ({ initialValues, onSubmit }) => {
+const useCustomForm = ({
+  initialValues = null,
+  customFormValidation = () => {},
+  onSubmit,
+}) => {
   // WHY {}
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
@@ -15,6 +19,7 @@ const useCustomForm = ({ initialValues, onSubmit }) => {
     const { target } = event;
     const { name, value } = target;
     event.persist(); // SET STATE JE ASINHRON, DA BISMO SE OSIGURALI
+    customFormValidation({ target, name, value });
     setValues({ ...values, [name]: value });
   };
 

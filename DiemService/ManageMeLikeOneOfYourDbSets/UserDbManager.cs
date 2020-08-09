@@ -15,7 +15,7 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
 {
     public static class UserDbManager
     {
-        public static UserGift EditUser(EditUserForm form)
+        public static string EditUser(EditUserForm form)
         {
             if (form == null)
                 throw new Exception("BAD");
@@ -37,7 +37,7 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
                     found.Hash = form.NewHash;
                 _context.SaveChanges();
 
-                return new UserGift(TokenManager.GetToken(found), found);
+                return TokenManager.GetToken(found);
             }
         }
         public static List<object> GetHardcoreUsers()

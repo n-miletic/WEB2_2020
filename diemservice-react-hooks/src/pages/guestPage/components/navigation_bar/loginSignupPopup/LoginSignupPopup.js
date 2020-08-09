@@ -1,27 +1,26 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
-import "./LoginSignupPopup.scss";
+import React, { useState } from "react";
+import styles from "./LoginSignupPopup.module.scss";
 
 import LogIn from "./LogIn/LogIn";
 import SignUp from "./SignUp/SignUp";
 
 export default function LoginSignupPopup(props) {
-  const [selectedOption, setSelectedOption] = useState("LOGIN");
-  useEffect(() => {}, [selectedOption]);
+  const [selectedoption, setSelectedOption] = useState("LOGIN");
   return (
     <React.Fragment>
-      <div className="gray-overlay"></div>
-      <div className="log-sign-navbar">
-        <div selectedOption={selectedOption} className="selected">
+      <div className={styles.gray_overlay}></div>
+      <div className={styles.log_sign_navbar}>
+        <div selectedoption={selectedoption} className={styles.selected}>
           <span onClick={() => setSelectedOption("LOGIN")}>LOG IN</span>
           <span onClick={() => setSelectedOption("SIGNUP")}>SIGN UP</span>
         </div>
 
-        <div className="log-sign-div">
+        <div className={styles.log_sign_div}>
           {
             {
               LOGIN: <LogIn finished={props.finished} />,
               SIGNUP: <SignUp finished={props.finished} />,
-            }[selectedOption]
+            }[selectedoption]
           }
         </div>
       </div>

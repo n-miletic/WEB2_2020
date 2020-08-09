@@ -1,24 +1,20 @@
 import React, { useState } from "react";
 import styles from "./LogIn.module.scss";
 import useCustomForm from "../../../../../../utils/useCustomForm";
-import useLoggedUser from "../../../../../../utils/useLoggedUser";
-import { useQuery } from "react-query";
-import { queryCache } from "react-query";
+import { useUserStore } from "../../../../../../utils/userStore";
+import { useHistory } from "react-router-dom";
 
 export default function LogIn(props) {
-  const [loginErr, setLoginErr] = useState("");
-
-  const { logUserIn, userError } = useLoggedUser();
+  const { action, error } = useUserStore(false);
+  const history = useHistory();
 
   const LogMeIn = (event) => {
+    console.log(event.target);
     event.preventDefault();
-    logUserIn(values)
-      .then(() => {
-        props.finished();
-      })
-      .catch((err) => {
-        setLoginErr(err.message);
-      });
+
+    action("LOGIN", values)
+      .then(() => history.push("/"))
+      .catch();
   };
   const { values, handleChange } = useCustomForm({
     initialValues: {},
@@ -33,7 +29,7 @@ export default function LogIn(props) {
         <label>Password</label>
         <input name="Password" onChange={handleChange} type="password" />
         <input className={styles.button} value="Log In" type="submit" />
-        <label>{loginErr}</label>
+        <label>{error}</label>
       </div>
     </form>
   );

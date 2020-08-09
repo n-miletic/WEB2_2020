@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
-import useLoggedUser from "./utils/useLoggedUser";
+import { useUserStore } from "./utils/userStore";
 import GuestPage from "./pages/guestPage/GuestPage";
 import RegisteredPage from "./pages/registeredPage/RegisteredPage";
 
@@ -9,11 +9,11 @@ const Pages = {
   Guest: <GuestPage />,
 };
 function App() {
-  const { user } = useLoggedUser();
-  console.log(user.Role);
+  const { user } = useUserStore();
+  console.log(user);
   if (user) return Pages[user.Role];
 
-  return <h3>{console.log(user)}Error</h3>;
+  return Pages["Guest"];
 }
 
 export default App;

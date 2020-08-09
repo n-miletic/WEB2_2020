@@ -1,9 +1,8 @@
-import React, { Fragment, useState } from "react";
-import "./NavigationBar.scss";
+import React, { useState } from "react";
+import styles from "./NavigationBar.module.scss";
 import logoPic from "./assets/logo.png";
 import userPic from "./assets/user.png";
 import { Link } from "react-router-dom";
-import { useQuery } from "react-query";
 
 import LoginSignupPopup from "./loginSignupPopup/LoginSignupPopup";
 
@@ -15,20 +14,26 @@ export default function NavigationBar() {
   };
 
   return (
-    <div className="navbar">
-      <img className="company-img" src={logoPic} />
-      <div className="user-shortcuts">
-        <Link className="link" to>
+    <div className={styles.navbar}>
+      {console.log("Rendering guest page navigation bar")}
+      <img
+        alt="Can't load company"
+        className={styles.company_img}
+        src={logoPic}
+      />
+      <div className={styles.user_shortcuts}>
+        <Link className={styles.link} to="/">
           HOME
         </Link>
-        <Link className="link" to>
+        <Link className={styles.link} to="/">
           FLIGHTS
         </Link>
         <img
+          alt="cant load user img"
           onClick={() => {
             setloginSignupDialog(true);
           }}
-          className="user-img"
+          className={styles.user_img}
           src={userPic}
         />
       </div>
