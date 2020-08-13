@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./LogIn.module.scss";
 import useCustomForm from "../../../../../../utils/useCustomForm";
 import { useUserStore } from "../../../../../../utils/userStore";
 import { useHistory } from "react-router-dom";
 
 export default function LogIn(props) {
-  const { action, error } = useUserStore(false);
+  const { action, error } = useUserStore({ subscriber: false });
   const history = useHistory();
 
   const LogMeIn = (event) => {

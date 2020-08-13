@@ -3,8 +3,22 @@ export const RegisteredUserActions = {
   LOGOUT: logOut,
   GETLOGGEDUSER: getLoggedUser,
   EDITUSER: editUser,
+  SIGNUP: signUp,
 };
 
+function signUp(values) {
+  return fetch("/DiemApi/User/Register", {
+    method: "post",
+    body: JSON.stringify(values),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (res.status !== 200) {
+      return Promise.reject(res.statusText);
+    }
+  });
+}
 function editUser(token) {
   if (!token) return null;
   return fetch("/DiemApi/User/Edit", {

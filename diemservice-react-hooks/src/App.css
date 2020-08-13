@@ -1,7 +1,23 @@
-
-body{
+body {
   margin-left: 14vw;
   margin-right: 14vw;
   background: url(./assets/tempbackground.jpg) no-repeat center center fixed;
   background-size: cover;
+  font-family: "Oleo Script";
+}
+
+:root {
+  --my-red: #e54b4b;
+  --my-font: "Oleo Script";
+}
+
+button {
+  font: inherit;
+  background: #ff2058;
+  padding: 0.5rem 2rem;
+  color: white;
+  border: 1px solid #ff2058;
+  margin: 0.5rem 0;
+  border-radius: 5px;
+  cursor: pointer;
 }

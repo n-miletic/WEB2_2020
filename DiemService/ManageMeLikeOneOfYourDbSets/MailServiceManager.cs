@@ -21,7 +21,7 @@ namespace DiemService.ManageMeLikeOneOfYourDbSets
 
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
+            SmtpServer.UseDefaultCredentials = false;
             mail.From = new MailAddress("diem.service.api@gmail.com");
             mail.To.Add(user.Email);
             mail.Subject = "User activation email";

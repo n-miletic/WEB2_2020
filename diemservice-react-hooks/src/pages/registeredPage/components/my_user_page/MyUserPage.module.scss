@@ -1,0 +1,31 @@
+grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 40% 60%;
+  column-gap: 5px;
+  background: gray;
+}
+
+.border {
+  box-sizing: border-box;
+  padding-right: 4px;
+  background: linear-gradient(
+    rgba(255, 255, 255, 1) 0%,
+    rgba(229, 75, 75, 1) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+.navitems > label {
+  font-family: var(--my-font);
+  color: white;
+}
+
+.navitems {
+  background: rgb(138, 141, 145);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}

@@ -9,7 +9,6 @@ const useCustomForm = ({
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState("");
-  // const [onSubmitting, setOnSubmitting] = useState({});
 
   useEffect(() => {
     setValues(initialValues);

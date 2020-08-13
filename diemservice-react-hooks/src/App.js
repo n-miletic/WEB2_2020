@@ -9,7 +9,7 @@ const Pages = {
   Guest: <GuestPage />,
 };
 function App() {
-  const { user } = useUserStore();
+  const { user } = useUserStore({ susbscriptions: ["Role"] });
   console.log(user);
   if (user) return Pages[user.Role];
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useUserStore } from "../../../../utils/userStore";
 
 export default function NavigationBar() {
-  const { user, action } = useUserStore();
+  const { user, action } = useUserStore({ susbscriptions: ["Username"] });
   return (
     <div className={styles.navbar}>
       {console.log("Rendering registered page navigation bar")}
